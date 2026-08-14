@@ -78,48 +78,88 @@
             <div class="footer-container">
                 <!-- Brand Value Statement (Centered) -->
                 <div class="footer-top-cta">
-                    <h2 class="footer-cta-text">Let us take your estimation load.</h2>
-                    <div class="social-links">
-                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
-                    </div>
+                    <h2 class="footer-cta-text">
+                        Let us take your estimation load.
+                    </h2>
                 </div>
 
                 <div class="footer-grid">
                     <div class="footer-info">
                         <h3 class="footer-logo">THE BEST ESTIMATOR</h3>
-                        <p class="footer-desc">Your virtual estimation department. Delivering hyper-accurate material takeoffs and industrial cost consulting across the United States.</p>
+
+                        <div class="social-links">
+                            <a href="#" target="_blank" aria-label="LinkedIn"
+                                ><i class="fab fa-linkedin-in"></i
+                            ></a>
+                            <a href="#" target="_blank" aria-label="Twitter"
+                                ><i class="fab fa-twitter"></i
+                            ></a>
+                            <a href="#" target="_blank" aria-label="Facebook"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+                        </div>
                     </div>
                     <div class="footer-links-col">
                         <h4>Navigation</h4>
-                        <a href="{{ url_for('index') }}">Home</a>
-                        <a href="{{ url_for('samples') }}">Samples</a>
-                        <a href="{{ url_for('pricing') }}">Services & Pricing</a>
-                        <a href="{{ url_for('contact') }}">Request Quote</a>
+                        <a href="{{ url_for('index') }}"
+                            >Home <i class="fas fa-chevron-right link-arrow"></i
+                        ></a>
+                        <a href="{{ url_for('samples') }}"
+                            >Samples
+                            <i class="fas fa-chevron-right link-arrow"></i
+                        ></a>
+                        <a href="{{ url_for('pricing') }}"
+                            >Services & Pricing
+                            <i class="fas fa-chevron-right link-arrow"></i
+                        ></a>
+                        <a href="{{ url_for('contact') }}"
+                            >Request Quote
+                            <i class="fas fa-chevron-right link-arrow"></i
+                        ></a>
                     </div>
                     <div class="footer-links-col">
                         <h4>Services</h4>
                         <a href="{{ url_for('pricing') }}">Lumber & Framing</a>
-                        <a href="{{ url_for('pricing') }}">Concrete & Masonry</a>
+                        <a href="{{ url_for('pricing') }}"
+                            >Concrete & Masonry</a
+                        >
                         <a href="{{ url_for('pricing') }}">MEP Takeoffs</a>
                         <a href="{{ url_for('pricing') }}">Drywall & Framing</a>
                     </div>
                     <div class="footer-links-col contact-col">
                         <h4>Contact Info</h4>
-                        <p><strong>Phone:</strong> <a href="tel:+19173101235">+1 (917) 310-1235</a></p>
-                        <p><strong>Email:</strong> <a href="mailto:Sales@thebestestimatorllc.com">Sales@thebestestimatorllc.com</a></p>
+                        <p>
+                            <strong>Phone:</strong>
+                            <a href="tel:+19173101235">+1 (917) 310-1235</a>
+                        </p>
+                        <p>
+                            <strong>Email:</strong>
+                            <a href="mailto:Sales@thebestestimatorllc.com"
+                                >Sales@thebestestimatorllc.com</a
+                            >
+                        </p>
                     </div>
                 </div>
 
                 <!-- Trust Badges & Copyright -->
                 <div class="footer-bottom">
                     <div class="trust-badges">
-                        <span class="badge-placeholder">RSMeans Certified</span>
-                        <span class="badge-placeholder">Bluebeam Certified</span>
-                        <span class="badge-placeholder">PlanSwift Expert</span>
+                        <div class="badge-seal">
+                            <span>RSMeans</span>
+                            <span class="badge-seal-sub">Certified</span>
+                        </div>
+                        <div class="badge-seal">
+                            <span>Bluebeam</span>
+                            <span class="badge-seal-sub">Certified</span>
+                        </div>
+                        <div class="badge-seal">
+                            <span>PlanSwift</span>
+                            <span class="badge-seal-sub">Expert</span>
+                        </div>
                     </div>
-                    <p>&copy; 2026 The Best Estimator LLC. All Rights Reserved.</p>
+                    <p>
+                        &copy; 2026 The Best Estimator LLC. All Rights Reserved.
+                    </p>
                 </div>
             </div>
         </footer>

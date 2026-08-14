@@ -265,12 +265,33 @@ h6 {
    FOOTER (OXFORD BLUE)
    ========================================== */
 #site-footer {
+    position: relative;
     background-color: var(--color-primary);
     color: #e2e8f0;
-    padding: 12rem 0 4rem; /* Increased top padding further for the curve */
-    border-top-left-radius: 120px;
-    border-top-right-radius: 120px;
-    margin-top: -8rem; /* Overlap the curve */
+    padding: 9rem 0 4rem;
+    margin-top: 0;
+}
+
+/* Hugo-style dome curve: a full-width arc across the ENTIRE top edge,
+   not just rounded corners. Positioned to poke above the footer box,
+   so the parent must NOT clip overflow. */
+#site-footer::before {
+    content: "";
+    position: absolute;
+    top: -6vw;
+    left: -5%;
+    right: -5%;
+    height: 12vw;
+    min-height: 90px;
+    max-height: 220px;
+    background-color: var(--color-primary);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    z-index: 0;
+}
+
+.footer-container {
+    position: relative;
+    z-index: 1;
 }
 
 .footer-container {
@@ -278,6 +299,17 @@ h6 {
     margin: 0 auto;
     padding: 0 2rem;
     text-align: center; /* Center content for better fit in the curve */
+}
+
+.footer-top-cta {
+    margin-bottom: 3.5rem;
+}
+
+.footer-cta-text {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
 }
 
 .footer-grid {
@@ -308,6 +340,47 @@ h6 {
     padding-left: 4px;
 }
 
+/* Nav link arrow (Hugo-style '>' that appears on hover) */
+.link-arrow {
+    font-size: 0.65rem;
+    margin-left: 4px;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: var(--transition-smooth);
+    display: inline-block;
+}
+
+.footer-links-col a:hover .link-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Social icon chips — solid gold circles, Hugo-style */
+.social-links {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.social-links a:hover {
+    background-color: #ffffff;
+    transform: translateY(-3px);
+}
+
 .contact-col p {
     font-size: 0.95rem;
     margin-bottom: 1rem;
@@ -325,12 +398,63 @@ h6 {
 }
 
 .footer-bottom {
-    border-top: 1px solid #1c2541;
-    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
     font-size: 0.85rem;
+}
+
+.footer-bottom p {
+    color: var(--color-footer-text);
+    margin: 0;
+}
+
+/* Trust badges — circular seal treatment, Hugo-inspired */
+.trust-badges {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.badge-seal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(229, 169, 59, 0.4);
+    text-align: center;
+    padding: 0.5rem;
+    transition: var(--transition-smooth);
+}
+
+.badge-seal span {
+    display: block;
+    margin: 0;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.badge-seal .badge-seal-sub {
+    color: var(--color-footer-text);
+    font-weight: 400;
+    font-size: 0.62rem;
+    text-transform: none;
+}
+
+.badge-seal:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-3px);
 }
 
 /* Responsiveness */
@@ -770,7 +894,7 @@ h6 {
    FINAL CLOSE CALL TO ACTION
    ========================================== */
 #final-cta {
-    padding: 8rem 0 12rem; /* Increased bottom padding to push content away from curved footer */
+    padding: 8rem 0 6rem;
     background-color: var(--color-bg);
     text-align: center;
 }
