@@ -970,7 +970,7 @@ h6 {
    FINAL CLOSE CALL TO ACTION
    ========================================== */
 #final-cta {
-    padding: 8rem 0 6rem;
+    padding: 8rem 0 12rem; /* Pushing content further up from footer curve */
     background-color: var(--color-bg);
     text-align: center;
 }
