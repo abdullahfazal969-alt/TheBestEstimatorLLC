@@ -6,6 +6,9 @@
 <!-- Hero Section -->
 <section id="hero-section" class="bg-light">
     <div class="container hero-container grid-hero">
+        <div class="hero-image">
+            <img src="{{ url_for('static', filename='images/hero-image.png') }}" alt="Construction Estimation Services" class="hero-img-file">
+        </div>
         <div class="hero-content">
             <h1 class="hero-headline">Your Virtual<br><span class="highlight">Estimation Department.</span></h1>
             <p class="hero-subtitle">Delivering hyper-accurate material takeoffs, shop drawings, and BIM scheduling in 24-48 hours. Scale your bids, slash your engineering overhead by 60%.</p>
@@ -13,9 +16,6 @@
                 <a href="{{ url_for('contact') }}" class="btn btn-primary">Request a Free Quote</a>
                 <a href="{{ url_for('samples') }}" class="btn btn-secondary">View Work Samples</a>
             </div>
-        </div>
-        <div class="hero-image">
-            <img src="{{ url_for('static', filename='images/hero-image.png') }}" alt="Construction Estimation Services" class="hero-img-file">
         </div>
     </div>
 </section>

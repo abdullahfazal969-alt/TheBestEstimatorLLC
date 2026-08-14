@@ -516,20 +516,22 @@ h6 {
     margin-bottom: 3rem;
 }
 
-/* Hero Image Floating Effect */
+/* Hero Image Floating Effect & Natural Blending */
 .hero-img-file {
     width: 100%;
     height: auto;
-    border-radius: 20px;
-    /* Floating Effect: Multi-layer soft shadow to create 'lift' */
-    box-shadow: 0 25px 50px -12px rgba(10, 17, 40, 0.25),
-                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    /* Remove borders, shadows, and cards for natural integration */
+    border-radius: 0; 
+    box-shadow: none;
+    /* Softly mask edges to blend into background */
+    mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
     transition: var(--transition-smooth);
 }
 
 .hero-img-file:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 40px 60px -15px rgba(10, 17, 40, 0.3);
+    transform: none;
+    box-shadow: none;
 }
 
 /* ==========================================
