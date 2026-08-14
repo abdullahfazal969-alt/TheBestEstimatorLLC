@@ -33,6 +33,10 @@
     padding: 0;
 }
 
+html {
+    font-size: 90%; /* This scales everything down proportionally */
+}
+
 body {
     font-family: var(--font-sans);
     background-color: var(--color-bg);
@@ -1151,9 +1155,49 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.6;
 }
 
-/* ==========================================
-   5-STEP CONTACT INTAKE FORM
-   ========================================== */
+/* FAQ Accordion Section */
+#faq-section {
+    padding: 8rem 0;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid #E2E8F0;
+    padding: 1.5rem 0;
+}
+
+.faq-item summary {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-item summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--color-accent);
+}
+
+.faq-item[open] summary::after {
+    content: '-';
+}
+
+.faq-item p {
+    margin-top: 1rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+}
+
 .contact-page-main {
     padding: 5rem 0 8rem;
     background-color: var(--color-bg);
