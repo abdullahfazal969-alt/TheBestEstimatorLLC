@@ -257,13 +257,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================
-   FOOTER (EERIE BLACK)
+   FOOTER (OXFORD BLUE)
    ========================================== */
 #site-footer {
-    background-color: var(--color-footer-bg);
-    color: var(--color-footer-text);
-    padding: 6rem 0 3rem;
-    border-top: 1px solid #1A1A1A;
+    background-color: var(--color-primary);
+    color: #E2E8F0;
+    padding: 8rem 0 3rem;
+    border-top-left-radius: 80px;
+    border-top-right-radius: 80px;
+    margin-top: -4rem; /* Overlap the curve onto the previous section */
 }
 
 .footer-container {
@@ -272,32 +274,8 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 2rem;
 }
 
-.footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1.5fr;
-    gap: 4rem;
-    margin-bottom: 4rem;
-}
-
-.footer-info h3 {
+.footer-info h3, .footer-links-col h4 {
     color: #FFFFFF;
-    font-family: var(--font-heading);
-    font-size: 1.4rem;
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-    letter-spacing: 1px;
-}
-
-.footer-desc {
-    font-size: 0.95rem;
-    line-height: 1.8;
-}
-
-.footer-links-col h4 {
-    color: #FFFFFF;
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
 }
 
 .footer-links-col a, .footer-links-col span {
