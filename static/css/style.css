@@ -526,9 +526,13 @@ h6 {
     /* Remove borders, shadows, and cards for natural integration */
     border-radius: 0; 
     box-shadow: none;
-    /* Softly mask bottom edge to blend into background */
-    mask-image: linear-gradient(to top, transparent 0%, black 25%);
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 25%);
+    /* Softly mask bottom and right edges to blend into background/text */
+    mask-image: linear-gradient(to top, transparent 0%, black 25%), 
+                linear-gradient(to left, transparent 0%, black 25%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 25%), 
+                        linear-gradient(to left, transparent 0%, black 25%);
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
     transition: var(--transition-smooth);
 }
 
