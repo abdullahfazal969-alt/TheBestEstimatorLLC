@@ -6,27 +6,36 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. Entrance Reveal Animation (Hugo/Apple Style)
     const overlay = document.getElementById("entrance-overlay");
     const overlayLine = document.querySelector(".overlay-line");
-    const overlayLogo = document.querySelector(".overlay-logo");
+    const overlayLogo = document.querySelector(".overlay-logo-img");
 
     if (overlay && overlayLine && overlayLogo) {
-        // Step A: Expand line
-        gsap.to(overlayLine, {
-            width: "120px",
+        const entranceTl = gsap.timeline();
+
+        // Step A: Logo fades and scales in
+        entranceTl.to(overlayLogo, {
+            opacity: 1,
+            scale: 1,
             duration: 0.8,
-            ease: "power2.out",
+            ease: "power3.out",
         });
 
-        // Step B: Slide up and fade out overlay
-        gsap.to(overlay, {
+        // Step B: Gold line draws underneath
+        entranceTl.to(overlayLine, {
+            width: "120px",
+            duration: 0.6,
+            ease: "power2.out",
+        }, "-=0.35");
+
+        // Step C: Hold briefly, then slide up and fade out overlay
+        entranceTl.to(overlay, {
             yPercent: -100,
             duration: 1,
-            delay: 1,
             ease: "power4.inOut",
             onComplete: () => {
                 overlay.style.display = "none";
                 triggerHeroAnimations();
             }
-        });
+        }, "+=0.5");
     } else {
         // Fallback if elements don't exist
         triggerHeroAnimations();
@@ -214,6 +223,18 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.key === "Escape" && capabilityBackdrop.classList.contains("is-open")) {
                 closeCapability();
             }
+        });
+    }
+
+    // 6. FAQ Accordion — smooth expand/collapse
+    const faqQuestions = document.querySelectorAll(".faq-question");
+
+    if (faqQuestions.length > 0) {
+        faqQuestions.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const isOpen = btn.getAttribute("aria-expanded") === "true";
+                btn.setAttribute("aria-expanded", String(!isOpen));
+            });
         });
     }
 });
