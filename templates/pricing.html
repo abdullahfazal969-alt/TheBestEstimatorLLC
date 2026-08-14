@@ -53,38 +53,124 @@
     </div>
 </section>
 
-<!-- Detailed Trades Table Section -->
+<!-- Detailed Trades Breakdown Section — Spotlight-Expand Rows -->
 <section id="trades-breakdown">
+    <svg class="section-wave section-wave-top" viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,30 C240,70 480,0 720,30 C960,60 1200,0 1440,30 L1440,0 L0,0 Z" fill="var(--color-bg)"></path>
+    </svg>
+
     <div class="container">
         <h2 class="section-title text-center">Estimation Capabilities Matrix</h2>
-        <div class="trades-grid">
-            <div class="trade-box">
-                <h4>Division 03 — Concrete</h4>
-                <p>Foundations, slabs, footings, piers, columns, reinforcing steel (rebar), wire mesh, formwork, and gravel base.</p>
+        <p class="section-desc text-center capability-subtitle">Click any division to see the full scope of what we take off.</p>
+
+        <div class="capability-list">
+            <div class="capability-row"
+                 data-division="03"
+                 data-title="Concrete"
+                 data-desc="Foundations, slabs, footings, piers, columns, reinforcing steel (rebar), wire mesh, formwork, and gravel base."
+                 data-items="Foundations &amp; footings|Slabs on grade|Piers &amp; structural columns|Reinforcing steel (rebar) tonnage|Wire mesh|Formwork square footage|Gravel &amp; sub-base quantities">
+                <div class="capability-row-main">
+                    <span class="capability-num">03</span>
+                    <div class="capability-row-text">
+                        <h3>Concrete</h3>
+                        <p>Foundations, slabs, footings, piers, columns, rebar, formwork &amp; gravel base.</p>
+                    </div>
+                </div>
+                <button class="capability-toggle" aria-label="Expand Concrete division"><i class="fas fa-plus"></i></button>
             </div>
-            <div class="trade-box">
-                <h4>Division 04 — Masonry</h4>
-                <p>Concrete block (CMU), architectural precast concrete, bricks, natural stone, lintels, anchors, and mortar quantity takeoff.</p>
+
+            <div class="capability-row"
+                 data-division="04"
+                 data-title="Masonry"
+                 data-desc="Concrete block (CMU), architectural precast concrete, bricks, natural stone, lintels, anchors, and mortar quantity takeoff."
+                 data-items="Concrete block (CMU) counts|Architectural precast concrete|Brick veneer|Natural stone|Lintels &amp; anchors|Mortar &amp; grout quantity takeoff">
+                <div class="capability-row-main">
+                    <span class="capability-num">04</span>
+                    <div class="capability-row-text">
+                        <h3>Masonry</h3>
+                        <p>CMU, precast concrete, bricks, natural stone, lintels &amp; mortar takeoff.</p>
+                    </div>
+                </div>
+                <button class="capability-toggle" aria-label="Expand Masonry division"><i class="fas fa-plus"></i></button>
             </div>
-            <div class="trade-box">
-                <h4>Division 06 — Wood & Plastics</h4>
-                <p>Structural timber, roof trusses, lumber joists, wall studs, finishing carpentry, casework, paneling, and cabinetry hardware.</p>
+
+            <div class="capability-row"
+                 data-division="06"
+                 data-title="Wood &amp; Plastics"
+                 data-desc="Structural timber, roof trusses, lumber joists, wall studs, finishing carpentry, casework, paneling, and cabinetry hardware."
+                 data-items="Structural timber|Roof trusses|Lumber joists|Wall stud counts|Finish carpentry|Casework &amp; paneling|Cabinetry hardware">
+                <div class="capability-row-main">
+                    <span class="capability-num">06</span>
+                    <div class="capability-row-text">
+                        <h3>Wood &amp; Plastics</h3>
+                        <p>Structural timber, roof trusses, lumber joists &amp; finish carpentry.</p>
+                    </div>
+                </div>
+                <button class="capability-toggle" aria-label="Expand Wood and Plastics division"><i class="fas fa-plus"></i></button>
             </div>
-            <div class="trade-box">
-                <h4>Division 09 — Finishes</h4>
-                <p>Drywall boards, metal studs, tape & joint compound, interior/exterior painting surface, flooring tile/carpets, and acoustical ceilings.</p>
+
+            <div class="capability-row"
+                 data-division="09"
+                 data-title="Finishes"
+                 data-desc="Drywall boards, metal studs, tape &amp; joint compound, interior/exterior painting surface, flooring tile/carpets, and acoustical ceilings."
+                 data-items="Drywall board counts|Metal stud framing|Tape &amp; joint compound|Interior/exterior paint surface area|Flooring (tile/carpet)|Acoustical ceiling tiles">
+                <div class="capability-row-main">
+                    <span class="capability-num">09</span>
+                    <div class="capability-row-text">
+                        <h3>Finishes</h3>
+                        <p>Drywall, paint surface, flooring, and acoustical ceilings.</p>
+                    </div>
+                </div>
+                <button class="capability-toggle" aria-label="Expand Finishes division"><i class="fas fa-plus"></i></button>
             </div>
-            <div class="trade-box">
-                <h4>Division 21/22/23 — MEP</h4>
-                <p>HVAC ductwork, copper piping, electrical conduit lengths, branch wire counts, panelboards, and fixture schedules.</p>
+
+            <div class="capability-row"
+                 data-division="21-23"
+                 data-title="MEP"
+                 data-desc="HVAC ductwork, copper piping, electrical conduit lengths, branch wire counts, panelboards, and fixture schedules."
+                 data-items="HVAC ductwork linear footage|Copper piping|Electrical conduit lengths|Branch wire counts|Panelboards &amp; fixture schedules|Plumbing fixture counts">
+                <div class="capability-row-main">
+                    <span class="capability-num">21<span class="capability-num-sep">–</span>23</span>
+                    <div class="capability-row-text">
+                        <h3>MEP</h3>
+                        <p>HVAC ductwork, piping, conduit, panelboards &amp; fixtures.</p>
+                    </div>
+                </div>
+                <button class="capability-toggle" aria-label="Expand MEP division"><i class="fas fa-plus"></i></button>
             </div>
-            <div class="trade-box">
-                <h4>Division 31 — Earthwork</h4>
-                <p>Cut & fill excavation, site grading volumes, clearing and grubbing, trench backfilling, soil stabilization, and site utilities.</p>
+
+            <div class="capability-row"
+                 data-division="31"
+                 data-title="Earthwork"
+                 data-desc="Cut &amp; fill excavation, site grading volumes, clearing and grubbing, trench backfilling, soil stabilization, and site utilities."
+                 data-items="Cut &amp; fill excavation volumes|Site grading|Clearing &amp; grubbing|Trench backfilling|Soil stabilization|Site utility trenching">
+                <div class="capability-row-main">
+                    <span class="capability-num">31</span>
+                    <div class="capability-row-text">
+                        <h3>Earthwork</h3>
+                        <p>Cut &amp; fill excavation, site grading, and site utilities.</p>
+                    </div>
+                </div>
+                <button class="capability-toggle" aria-label="Expand Earthwork division"><i class="fas fa-plus"></i></button>
             </div>
         </div>
     </div>
+
+    <svg class="section-wave section-wave-bottom" viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,70 C240,30 480,100 720,70 C960,40 1200,100 1440,70 L1440,100 L0,100 Z" fill="var(--color-bg)"></path>
+    </svg>
 </section>
+
+<!-- Spotlight modal (single shared instance, populated by JS) -->
+<div class="capability-modal-backdrop" id="capability-modal-backdrop">
+    <div class="capability-modal" id="capability-modal">
+        <button class="capability-modal-close" id="capability-modal-close" aria-label="Close"><i class="fas fa-times"></i></button>
+        <span class="capability-modal-num" id="capability-modal-num"></span>
+        <h3 class="capability-modal-title" id="capability-modal-title"></h3>
+        <p class="capability-modal-desc" id="capability-modal-desc"></p>
+        <ul class="capability-modal-items" id="capability-modal-items"></ul>
+    </div>
+</div>
 
 <!-- Hugo-Style FAQ Section -->
 <section id="faq-section" class="bg-light">

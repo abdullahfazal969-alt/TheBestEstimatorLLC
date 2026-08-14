@@ -131,13 +131,20 @@ h6 {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-    transition: var(--transition-smooth);
+    transform: translateY(0);
+    transition:
+        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        background-color 0.4s ease;
+}
+
+#site-header.nav-hidden {
+    transform: translateY(-100%);
 }
 
 .header-container {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 1.25rem 2rem;
+    padding: 0.75rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -151,7 +158,7 @@ h6 {
 }
 
 .brand-logo {
-    max-height: 50px;
+    max-height: 38px;
     width: auto;
     display: block;
 }
@@ -988,6 +995,33 @@ h6 {
     transform: translateY(0);
 }
 
+/* Eager variant: triggers sooner + snappier, used for services-section */
+.scroll-reveal-eager {
+    transition:
+        opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal-eager .service-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal-eager.revealed .service-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-reveal-eager.revealed .service-card:nth-child(1) { transition-delay: 0.05s; }
+.scroll-reveal-eager.revealed .service-card:nth-child(2) { transition-delay: 0.12s; }
+.scroll-reveal-eager.revealed .service-card:nth-child(3) { transition-delay: 0.19s; }
+.scroll-reveal-eager.revealed .service-card:nth-child(4) { transition-delay: 0.26s; }
+.scroll-reveal-eager.revealed .service-card:nth-child(5) { transition-delay: 0.33s; }
+.scroll-reveal-eager.revealed .service-card:nth-child(6) { transition-delay: 0.4s; }
+
 /* ==========================================
    RESPONSIVENESS ADJUSTMENTS
    ========================================== */
@@ -1293,11 +1327,12 @@ h6 {
     margin-top: auto;
 }
 
-/* Trades Breakdown Section */
+/* Trades Breakdown Section — Spotlight-Expand Rows */
 #trades-breakdown {
-    padding: 8rem 0;
+    position: relative;
+    padding: 7rem 0;
     background-color: var(--color-surface);
-    border-top: 1px solid rgba(226, 232, 240, 0.8);
+    overflow: hidden;
 }
 
 .section-title {
@@ -1306,30 +1341,205 @@ h6 {
     margin-bottom: 5rem;
 }
 
-.trades-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
+.capability-subtitle {
+    margin-top: -3.5rem;
+    margin-bottom: 3.5rem;
+    color: var(--color-text-muted);
 }
 
-.trade-box {
+.capability-list {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.capability-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
     background-color: var(--color-bg);
-    padding: 2.5rem;
+    border: 1px solid rgba(226, 232, 240, 0.8);
     border-radius: var(--border-radius);
-    border: 1px solid rgba(226, 232, 240, 0.5);
+    padding: 1.5rem 2rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
 }
 
-.trade-box h4 {
-    font-size: 1.15rem;
+.capability-row:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(10, 17, 40, 0.05);
+}
+
+.capability-row-main {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+}
+
+.capability-num {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--color-accent);
+    min-width: 56px;
+    flex-shrink: 0;
+}
+
+.capability-num-sep {
+    color: var(--color-text-muted);
+    font-weight: 400;
+    margin: 0 1px;
+}
+
+.capability-row-text h3 {
+    font-size: 1.1rem;
     font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.25rem;
+}
+
+.capability-row-text p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+}
+
+.capability-toggle {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.capability-row:hover .capability-toggle {
+    background-color: var(--color-accent);
+}
+
+/* Spotlight Modal */
+.capability-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(28, 37, 65, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.capability-modal-backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.capability-modal {
+    position: relative;
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius);
+    padding: 3rem;
+    max-width: 560px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 30px 80px rgba(10, 17, 40, 0.3);
+    opacity: 0;
+    transform: scale(0.85) translateY(30px);
+}
+
+.capability-modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--color-bg);
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.capability-modal-close:hover {
+    background-color: var(--color-accent);
+    color: #ffffff;
+}
+
+.capability-modal-num {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--color-accent);
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+}
+
+.capability-modal-title {
+    font-size: 1.8rem;
+    font-weight: 800;
     color: var(--color-primary);
     margin-bottom: 1rem;
 }
 
-.trade-box p {
-    font-size: 0.95rem;
+.capability-modal-desc {
+    font-size: 1rem;
     color: var(--color-text-muted);
-    line-height: 1.6;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.capability-modal-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.capability-modal-items li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--color-text-dark);
+    opacity: 0;
+    transform: translateY(14px);
+}
+
+.capability-modal-items li::before {
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+body.capability-modal-open {
+    overflow: hidden;
 }
 
 /* FAQ Accordion Section */
@@ -1654,9 +1864,6 @@ h6 {
         max-width: 550px;
         margin: 0 auto;
     }
-    .trades-grid {
-        grid-template-columns: 1fr 1fr;
-    }
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 4rem;
@@ -1677,13 +1884,24 @@ h6 {
     .samples-grid {
         grid-template-columns: 1fr;
     }
-    .trades-grid {
-        grid-template-columns: 1fr;
-    }
     .contact-left {
         padding: 2.5rem 1.5rem;
     }
     .contact-title {
         font-size: 2rem;
+    }
+    .capability-row {
+        padding: 1.25rem 1.5rem;
+        gap: 1rem;
+    }
+    .capability-row-main {
+        gap: 1rem;
+    }
+    .capability-num {
+        font-size: 1.25rem;
+        min-width: 40px;
+    }
+    .capability-modal {
+        padding: 2rem 1.5rem;
     }
 }
