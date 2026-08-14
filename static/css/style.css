@@ -279,8 +279,8 @@ h6 {
     content: "";
     position: absolute;
     top: -6vw;
-    left: -5%;
-    right: -5%;
+    left: -10%;
+    right: -10%;
     height: 12vw;
     min-height: 90px;
     max-height: 220px;
@@ -307,7 +307,8 @@ h6 {
 
 .footer-cta-text {
     font-size: clamp(1.5rem, 3vw, 2.25rem);
-    font-weight: 700;
+    font-weight: 500;
+    font-family: pp-mori, sans-serif;
     color: #ffffff;
     margin: 0;
 }
@@ -323,6 +324,8 @@ h6 {
 .footer-info h3,
 .footer-links-col h4 {
     color: #ffffff;
+    font-family: pp-mori, sans-serif;
+    font-weight: 500;
 }
 
 .footer-links-col a,
