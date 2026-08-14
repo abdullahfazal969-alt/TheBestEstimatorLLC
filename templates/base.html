@@ -1,91 +1,131 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}The Best Estimator LLC{% endblock %} | Precision Cost Estimating</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <!-- FontAwesome for premium icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <!-- GSAP for smooth animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    {% block head %}{% endblock %}
-</head>
-<body>
-
-    <!-- Entrance Screen Overlay (Hugo/Apple Style) -->
-    <div id="entrance-overlay">
-        <div class="overlay-content">
-            <span class="overlay-logo">THE BEST ESTIMATOR</span>
-            <div class="overlay-line"></div>
-        </div>
-    </div>
-
-    <!-- Sticky Navigation Bar -->
-    <header id="site-header">
-        <div class="header-container">
-            <div class="logo">
-                <a href="{{ url_for('index') }}">
-                    <span class="logo-bold">THE BEST</span> <span class="logo-light">ESTIMATOR</span>
-                </a>
-            </div>
-            <nav class="nav-links">
-                <a href="{{ url_for('index') }}" class="{% if request.path == '/' %}active{% endif %}">Home</a>
-                <a href="{{ url_for('samples') }}" class="{% if request.path == '/samples' %}active{% endif %}">Samples</a>
-                <a href="{{ url_for('pricing') }}" class="{% if request.path == '/pricing' %}active{% endif %}">Services & Pricing</a>
-                <a href="{{ url_for('contact') }}" class="nav-cta">Request Quote</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Main Content Injection -->
-    <main class="page-content">
-        {% block content %}{% endblock %}
-    </main>
-
-    <!-- Hugo-Style Footer (Eerie Black Anchor) -->
-    <footer id="site-footer">
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-info">
-                    <h3 class="footer-logo">THE BEST ESTIMATOR</h3>
-                    <p class="footer-desc">Your virtual estimation department. Delivering hyper-accurate material takeoffs and industrial cost consulting across the United States.</p>
-                </div>
-                <div class="footer-links-col">
-                    <h4>Navigation</h4>
-                    <a href="{{ url_for('index') }}">Home</a>
-                    <a href="{{ url_for('samples') }}">Samples</a>
-                    <a href="{{ url_for('pricing') }}">Services & Pricing</a>
-                    <a href="{{ url_for('contact') }}">Request Quote</a>
-                </div>
-                <div class="footer-links-col">
-                    <h4>Services</h4>
-                    <span>Lumber & Framing</span>
-                    <span>Concrete & Masonry</span>
-                    <span>MEP Takeoffs</span>
-                    <span>Drywall & Framing</span>
-                </div>
-                <div class="footer-links-col contact-col">
-                    <h4>Contact Info</h4>
-                    <p><strong>Phone:</strong> <a href="tel:+19173101235">+1 (917) 310-1235</a></p>
-                    <p><strong>Email:</strong> <a href="mailto:Sales@thebestestimatorllc.com">Sales@thebestestimatorllc.com</a></p>
-                    <p><strong>Office:</strong> 1209 Mountain Rd NE, Albuquerque, NM 87110</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 The Best Estimator LLC. Pelican Services. All Rights Reserved.</p>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            {% block title %}The Best Estimator LLC{% endblock %} | Precision
+            Cost Estimating
+        </title>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Custom CSS -->
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/style.css') }}"
+        />
+        <!-- FontAwesome for premium icons -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        />
+        <!-- GSAP for smooth animations -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        <!-- Entrance Screen Overlay (Hugo/Apple Style) -->
+        <div id="entrance-overlay">
+            <div class="overlay-content">
+                <span class="overlay-logo">THE BEST ESTIMATOR</span>
+                <div class="overlay-line"></div>
             </div>
         </div>
-    </footer>
 
-    <!-- Custom JS -->
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    {% block scripts %}{% endblock %}
-</body>
+        <!-- Sticky Navigation Bar -->
+        <header id="site-header">
+            <div class="header-container">
+                <div class="logo">
+                    <a href="{{ url_for('index') }}">
+                        <span class="logo-bold">THE BEST</span>
+                        <span class="logo-light">ESTIMATOR</span>
+                    </a>
+                </div>
+                <nav class="nav-links">
+                    <a
+                        href="{{ url_for('index') }}"
+                        class="{% if request.path == '/' %}active{% endif %}"
+                        >Home</a
+                    >
+                    <a
+                        href="{{ url_for('samples') }}"
+                        class="{% if request.path == '/samples' %}active{% endif %}"
+                        >Samples</a
+                    >
+                    <a
+                        href="{{ url_for('pricing') }}"
+                        class="{% if request.path == '/pricing' %}active{% endif %}"
+                        >Services & Pricing</a
+                    >
+                    <a href="{{ url_for('contact') }}" class="nav-cta"
+                        >Request Quote</a
+                    >
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content Injection -->
+        <main class="page-content">{% block content %}{% endblock %}</main>
+
+        <!-- Hugo-Style Footer (Eerie Black Anchor) -->
+        <footer id="site-footer">
+            <div class="footer-container">
+                <div class="footer-grid">
+                    <div class="footer-info">
+                        <h3 class="footer-logo">THE BEST ESTIMATOR</h3>
+                        <p class="footer-desc"></p>
+                    </div>
+                    <div class="footer-links-col">
+                        <h4>Navigation</h4>
+                        <a href="{{ url_for('index') }}">Home</a>
+                        <a href="{{ url_for('samples') }}">Samples</a>
+                        <a href="{{ url_for('pricing') }}"
+                            >Services & Pricing</a
+                        >
+                        <a href="{{ url_for('contact') }}">Request Quote</a>
+                    </div>
+                    <div class="footer-links-col">
+                        <h4>Services</h4>
+                        <span>Lumber & Framing</span>
+                        <span>Concrete & Masonry</span>
+                        <span>MEP Takeoffs</span>
+                        <span>Drywall & Framing</span>
+                    </div>
+                    <div class="footer-links-col contact-col">
+                        <h4>Contact Info</h4>
+                        <p>
+                            <strong>Phone:</strong>
+                            <a href="tel:+19173101235">+1 (917) 310-1235</a>
+                        </p>
+                        <p>
+                            <strong>Email:</strong>
+                            <a href="mailto:Sales@thebestestimatorllc.com"
+                                >Sales@thebestestimatorllc.com</a
+                            >
+                        </p>
+                        <p>
+                            <strong>Office:</strong> 1209 Mountain Rd NE,
+                            Albuquerque, NM 87110
+                        </p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>
+                        &copy; 2026 The Best Estimator LLC. Pelican Services.
+                        All Rights Reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Custom JS -->
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        {% block scripts %}{% endblock %}
+    </body>
 </html>
