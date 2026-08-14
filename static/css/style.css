@@ -524,12 +524,12 @@ h6 {
     width: 100%;
     height: auto;
     /* Remove borders, shadows, and cards for natural integration */
-    border-radius: 0; 
+    border-radius: 0;
     box-shadow: none;
     /* Softly mask bottom and right edges to blend into background/text */
-    mask-image: linear-gradient(to top, transparent 0%, black 25%), 
+    mask-image: linear-gradient(to top, transparent 0%, black 25%),
                 linear-gradient(to left, transparent 0%, black 25%);
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 25%), 
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 25%),
                         linear-gradient(to left, transparent 0%, black 25%);
     mask-composite: intersect;
     -webkit-mask-composite: source-in;
@@ -820,6 +820,30 @@ h6 {
     font-size: 0.95rem;
     color: var(--color-text-muted);
     line-height: 1.7;
+}
+#services-section {
+    padding: 8rem 0 11rem; /* extra bottom padding so content clears the wave cap */
+    background-color: var(--color-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.section-wave {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    display: block;
+    pointer-events: none;
+}
+
+.section-wave-top {
+    top: -1px;
+    height: 50px;
+}
+
+.section-wave-bottom {
+    bottom: -1px;
+    height: 90px;
 }
 
 /* ==========================================
