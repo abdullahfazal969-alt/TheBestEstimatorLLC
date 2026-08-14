@@ -43,8 +43,7 @@
             <div class="header-container">
                 <div class="logo">
                     <a href="{{ url_for('index') }}">
-                        <span class="logo-bold">THE BEST</span>
-                        <span class="logo-light">ESTIMATOR</span>
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="The Best Estimator Logo" class="brand-logo">
                     </a>
                 </div>
                 <nav class="nav-links">
@@ -80,7 +79,7 @@
 
                 <div class="footer-grid">
                     <div class="footer-info">
-                        <h3 class="footer-logo">THE BEST ESTIMATOR</h3>
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="The Best Estimator Logo" class="footer-logo-img">
 
                         <div class="social-links">
                             <a
