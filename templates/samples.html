@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Work Samples{% endblock %}
+
+{% block content %}
+<section id="samples-header">
+    <div class="container text-center">
+        <span class="eyebrow">VERIFIED ACCURACY</span>
+        <h1 class="page-title">Our Work Speaks for Itself.</h1>
+        <p class="page-subtitle">Download our real, color-coded PlanSwift markup blueprints and itemized Excel takeoff spreadsheets to inspect our meticulous precision.</p>
+    </div>
+</section>
+
+<section id="samples-gallery">
+    <div class="container">
+        <!-- Dynamic Trade Filtering Tabs (Sleek UI) -->
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">All Divisions</button>
+            <button class="filter-tab" data-filter="Lumber & Framing">Lumber & Framing</button>
+            <button class="filter-tab" data-filter="Concrete & Masonry">Concrete & Masonry</button>
+            <button class="filter-tab" data-filter="MEP Estimation">MEP Division</button>
+        </div>
+
+        <div class="samples-grid">
+            {% for sample in samples %}
+            <div class="sample-card scroll-reveal" data-trade="{{ sample.trade }}">
+                <div class="sample-badge">{{ sample.trade }}</div>
+                
+                <div class="sample-icon-zone">
+                    {% if sample.file_type == 'pdf' %}
+                        <!-- PDF Red Accent Icon -->
+                        <div class="file-icon pdf-type">
+                            <span class="file-ext">PDF</span>
+                        </div>
+                    {% else %}
+                        <!-- Excel Green Accent Icon -->
+                        <div class="file-icon excel-type">
+                            <span class="file-ext">XLSX</span>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="sample-details">
+                    <h3>{{ sample.title }}</h3>
+                    <p>{{ sample.description }}</p>
+                    
+                    <!-- Direct Action Force Download link -->
+                    <a href="{{ sample.file_url }}" download class="btn btn-secondary btn-download">
+                        Download Sample Document
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Embedded Page-Specific JS for Dynamic Filtering -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll(".filter-tab");
+    const cards = document.querySelectorAll(".sample-card");
+
+    tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+            // Remove active class from all tabs
+            tabs.forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+
+            const filter = tab.getAttribute("data-filter");
+
+            cards.forEach(card => {
+                const cardTrade = card.getAttribute("data-trade");
+                if (filter === "all" || cardTrade === filter) {
+                    card.style.display = "block";
+                    gsap.fromTo(card, {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.4});
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

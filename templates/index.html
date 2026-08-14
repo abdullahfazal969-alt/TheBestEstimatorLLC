@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="hero-section">
+    <div class="container hero-container">
+        <h1 class="hero-headline">Your Virtual<br><span class="highlight">Estimation Department.</span></h1>
+        <p class="hero-subtitle">Delivering hyper-accurate material takeoffs, shop drawings, and BIM scheduling in 24-48 hours. Scale your bids, slash your engineering overhead by 60%.</p>
+        <div class="hero-ctas">
+            <a href="{{ url_for('contact') }}" class="btn btn-primary">Request a Free Quote</a>
+            <a href="{{ url_for('samples') }}" class="btn btn-secondary">View Work Samples</a>
+        </div>
+    </div>
+</section>
+
+<!-- Grayscale Trust Software Bar (Hugo Style) -->
+<section id="software-trust-bar">
+    <div class="container">
+        <p class="trust-title">POWERED BY INDUSTRY-STANDARD PRECISION INSTRUMENTS</p>
+        <div class="logo-track">
+            <!-- Text-based or CSS stylized badges representing their exact softwares -->
+            <div class="software-logo">AutoCAD</div>
+            <div class="software-logo">PlanSwift</div>
+            <div class="software-logo">Revit</div>
+            <div class="software-logo">Bluebeam</div>
+            <div class="software-logo">Primavera</div>
+        </div>
+    </div>
+</section>
+
+<!-- The Outsourcing Value Prop (The Sales Trigger) -->
+<section id="value-prop-section" class="scroll-reveal">
+    <div class="container grid-2">
+        <div class="value-left">
+            <span class="eyebrow">THE OUTSOURCING MATHEMATICS</span>
+            <h2>Stop overpaying for in-house estimators.</h2>
+            <p>Maintaining a full-time, in-house estimation team carries massive financial baggage—salaries, software licenses, benefits, and downtime. The Best Estimator LLC acts as your on-demand estimation partner. You only pay for the projects you bid on.</p>
+            
+            <div class="metrics-row">
+                <div class="metric-item">
+                    <span class="metric-num">60%</span>
+                    <span class="metric-label">Overhead Savings</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-num">24-48h</span>
+                    <span class="metric-label">Guaranteed Turnaround</span>
+                </div>
+            </div>
+        </div>
+        <div class="value-right">
+            <div class="comparison-card">
+                <h3>The Mathematics</h3>
+                <div class="comparison-line">
+                    <span class="comp-label">In-House Estimator:</span>
+                    <span class="comp-val red">$85,000+/year</span>
+                </div>
+                <div class="comparison-line">
+                    <span class="comp-label">Software & Benefits:</span>
+                    <span class="comp-val red">$15,000+/year</span>
+                </div>
+                <div class="divider"></div>
+                <div class="comparison-line highlight-line">
+                    <span class="comp-label">The Best Estimator:</span>
+                    <span class="comp-val green">$200 average / project</span>
+                </div>
+                <p class="comp-footer">You save approximately $75,000 annually while bidding on twice as many jobs.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Timeline (Hugo Inspired) -->
+<section id="timeline-section" class="scroll-reveal">
+    <div class="container">
+        <div class="section-header">
+            <span class="eyebrow">SEAMLESS INTEGRATION</span>
+            <h2>Onboard in 3 simple steps.</h2>
+        </div>
+        
+        <div class="timeline-grid">
+            <div class="timeline-step">
+                <div class="step-num">01</div>
+                <h3>Upload Your Plans</h3>
+                <p>Submit your blueprints, construction documents, or CAD drawings via our secure, encrypted 5-step quote intake form.</p>
+            </div>
+            <div class="timeline-step">
+                <div class="step-num">02</div>
+                <h3>Receive Proposal</h3>
+                <p>Our quantity surveyors review your plans and send a detailed project proposal, takeoff quote, and delivery agreement within minutes.</p>
+            </div>
+            <div class="timeline-step">
+                <div class="step-num">03</div>
+                <h3>Deliver Takeoff</h3>
+                <p>Receive your detailed material takeoff, itemized Excel sheets, and color-coded PlanSwift markup drawings ready for bidding.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Core Services Grid -->
+<section id="services-section" class="scroll-reveal">
+    <div class="container">
+        <div class="section-header-center">
+            <span class="eyebrow">OUR SPECIALIZATION</span>
+            <h2>Unmatched trade division coverage.</h2>
+            <p class="section-desc">From complex mechanical HVAC systems to residential framing takeoffs, our experienced surveyors deliver itemized, zip-code matched estimations.</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🪵</div>
+                <h3>Lumber & Framing</h3>
+                <p>Detailed wood trusses, rough carpentry, millwork, and stud counts matched to regional lumber indexes.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🧱</div>
+                <h3>Concrete & Masonry</h3>
+                <p>Precise concrete volume, rebar tonnage, block counts, and pavers for foundations or walls.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3>MEP Estimating</h3>
+                <p>Full HVAC ductwork, mechanical fixtures, electrical conduit lineals, and commercial plumbing takeoffs.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📐</div>
+                <h3>BIM Modeling & Drafting</h3>
+                <p>3D architectural modeling, shop drawings drafting, conflict checking, and construction document compilation.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>Interior/Exterior Finishes</h3>
+                <p>Drywall boards count, taping, paint surface square footage, acoustic ceilings, and flooring takeoffs.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚜</div>
+                <h3>Sitework & Earthwork</h3>
+                <p>Cut and fill volumetric calculations, 3D surface grading, landscape, and excavation takeoffs.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Big Stats Counter Banner -->
+<section id="stats-banner">
+    <div class="container stats-container">
+        <div class="stat-box">
+            <span class="stat-big">1,500+</span>
+            <span class="stat-sub">Projects Completed</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-big">98.2%</span>
+            <span class="stat-sub">Precision Rating</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-big">92%</span>
+            <span class="stat-sub">Bid Winning Ratio</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-big">24hr</span>
+            <span class="stat-sub">Average Turnaround</span>
+        </div>
+    </div>
+</section>
+
+<!-- Premium Single-Quote Testimonial Section -->
+<section id="testimonials-section">
+    <div class="container testimonial-rotator">
+        <span class="eyebrow">TRUSTED BY BUILDERS NATIONWIDE</span>
+        
+        <div class="testimonial-card active">
+            <p class="quote-text">“The level of accuracy and detail we received from The Best Estimator LLC was outstanding. Their PlanSwift markup let us verify every stud. We won our school bidding by a margin of 1.2%.”</p>
+            <div class="quote-author">
+                <span class="author-name">Kathy B. Ramirez</span>
+                <span class="author-title">Project Director, New Era Construction</span>
+            </div>
+        </div>
+
+        <div class="testimonial-card">
+            <p class="quote-text">“Outsourcing our concrete takeoffs saved our company over $5,000 monthly in software licensing and estimation payroll. They have been a core partner in our land development projects.”</p>
+            <div class="quote-author">
+                <span class="author-name">Raymond Eyi</span>
+                <span class="author-title">Founder, Eden Land Developers</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Action Close Call to Action -->
+<section id="final-cta">
+    <div class="container final-cta-container">
+        <h2>Start bidding to win.</h2>
+        <p>Send us your project drawings today. Our quantity surveyors will provide a custom proposal and turnaround agreement in less than an hour.</p>
+        <a href="{{ url_for('contact') }}" class="btn btn-primary">Upload Plans & Get Quote</a>
+    </div>
+</section>
+{% endblock %}

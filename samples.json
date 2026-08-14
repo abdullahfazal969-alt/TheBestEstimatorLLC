@@ -1,0 +1,26 @@
+[
+  {
+    "id": "lumber-takeoff-sample",
+    "trade": "Lumber & Framing",
+    "title": "Residential Lumber Takeoff",
+    "description": "Comprehensive material list for a 2,500 sq ft residential project including hardware and framing.",
+    "file_url": "/static/samples/sample_lumber.pdf",
+    "file_type": "pdf"
+  },
+  {
+    "id": "concrete-takeoff-sample",
+    "trade": "Concrete & Masonry",
+    "title": "Commercial Slab Estimation",
+    "description": "Detailed volume calculation for a 5,000 sq ft commercial warehouse slab.",
+    "file_url": "/static/samples/sample_concrete.xlsx",
+    "file_type": "excel"
+  },
+  {
+    "id": "mep-takeoff-sample",
+    "trade": "MEP Estimation",
+    "title": "HVAC Ductwork Takeoff",
+    "description": "Detailed ductwork and equipment schedule for a multi-family apartment complex.",
+    "file_url": "/static/samples/sample_mep.pdf",
+    "file_type": "pdf"
+  }
+]

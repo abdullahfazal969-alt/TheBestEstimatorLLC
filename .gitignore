@@ -1,0 +1,20 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+
+# IDEs
+.vscode/
+.idea/
+
+# Custom Project Ignores
+uploads/*
+!uploads/.gitkeep
+static/samples/*
+!static/samples/.gitkeep

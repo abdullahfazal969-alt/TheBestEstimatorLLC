@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+
+{% block title %}Request Estimate Quote{% endblock %}
+
+{% block content %}
+<main class="contact-page-main">
+    <div class="container contact-grid scroll-reveal">
+        <!-- LEFT SIDE: The Onboarding Intake Form -->
+        <div class="contact-left">
+            <header class="contact-header">
+                <span class="eyebrow">ESTIMATION ONBOARDING</span>
+                <h2 class="contact-title">Let’s bid your next project.</h2>
+                <p class="contact-sub">Fill out our structured project intake form below. Upload your drawings to trigger an automatic quote review by our chief estimator.</p>
+            </header>
+
+            <form
+                id="estimator-contact-form"
+                method="POST"
+                action="{{ url_for('submit_quote') }}"
+                enctype="multipart/form-data"
+                class="contact-form"
+            >
+                <!-- Step 01: Name -->
+                <div class="form-row">
+                    <label class="form-label">
+                        <span class="form-index">01</span> What’s your name?
+                    </label>
+                    <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="e.g. Michael Connor"
+                        required
+                    />
+                </div>
+
+                <!-- Step 02: Email -->
+                <div class="form-row">
+                    <label class="form-label">
+                        <span class="form-index">02</span> What’s your business email?
+                    </label>
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="e.g. m.connor@yourcompany.com"
+                        required
+                    />
+                </div>
+
+                <!-- Step 03: Organization -->
+                <div class="form-row">
+                    <label class="form-label">
+                        <span class="form-index">03</span> Company Name
+                    </label>
+                    <input
+                        id="org"
+                        name="org"
+                        type="text"
+                        placeholder="e.g. Apex Builders LLC (optional)"
+                    />
+                </div>
+
+                <!-- Step 04: Project Trade Division -->
+                <div class="form-row">
+                    <label class="form-label">
+                        <span class="form-index">04</span> Primary Trade/Division Required
+                    </label>
+                    <select id="project_type" name="project_type" required class="form-select">
+                        <option value="" disabled selected>Select primary division...</option>
+                        <option value="General Estimating">Division 01 — General Estimating (Multi-Trade)</option>
+                        <option value="Concrete & Masonry">Division 03/04 — Concrete & Masonry</option>
+                        <option value="Lumber & Framing">Division 06 — Wood & Framing (Lumber)</option>
+                        <option value="Finishes">Division 09 — Drywall, Paint & Finishes</option>
+                        <option value="MEP Estimating">Division 21-23 — Mechanical, Electrical & Plumbing</option>
+                        <option value="Earthwork">Division 31 — Earthwork & Excavation</option>
+                    </select>
+                </div>
+
+                <!-- Step 05: Blueprint Upload Zone -->
+                <div class="form-row">
+                    <label class="form-label">
+                        <span class="form-index">05</span> Upload Blueprints & Bid Set
+                    </label>
+                    <p class="field-sub">Accepts PDF, ZIP, DWG, and XLSX formats. Max file size: 50MB.</p>
+                    <div id="dropzone" class="upload-dropzone">
+                        <input
+                            id="blueprint-file"
+                            name="blueprint"
+                            type="file"
+                            accept=".pdf,.zip,.dwg,.dwf,.xlsx,.xls"
+                            required
+                            class="hidden-file-input"
+                        />
+                        <div class="dropzone-prompt">
+                            <span class="upload-icon">📁</span>
+                            <p class="prompt-text">Drag & drop your files here or <span class="highlight-link">browse computer</span></p>
+                            <p id="selected-file-name" class="selected-file-name"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 06: Message -->
+                <div class="form-row">
+                    <label class="form-label">
+                        <span class="form-index">06</span> Project Description & Scope Details
+                    </label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="4"
+                        placeholder="Include special instructions, required CSI division codes, bid dates, or regional cost adjustments (optional)."
+                    ></textarea>
+                </div>
+
+                <!-- Submit Button with Dynamic Loading State -->
+                <div class="form-row-cta">
+                    <button id="estimator-submit" type="submit" class="btn btn-primary w-full">
+                        Submit Intake Form & Upload plans
+                    </button>
+                </div>
+            </form>
+
+            <!-- Success/Result Banner -->
+            <div id="form-success-banner" class="form-result-success" style="display: none;">
+                <div class="success-icon">✓</div>
+                <h3>Intake Completed!</h3>
+                <p>We have successfully received your project plans. A notification has been sent directly to our Chief Estimator. You will receive a custom proposal and takeoff agreement shortly.</p>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE: Corporate Sidebar -->
+        <aside class="contact-right">
+            <div class="corporate-card">
+                <h3>Our Commitments</h3>
+                <div class="commitment-item">
+                    <h5>98%+ Measured Accuracy</h5>
+                    <p>We match quantities directly to local regional supplier cost databases based on zip codes.</p>
+                </div>
+                <div class="commitment-item">
+                    <h5>24-48 Hour Speed Delivery</h5>
+                    <p>Get bidding immediately. Most residential and commercial projects are delivered inside of 2 days.</p>
+                </div>
+                <div class="commitment-item">
+                    <h5>Free Blueprint Audit</h5>
+                    <p>Our surveyors run conflict checks across architectural, structural, and civil blueprints at no additional cost.</p>
+                </div>
+            </div>
+
+            <div class="direct-channels">
+                <h4>Direct Channels</h4>
+                <a class="channel-link" href="mailto:Sales@thebestestimatorllc.com">Sales@thebestestimatorllc.com</a>
+                <a class="channel-link" href="tel:+19173101235">+1 (917) 310-1235</a>
+                
+                <div class="location-box">
+                    <strong>Albuquerque Office</strong>
+                    <p>1209 Mountain Rd NE, Suite N<br>Albuquerque, NM 87110</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<!-- Page-Specific JS to manage Form Step UX & Blueprint Drag-and-Drop -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const dropzone = document.getElementById("dropzone");
+    const fileInput = document.getElementById("blueprint-file");
+    const fileNameDisplay = document.getElementById("selected-file-name");
+    const form = document.getElementById("estimator-contact-form");
+    const successBanner = document.getElementById("form-success-banner");
+    const submitBtn = document.getElementById("estimator-submit");
+
+    // Manage Drag & Drop Styles
+    if (dropzone && fileInput) {
+        dropzone.addEventListener("click", () => fileInput.click());
+
+        dropzone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            dropzone.classList.add("dragover");
+        });
+
+        dropzone.addEventListener("dragleave", () => {
+            dropzone.classList.remove("dragover");
+        });
+
+        dropzone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            dropzone.classList.remove("dragover");
+            if (e.dataTransfer.files.length > 0) {
+                fileInput.files = e.dataTransfer.files;
+                updateFileName();
+            }
+        });
+
+        fileInput.addEventListener("change", updateFileName);
+    }
+
+    function updateFileName() {
+        if (fileInput.files.length > 0) {
+            fileNameDisplay.textContent = `Attached: ${fileInput.files[0].name} (${(fileInput.files[0].size / (1024 * 1024)).toFixed(2)} MB)`;
+            fileNameDisplay.style.color = "var(--color-accent)";
+        }
+    }
+
+    // Ajax Submission to avoid page reload and show smooth Apple-style success transition
+    if (form) {
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            submitBtn.textContent = "Uploading plans & submitting details...";
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    // Smoothly animate the form hiding and success showing
+                    gsap.to(form, {
+                        opacity: 0,
+                        y: -20,
+                        duration: 0.5,
+                        onComplete: () => {
+                            form.style.display = "none";
+                            successBanner.style.display = "block";
+                            gsap.fromTo(successBanner, {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.5});
+                        }
+                    });
+                } else {
+                    alert("Error submitting. Please try again.");
+                    submitBtn.textContent = "Submit Intake Form";
+                    submitBtn.disabled = false;
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Network error. Please try again.");
+                submitBtn.textContent = "Submit Intake Form";
+                submitBtn.disabled = false;
+            }
+        });
+    }
+});
+</script>
+{% endblock %}
