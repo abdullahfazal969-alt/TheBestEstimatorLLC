@@ -73,53 +73,53 @@
         <!-- Main Content Injection -->
         <main class="page-content">{% block content %}{% endblock %}</main>
 
-        <!-- Hugo-Style Footer (Eerie Black Anchor) -->
+        <!-- Footer -->
         <footer id="site-footer">
             <div class="footer-container">
+                <!-- Brand Value Statement (Centered) -->
+                <div class="footer-top-cta">
+                    <h2 class="footer-cta-text">Let us take your estimation load.</h2>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+
                 <div class="footer-grid">
                     <div class="footer-info">
                         <h3 class="footer-logo">THE BEST ESTIMATOR</h3>
-                        <p class="footer-desc"></p>
+                        <p class="footer-desc">Your virtual estimation department. Delivering hyper-accurate material takeoffs and industrial cost consulting across the United States.</p>
                     </div>
                     <div class="footer-links-col">
                         <h4>Navigation</h4>
                         <a href="{{ url_for('index') }}">Home</a>
                         <a href="{{ url_for('samples') }}">Samples</a>
-                        <a href="{{ url_for('pricing') }}"
-                            >Services & Pricing</a
-                        >
+                        <a href="{{ url_for('pricing') }}">Services & Pricing</a>
                         <a href="{{ url_for('contact') }}">Request Quote</a>
                     </div>
                     <div class="footer-links-col">
                         <h4>Services</h4>
-                        <span>Lumber & Framing</span>
-                        <span>Concrete & Masonry</span>
-                        <span>MEP Takeoffs</span>
-                        <span>Drywall & Framing</span>
+                        <a href="{{ url_for('pricing') }}">Lumber & Framing</a>
+                        <a href="{{ url_for('pricing') }}">Concrete & Masonry</a>
+                        <a href="{{ url_for('pricing') }}">MEP Takeoffs</a>
+                        <a href="{{ url_for('pricing') }}">Drywall & Framing</a>
                     </div>
                     <div class="footer-links-col contact-col">
                         <h4>Contact Info</h4>
-                        <p>
-                            <strong>Phone:</strong>
-                            <a href="tel:+19173101235">+1 (917) 310-1235</a>
-                        </p>
-                        <p>
-                            <strong>Email:</strong>
-                            <a href="mailto:Sales@thebestestimatorllc.com"
-                                >Sales@thebestestimatorllc.com</a
-                            >
-                        </p>
-                        <p>
-                            <strong>Office:</strong> 1209 Mountain Rd NE,
-                            Albuquerque, NM 87110
-                        </p>
+                        <p><strong>Phone:</strong> <a href="tel:+19173101235">+1 (917) 310-1235</a></p>
+                        <p><strong>Email:</strong> <a href="mailto:Sales@thebestestimatorllc.com">Sales@thebestestimatorllc.com</a></p>
                     </div>
                 </div>
+
+                <!-- Trust Badges & Copyright -->
                 <div class="footer-bottom">
-                    <p>
-                        &copy; 2026 The Best Estimator LLC. Pelican Services.
-                        All Rights Reserved.
-                    </p>
+                    <div class="trust-badges">
+                        <span class="badge-placeholder">RSMeans Certified</span>
+                        <span class="badge-placeholder">Bluebeam Certified</span>
+                        <span class="badge-placeholder">PlanSwift Expert</span>
+                    </div>
+                    <p>&copy; 2026 The Best Estimator LLC. All Rights Reserved.</p>
                 </div>
             </div>
         </footer>
