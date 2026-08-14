@@ -4,28 +4,43 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section id="hero-section">
-    <div class="container hero-container">
-        <h1 class="hero-headline">Your Virtual<br><span class="highlight">Estimation Department.</span></h1>
-        <p class="hero-subtitle">Delivering hyper-accurate material takeoffs, shop drawings, and BIM scheduling in 24-48 hours. Scale your bids, slash your engineering overhead by 60%.</p>
-        <div class="hero-ctas">
-            <a href="{{ url_for('contact') }}" class="btn btn-primary">Request a Free Quote</a>
-            <a href="{{ url_for('samples') }}" class="btn btn-secondary">View Work Samples</a>
+<section id="hero-section" class="bg-light">
+    <div class="container hero-container grid-hero">
+        <div class="hero-content">
+            <h1 class="hero-headline">Your Virtual<br><span class="highlight">Estimation Department.</span></h1>
+            <p class="hero-subtitle">Delivering hyper-accurate material takeoffs, shop drawings, and BIM scheduling in 24-48 hours. Scale your bids, slash your engineering overhead by 60%.</p>
+            <div class="hero-ctas">
+                <a href="{{ url_for('contact') }}" class="btn btn-primary">Request a Free Quote</a>
+                <a href="{{ url_for('samples') }}" class="btn btn-secondary">View Work Samples</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="{{ url_for('static', filename='images/hero-image.png') }}" alt="Construction Estimation Services" class="hero-img-file">
         </div>
     </div>
 </section>
 
-<!-- Grayscale Trust Software Bar (Hugo Style) -->
-<section id="software-trust-bar">
-    <div class="container">
-        <p class="trust-title">POWERED BY INDUSTRY-STANDARD PRECISION INSTRUMENTS</p>
-        <div class="logo-track">
-            <!-- Text-based or CSS stylized badges representing their exact softwares -->
-            <div class="software-logo">AutoCAD</div>
-            <div class="software-logo">PlanSwift</div>
-            <div class="software-logo">Revit</div>
-            <div class="software-logo">Bluebeam</div>
-            <div class="software-logo">Primavera</div>
+<!-- Animated Software Marquee -->
+<section id="software-marquee-section">
+    <div class="marquee-container">
+        <div class="marquee-track">
+            <div class="marquee-content">
+                <span class="software-logo">AutoCAD</span>
+                <span class="software-logo">PlanSwift</span>
+                <span class="software-logo">Revit</span>
+                <span class="software-logo">Bluebeam</span>
+                <span class="software-logo">Primavera</span>
+                <span class="software-logo">RS Means</span>
+                <span class="software-logo">Xbeam</span>
+                <!-- Duplicate for seamless loop -->
+                <span class="software-logo">AutoCAD</span>
+                <span class="software-logo">PlanSwift</span>
+                <span class="software-logo">Revit</span>
+                <span class="software-logo">Bluebeam</span>
+                <span class="software-logo">Primavera</span>
+                <span class="software-logo">RS Means</span>
+                <span class="software-logo">Xbeam</span>
+            </div>
         </div>
     </div>
 </section>
@@ -37,7 +52,7 @@
             <span class="eyebrow">THE OUTSOURCING MATHEMATICS</span>
             <h2>Stop overpaying for in-house estimators.</h2>
             <p>Maintaining a full-time, in-house estimation team carries massive financial baggage—salaries, software licenses, benefits, and downtime. The Best Estimator LLC acts as your on-demand estimation partner. You only pay for the projects you bid on.</p>
-            
+
             <div class="metrics-row">
                 <div class="metric-item">
                     <span class="metric-num">60%</span>
@@ -78,7 +93,7 @@
             <span class="eyebrow">SEAMLESS INTEGRATION</span>
             <h2>Onboard in 3 simple steps.</h2>
         </div>
-        
+
         <div class="timeline-grid">
             <div class="timeline-step">
                 <div class="step-num">01</div>
@@ -107,7 +122,7 @@
             <h2>Unmatched trade division coverage.</h2>
             <p class="section-desc">From complex mechanical HVAC systems to residential framing takeoffs, our experienced surveyors deliver itemized, zip-code matched estimations.</p>
         </div>
-        
+
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-icon">🪵</div>
@@ -169,7 +184,7 @@
 <section id="testimonials-section">
     <div class="container testimonial-rotator">
         <span class="eyebrow">TRUSTED BY BUILDERS NATIONWIDE</span>
-        
+
         <div class="testimonial-card active">
             <p class="quote-text">“The level of accuracy and detail we received from The Best Estimator LLC was outstanding. Their PlanSwift markup let us verify every stud. We won our school bidding by a margin of 1.2%.”</p>
             <div class="quote-author">

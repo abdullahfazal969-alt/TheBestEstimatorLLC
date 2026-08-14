@@ -482,21 +482,23 @@ h6 {
 }
 
 /* ==========================================
-   HERO SECTION (APPLE/HUGO STYLE)
+   HERO SECTION (APPLE/HUGO STYLE - SPLIT LAYOUT)
    ========================================== */
 #hero-section {
-    padding: 10rem 0 7rem;
+    padding: 8rem 0;
     background-color: var(--color-bg);
-    text-align: center;
 }
 
-.hero-container {
-    max-width: 900px;
+.grid-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
 }
 
 .hero-headline {
     font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 800;
     letter-spacing: -2px;
     margin-bottom: 2rem;
@@ -508,60 +510,77 @@ h6 {
 }
 
 .hero-subtitle {
-    font-size: clamp(1.1rem, 2vw, 1.3rem);
-    font-weight: 400;
+    font-size: 1.1rem;
     color: var(--color-text-muted);
-    max-width: 750px;
-    margin: 0 auto 3.5rem;
     line-height: 1.8;
+    margin-bottom: 3rem;
 }
 
-.hero-ctas {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
+/* Hero Image Floating Effect */
+.hero-img-file {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    /* Floating Effect: Multi-layer soft shadow to create 'lift' */
+    box-shadow: 0 25px 50px -12px rgba(10, 17, 40, 0.25),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    transition: var(--transition-smooth);
+}
+
+.hero-img-file:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 40px 60px -15px rgba(10, 17, 40, 0.3);
 }
 
 /* ==========================================
-   SOFTWARE TRUST BAR (GRAYSCALE MARQUEE)
+   ANIMATED SOFTWARE MARQUEE (MINIMALIST LOOP)
    ========================================== */
-#software-trust-bar {
+#software-marquee-section {
     padding: 3rem 0;
-    background-color: var(--color-surface);
-    border-top: 1px solid rgba(226, 232, 240, 0.8);
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-    text-align: center;
+    background-color: var(--color-footer-text));
+    overflow: hidden;
+    margin: 0;
+
+}
+.software-logo{
+    font-weight: 500;
+    font-family: sans-serif;
+    color: var(--color-footer-text);
+    font-size: 2.8rem;
 }
 
-.trust-title {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: #94a3b8;
-    margin-bottom: 2rem;
-}
-
-.logo-track {
+.marquee-track {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5rem;
-    flex-wrap: wrap;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-content {
+    display: flex;
+    gap: 8rem;
+    white-space: nowrap;
+    /* 'linear' ensures a constant speed without acceleration/deceleration fluctuations */
+    animation: scroll-marquee 30s linear infinite;
+}
+
+@keyframes scroll-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
 }
 
 .software-logo {
     font-family: var(--font-heading);
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: #94a3b8;
     filter: grayscale(100%);
-    opacity: 0.6;
+    opacity: 0.5;
     transition: var(--transition-smooth);
 }
 
 .software-logo:hover {
     filter: grayscale(0%);
-    opacity: 1;
+    opacity: 0.9;
     color: var(--color-primary);
 }
 
