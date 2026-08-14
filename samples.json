@@ -22,5 +22,29 @@
     "description": "Detailed ductwork and equipment schedule for a multi-family apartment complex.",
     "file_url": "/static/samples/sample_mep.pdf",
     "file_type": "pdf"
+  },
+  {
+    "id": "drywall-takeoff-sample",
+    "trade": "Finishes",
+    "title": "Drywall & Partition Takeoff",
+    "description": "Detailed gypsum board counts, taping, and metal stud framing schedule for commercial office fit-out.",
+    "file_url": "/static/samples/sample_drywall.pdf",
+    "file_type": "pdf"
+  },
+  {
+    "id": "steel-takeoff-sample",
+    "trade": "Structural Steel",
+    "title": "Structural Steel Detailing",
+    "description": "Itemized list of columns, beams, trusses, and fasteners for industrial steel framework.",
+    "file_url": "/static/samples/sample_steel.xlsx",
+    "file_type": "excel"
+  },
+  {
+    "id": "sitework-takeoff-sample",
+    "trade": "Sitework & Earthwork",
+    "title": "Earthwork Volumetric Takeoff",
+    "description": "Cut and fill calculations based on civil site plans including soil excavation and grading volumes.",
+    "file_url": "/static/samples/sample_sitework.pdf",
+    "file_type": "pdf"
   }
 ]
