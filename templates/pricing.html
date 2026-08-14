@@ -1,13 +1,14 @@
-{% extends "base.html" %}
-
-{% block title %}Pricing & Services{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}Pricing & Services{% endblock %} {%
+block content %}
 <section id="pricing-header">
     <div class="container text-center">
         <span class="eyebrow">TRANSPARENT VALUE</span>
         <h1 class="page-title">Smarter Rates. Clear Pricing.</h1>
-        <p class="page-subtitle">We don’t hide our pricing. Choose between our on-demand per-project rates or subscribe to our Monthly Takeoff Package to save over 60% on in-house engineering costs.</p>
+        <p class="page-subtitle">
+            We don’t hide our pricing. Choose between our on-demand per-project
+            rates or subscribe to our Monthly Takeoff Package to save over 60%
+            on in-house engineering costs.
+        </p>
     </div>
 </section>
 
@@ -18,9 +19,14 @@
         <div class="pricing-card scroll-reveal">
             <span class="card-eyebrow">BID AS YOU GO</span>
             <h2>On-Demand Estimates</h2>
-            <p class="card-desc">Perfect for busy subcontractors bidding on selected regional projects throughout the month.</p>
+            <p class="card-desc">
+                Perfect for busy subcontractors bidding on selected regional
+                projects throughout the month.
+            </p>
             <div class="card-price">
-                <span class="price-symbol">$</span><span class="price-num">200</span><span class="price-period">/ avg project</span>
+                <span class="price-symbol">$</span
+                ><span class="price-num">200</span
+                ><span class="price-period">/ avg project</span>
             </div>
             <ul class="card-features">
                 <li>✓ Turnaround within 24 to 48 Hours</li>
@@ -29,7 +35,9 @@
                 <li>✓ Dynamic Excel Material Worksheets</li>
                 <li>✓ Free Revision Support</li>
             </ul>
-            <a href="{{ url_for('contact') }}" class="btn btn-secondary">Get Free Estimate Quote</a>
+            <a href="{{ url_for('contact') }}" class="btn btn-secondary"
+                >Get Free Estimate Quote</a
+            >
         </div>
 
         <!-- Option 2: Monthly Package (Most Popular) -->
@@ -37,9 +45,14 @@
             <div class="popular-badge">MOST POPULAR</div>
             <span class="card-eyebrow text-gold">UNLIMITED OUTSOURCING</span>
             <h2>Monthly Estimating</h2>
-            <p class="card-desc">Designed for active General Contractors aiming to scale operations, bid more, and secure more contracts.</p>
+            <p class="card-desc">
+                Designed for active General Contractors aiming to scale
+                operations, bid more, and secure more contracts.
+            </p>
             <div class="card-price text-white">
-                <span class="price-symbol">$</span><span class="price-num">1,500</span><span class="price-period">/ month</span>
+                <span class="price-symbol">$</span
+                ><span class="price-num">1,500</span
+                ><span class="price-period">/ month</span>
             </div>
             <ul class="card-features text-silver">
                 <li>✓ Unlimited Project Blueprints Submissions</li>
@@ -48,7 +61,9 @@
                 <li>✓ Includes All Structural, Finishing & MEP Divisions</li>
                 <li>✓ 60% More Cost-Effective than Full-Time Staff</li>
             </ul>
-            <a href="{{ url_for('contact') }}" class="btn btn-primary">Subscribe to Monthly Package</a>
+            <a href="{{ url_for('contact') }}" class="btn btn-primary"
+                >Subscribe to Monthly Package</a
+            >
         </div>
     </div>
 </section>
@@ -56,31 +71,62 @@
 <!-- Detailed Trades Table Section -->
 <section id="trades-breakdown">
     <div class="container">
-        <h2 class="section-title text-center">Estimation Capabilities Matrix</h2>
+        <h2 class="section-title text-center">
+            Estimation Capabilities Matrix
+        </h2>
         <div class="trades-grid">
             <div class="trade-box">
                 <h4>Division 03 — Concrete</h4>
-                <p>Foundations, slabs, footings, piers, columns, reinforcing steel (rebar), wire mesh, formwork, and gravel base.</p>
+                <p>
+                    Foundations, slabs, footings, piers, columns, reinforcing
+                    steel (rebar), wire mesh, formwork, and gravel base.
+                </p>
             </div>
             <div class="trade-box">
                 <h4>Division 04 — Masonry</h4>
-                <p>Concrete block (CMU), architectural precast concrete, bricks, natural stone, lintels, anchors, and mortar quantity takeoff.</p>
+                <p>
+                    Concrete block (CMU), architectural precast concrete,
+                    bricks, natural stone, lintels, anchors, and mortar quantity
+                    takeoff.
+                </p>
             </div>
             <div class="trade-box">
                 <h4>Division 06 — Wood & Plastics</h4>
-                <p>Structural timber, roof trusses, lumber joists, wall studs, finishing carpentry, casework, paneling, and cabinetry hardware.</p>
+                <p>
+                    Structural timber, roof trusses, lumber joists, wall studs,
+                    finishing carpentry, casework, paneling, and cabinetry
+                    hardware.
+                </p>
             </div>
             <div class="trade-box">
                 <h4>Division 09 — Finishes</h4>
-                <p>Drywall boards, metal studs, tape & joint compound, interior/exterior painting surface, flooring tile/carpets, and acoustical ceilings.</p>
+                <p>
+                    Drywall boards, metal studs, tape & joint compound,
+                    interior/exterior painting surface, flooring tile/carpets,
+                    and acoustical ceilings.
+                </p>
             </div>
             <div class="trade-box">
                 <h4>Division 21/22/23 — MEP</h4>
-                <p>HVAC ductwork, copper piping, electrical conduit lengths, branch wire counts, panelboards, and fixture schedules.</p>
+                <p>
+                    HVAC ductwork, copper piping, electrical conduit lengths,
+                    branch wire counts, panelboards, and fixture schedules.
+                </p>
             </div>
             <div class="trade-box">
                 <h4>Division 31 — Earthwork</h4>
-                <p>Cut & fill excavation, site grading volumes, clearing and grubbing, trench backfilling, soil stabilization, and site utilities.</p>
+                <p>
+                    Cut & fill excavation, site grading volumes, clearing and
+                    grubbing, trench backfilling, soil stabilization, and site
+                    utilities.
+                </p>
+            </div>
+            <div class="trade-box">
+                <h4>Design Stuff</h4>
+                <p>
+                    Whehter its plan drafting, shop drawings and bim modelling,
+                    we have got your back
+                </p>
             </div>
         </div>
     </div>

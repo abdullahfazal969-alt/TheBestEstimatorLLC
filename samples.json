@@ -1,50 +1,12 @@
 [
-  {
-    "id": "lumber-takeoff-sample",
-    "trade": "Lumber & Framing",
-    "title": "Residential Lumber Takeoff",
-    "description": "Comprehensive material list for a 2,500 sq ft residential project including hardware and framing.",
-    "file_url": "/static/samples/sample_lumber.pdf",
-    "file_type": "pdf"
-  },
-  {
-    "id": "concrete-takeoff-sample",
-    "trade": "Concrete & Masonry",
-    "title": "Commercial Slab Estimation",
-    "description": "Detailed volume calculation for a 5,000 sq ft commercial warehouse slab.",
-    "file_url": "/static/samples/sample_concrete.xlsx",
-    "file_type": "excel"
-  },
-  {
-    "id": "mep-takeoff-sample",
-    "trade": "MEP Estimation",
-    "title": "HVAC Ductwork Takeoff",
-    "description": "Detailed ductwork and equipment schedule for a multi-family apartment complex.",
-    "file_url": "/static/samples/sample_mep.pdf",
-    "file_type": "pdf"
-  },
-  {
-    "id": "drywall-takeoff-sample",
-    "trade": "Finishes",
-    "title": "Drywall & Partition Takeoff",
-    "description": "Detailed gypsum board counts, taping, and metal stud framing schedule for commercial office fit-out.",
-    "file_url": "/static/samples/sample_drywall.pdf",
-    "file_type": "pdf"
-  },
-  {
-    "id": "steel-takeoff-sample",
-    "trade": "Structural Steel",
-    "title": "Structural Steel Detailing",
-    "description": "Itemized list of columns, beams, trusses, and fasteners for industrial steel framework.",
-    "file_url": "/static/samples/sample_steel.xlsx",
-    "file_type": "excel"
-  },
-  {
-    "id": "sitework-takeoff-sample",
-    "trade": "Sitework & Earthwork",
-    "title": "Earthwork Volumetric Takeoff",
-    "description": "Cut and fill calculations based on civil site plans including soil excavation and grading volumes.",
-    "file_url": "/static/samples/sample_sitework.pdf",
-    "file_type": "pdf"
-  }
+  { "id": "lumber-takeoff", "trade": "Lumber & Framing", "title": "Residential Framing Takeoff", "description": "Full material lists, hardware schedules, and stud counts.", "file_url": "/static/samples/sample_lumber.pdf", "file_type": "pdf" },
+  { "id": "concrete-takeoff", "trade": "Concrete & Masonry", "title": "Commercial Slab Estimation", "description": "Volume calculation, rebar, and formwork.", "file_url": "/static/samples/sample_concrete.xlsx", "file_type": "excel" },
+  { "id": "mep-takeoff", "trade": "MEP Estimation", "title": "HVAC Ductwork Takeoff", "description": "Equipment schedule and ductwork run lengths.", "file_url": "/static/samples/sample_mep.pdf", "file_type": "pdf" },
+  { "id": "drywall-takeoff", "trade": "Finishes", "title": "Drywall Partition Takeoff", "description": "Gypsum boards, studs, and finish schedule.", "file_url": "/static/samples/sample_drywall.pdf", "file_type": "pdf" },
+  { "id": "steel-takeoff", "trade": "Structural Steel", "title": "Steel Detailing", "description": "Beams, columns, and fastener schedules.", "file_url": "/static/samples/sample_steel.xlsx", "file_type": "excel" },
+  { "id": "sitework-takeoff", "trade": "Sitework & Earthwork", "title": "Earthwork Volumetric", "description": "Cut & fill calculations and grading volumes.", "file_url": "/static/samples/sample_sitework.pdf", "file_type": "pdf" },
+  { "id": "painting-takeoff", "trade": "Finishes", "title": "Interior Painting Takeoff", "description": "Surface area calculations and finish schedules.", "file_url": "/static/samples/sample_painting.pdf", "file_type": "pdf" },
+  { "id": "roofing-takeoff", "trade": "Roofing & Insulation", "title": "Roofing Estimation", "description": "Shingles, underlayment, and insulation quantities.", "file_url": "/static/samples/sample_roofing.xlsx", "file_type": "excel" },
+  { "id": "flooring-takeoff", "trade": "Finishes", "title": "Flooring Takeoff", "description": "Tile, carpet, and wood flooring surface areas.", "file_url": "/static/samples/sample_flooring.pdf", "file_type": "pdf" },
+  { "id": "plumbing-takeoff", "trade": "MEP Estimation", "title": "Plumbing Pipe Takeoff", "description": "Pipe lengths, fittings, and fixtures.", "file_url": "/static/samples/sample_plumbing.pdf", "file_type": "pdf" }
 ]

@@ -941,53 +941,19 @@ h1, h2, h3, h4, h5, h6 {
 
 .sample-icon-zone {
     margin-bottom: 2rem;
-}
-
-.file-icon {
-    width: 60px;
-    height: 70px;
-    border-radius: 4px;
-    position: relative;
+    height: 64px;
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 1rem;
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 0.85rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    align-items: center;
 }
 
-.file-icon::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-width: 15px 15px 0 0;
-    border-style: solid;
-    border-radius: 0 4px 0 0;
-    width: 0;
-}
-
-/* PDF Accent */
-.pdf-type {
-    background-color: #FEE2E2;
+.pdf-icon {
     color: #EF4444;
-    border: 1.5px solid #FCA5A5;
-}
-.pdf-type::after {
-    border-color: #FCA5A5 var(--color-surface) var(--color-surface) #FCA5A5;
 }
 
-/* Excel Accent */
-.excel-type {
-    background-color: #D1FAE5;
+.excel-icon {
     color: #10B981;
-    border: 1.5px solid #6EE7B7;
 }
-.excel-type::after {
-    border-color: #6EE7B7 var(--color-surface) var(--color-surface) #6EE7B7;
-}
+
 
 .sample-details h3 {
     font-size: 1.25rem;

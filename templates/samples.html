@@ -16,9 +16,10 @@
         <!-- Dynamic Trade Filtering Tabs (Sleek UI) -->
         <div class="filter-tabs">
             <button class="filter-tab active" data-filter="all">All Divisions</button>
-            <button class="filter-tab" data-filter="Lumber & Framing">Lumber & Framing</button>
-            <button class="filter-tab" data-filter="Concrete & Masonry">Concrete & Masonry</button>
-            <button class="filter-tab" data-filter="MEP Estimation">MEP Division</button>
+            <button class="filter-tab" data-filter="Lumber & Framing">Lumber</button>
+            <button class="filter-tab" data-filter="Concrete & Masonry">Concrete</button>
+            <button class="filter-tab" data-filter="MEP Estimation">MEP</button>
+            <button class="filter-tab" data-filter="Finishes">Finishes</button>
         </div>
 
         <div class="samples-grid">
@@ -28,15 +29,9 @@
                 
                 <div class="sample-icon-zone">
                     {% if sample.file_type == 'pdf' %}
-                        <!-- PDF Red Accent Icon -->
-                        <div class="file-icon pdf-type">
-                            <span class="file-ext">PDF</span>
-                        </div>
+                        <i class="fa-solid fa-file-pdf fa-4x pdf-icon"></i>
                     {% else %}
-                        <!-- Excel Green Accent Icon -->
-                        <div class="file-icon excel-type">
-                            <span class="file-ext">XLSX</span>
-                        </div>
+                        <i class="fa-solid fa-file-excel fa-4x excel-icon"></i>
                     {% endif %}
                 </div>
 
@@ -46,7 +41,7 @@
                     
                     <!-- Direct Action Force Download link -->
                     <a href="{{ sample.file_url }}" download class="btn btn-secondary btn-download">
-                        Download Sample Document
+                        Download Sample
                     </a>
                 </div>
             </div>
@@ -63,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     tabs.forEach(tab => {
         tab.addEventListener("click", () => {
-            // Remove active class from all tabs
             tabs.forEach(t => t.classList.remove("active"));
             tab.classList.add("active");
 
@@ -72,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cards.forEach(card => {
                 const cardTrade = card.getAttribute("data-trade");
                 if (filter === "all" || cardTrade === filter) {
-                    card.style.display = "block";
+                    card.style.display = "flex";
                     gsap.fromTo(card, {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.4});
                 } else {
                     card.style.display = "none";
