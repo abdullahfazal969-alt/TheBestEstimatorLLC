@@ -523,9 +523,9 @@ h6 {
     /* Remove borders, shadows, and cards for natural integration */
     border-radius: 0; 
     box-shadow: none;
-    /* Softly mask edges to blend into background */
-    mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
-    -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+    /* Softly mask bottom edge to blend into background */
+    mask-image: linear-gradient(to top, transparent 0%, black 25%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 25%);
     transition: var(--transition-smooth);
 }
 
