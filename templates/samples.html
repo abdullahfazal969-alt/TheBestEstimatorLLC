@@ -5,43 +5,54 @@
 {% block content %}
 <section id="samples-header">
     <div class="container text-center">
-        <span class="eyebrow">VERIFIED ACCURACY</span>
-        <h1 class="page-title">Our Work Speaks for Itself.</h1>
-        <p class="page-subtitle">Download our real, color-coded PlanSwift markup blueprints and itemized Excel takeoff spreadsheets to inspect our meticulous precision.</p>
+        <span class="eyebrow">FULL-SCOPE CSI COVERAGE</span>
+        <h1 class="page-title">One Team. Every Division.</h1>
+        <p class="page-subtitle">From structural concrete and steel to MEP, finishes, and sitework — download real takeoff samples spanning the CSI divisions we estimate every day.</p>
     </div>
 </section>
 
 <section id="samples-gallery">
     <div class="container">
-        <!-- Dynamic Trade Filtering Tabs (Sleek UI) -->
+        <div class="samples-gallery-heading">
+            <h2 class="section-title">Estimating Samples Across the Trades</h2>
+            <p class="section-desc">Ten representative takeoffs, ten different divisions — a cross-section of the scope we cover on every project.</p>
+        </div>
+
+        <!-- Dynamic Trade Filtering Tabs -->
         <div class="filter-tabs">
             <button class="filter-tab active" data-filter="all">All Divisions</button>
             <button class="filter-tab" data-filter="Lumber & Framing">Lumber</button>
             <button class="filter-tab" data-filter="Concrete & Masonry">Concrete</button>
+            <button class="filter-tab" data-filter="Structural Steel">Steel</button>
             <button class="filter-tab" data-filter="MEP Estimation">MEP</button>
             <button class="filter-tab" data-filter="Finishes">Finishes</button>
+            <button class="filter-tab" data-filter="Roofing & Insulation">Roofing</button>
+            <button class="filter-tab" data-filter="Sitework & Earthwork">Sitework</button>
         </div>
 
         <div class="samples-grid">
             {% for sample in samples %}
-            <div class="sample-card scroll-reveal" data-trade="{{ sample.trade }}">
-                <div class="sample-badge">{{ sample.trade }}</div>
-                
-                <div class="sample-icon-zone">
-                    {% if sample.file_type == 'pdf' %}
-                        <i class="fa-solid fa-file-pdf fa-4x pdf-icon"></i>
-                    {% else %}
-                        <i class="fa-solid fa-file-excel fa-4x excel-icon"></i>
-                    {% endif %}
+            <div class="sample-card scroll-reveal{% if loop.first %} sample-card-featured{% endif %}" data-trade="{{ sample.trade }}">
+                <div class="sample-image-zone">
+                    <img src="{{ sample.image }}" alt="{{ sample.title }} — CSI Division {{ sample.division }} construction takeoff sample" loading="lazy">
+                    <span class="sample-division-chip">DIV {{ sample.division }}</span>
+                    <span class="sample-filetype-chip">
+                        {% if sample.file_type == 'pdf' %}
+                            <i class="fa-solid fa-file-pdf"></i> PDF
+                        {% else %}
+                            <i class="fa-solid fa-file-excel"></i> XLSX
+                        {% endif %}
+                    </span>
                 </div>
 
-                <div class="sample-details">
+                <div class="sample-content">
+                    <span class="sample-trade-label">{{ sample.trade }}</span>
                     <h3>{{ sample.title }}</h3>
                     <p>{{ sample.description }}</p>
-                    
-                    <!-- Direct Action Force Download link -->
-                    <a href="{{ sample.file_url }}" download class="btn btn-secondary btn-download">
-                        Download Sample
+
+                    <a href="{{ sample.file_url }}" download class="sample-download-link">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Download Sample</span>
                     </a>
                 </div>
             </div>

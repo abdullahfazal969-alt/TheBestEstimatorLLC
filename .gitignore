@@ -16,5 +16,3 @@ venv/
 # Custom Project Ignores
 uploads/*
 !uploads/.gitkeep
-static/samples/*
-!static/samples/.gitkeep
