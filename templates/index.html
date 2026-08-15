@@ -191,24 +191,65 @@
     </div>
 </section>
 
-<!-- Premium Single-Quote Testimonial Section -->
+<!-- Premium Testimonial Section — Hugo-style photo framing, photo-ready -->
 <section id="testimonials-section">
-    <div class="container testimonial-rotator">
-        <span class="eyebrow">TRUSTED BY BUILDERS NATIONWIDE</span>
+    <div class="container">
+        <span class="eyebrow text-center-block">TRUSTED BY BUILDERS NATIONWIDE</span>
 
-        <div class="testimonial-card active">
-            <p class="quote-text">“The level of accuracy and detail we received from The Best Estimator LLC was outstanding. Their PlanSwift markup let us verify every stud. We won our school bidding by a margin of 1.2%.”</p>
-            <div class="quote-author">
-                <span class="author-name">Kathy B. Ramirez</span>
-                <span class="author-title">Project Director, New Era Construction</span>
+        <div class="testimonial-rotator">
+            <div class="testimonial-card active">
+                <div class="testimonial-photo-frame">
+                    <img src="{{ url_for('static', filename='images/testimonials/kathy-ramirez.jpg') }}" alt="Kathy B. Ramirez" onerror="this.style.display='none'; this.parentElement.classList.add('no-photo');">
+                    <span class="testimonial-photo-fallback"><i class="fas fa-user"></i></span>
+                </div>
+                <p class="quote-text">“The level of accuracy and detail we received from The Best Estimator LLC was outstanding. Their PlanSwift markup let us verify every stud. We won our school bidding by a margin of 1.2%.”</p>
+                <div class="quote-author">
+                    <span class="author-name">Kathy B. Ramirez</span>
+                    <span class="author-title">Project Director, New Era Construction</span>
+                </div>
             </div>
-        </div>
 
-        <div class="testimonial-card">
-            <p class="quote-text">“Outsourcing our concrete takeoffs saved our company over $5,000 monthly in software licensing and estimation payroll. They have been a core partner in our land development projects.”</p>
-            <div class="quote-author">
-                <span class="author-name">Raymond Eyi</span>
-                <span class="author-title">Founder, Eden Land Developers</span>
+            <div class="testimonial-card">
+                <div class="testimonial-photo-frame">
+                    <img src="{{ url_for('static', filename='images/testimonials/raymond-eyi.jpg') }}" alt="Raymond Eyi" onerror="this.style.display='none'; this.parentElement.classList.add('no-photo');">
+                    <span class="testimonial-photo-fallback"><i class="fas fa-user"></i></span>
+                </div>
+                <p class="quote-text">“Outsourcing our concrete takeoffs saved our company over $5,000 monthly in software licensing and estimation payroll. They have been a core partner in our land development projects.”</p>
+                <div class="quote-author">
+                    <span class="author-name">Raymond Eyi</span>
+                    <span class="author-title">Founder, Eden Land Developers</span>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-photo-frame">
+                    <img src="{{ url_for('static', filename='images/testimonials/testimonial-3.jpg') }}" alt="Client testimonial" onerror="this.style.display='none'; this.parentElement.classList.add('no-photo');">
+                    <span class="testimonial-photo-fallback"><i class="fas fa-quote-left"></i></span>
+                </div>
+                <p class="quote-text placeholder-quote">Add your third client testimonial here — swap this placeholder text and photo once you have a real quote to feature.</p>
+                <div class="quote-author">
+                    <span class="author-name">Client Name</span>
+                    <span class="author-title">Title, Company</span>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-photo-frame">
+                    <img src="{{ url_for('static', filename='images/testimonials/testimonial-4.jpg') }}" alt="Client testimonial" onerror="this.style.display='none'; this.parentElement.classList.add('no-photo');">
+                    <span class="testimonial-photo-fallback"><i class="fas fa-quote-left"></i></span>
+                </div>
+                <p class="quote-text placeholder-quote">Add your fourth client testimonial here — swap this placeholder text and photo once you have a real quote to feature.</p>
+                <div class="quote-author">
+                    <span class="author-name">Client Name</span>
+                    <span class="author-title">Title, Company</span>
+                </div>
+            </div>
+
+            <div class="testimonial-dots">
+                <button class="testimonial-dot active" data-index="0" aria-label="Show testimonial 1"></button>
+                <button class="testimonial-dot" data-index="1" aria-label="Show testimonial 2"></button>
+                <button class="testimonial-dot" data-index="2" aria-label="Show testimonial 3"></button>
+                <button class="testimonial-dot" data-index="3" aria-label="Show testimonial 4"></button>
             </div>
         </div>
     </div>
@@ -216,10 +257,18 @@
 
 <!-- Action Close Call to Action -->
 <section id="final-cta">
-    <div class="container final-cta-container">
-        <h2>Start bidding to win.</h2>
-        <p>Send us your project drawings today. Our quantity surveyors will provide a custom proposal and turnaround agreement in less than an hour.</p>
-        <a href="{{ url_for('contact') }}" class="btn btn-primary">Upload Plans & Get Quote</a>
+    <div class="container">
+        <div class="final-cta-frame">
+            <div class="final-cta-top">
+                <h2>Start bidding to win.
+                    <span class="final-cta-arrow"><i class="fas fa-arrow-down"></i></span>
+                </h2>
+            </div>
+            <div class="final-cta-bottom">
+                <p>Send us your project drawings today. Our quantity surveyors will provide a custom proposal and turnaround agreement in less than an hour.</p>
+                <a href="{{ url_for('contact') }}" class="btn btn-primary">Upload Plans & Get Quote</a>
+            </div>
+        </div>
     </div>
 </section>
 {% endblock %}
