@@ -1075,7 +1075,6 @@ h6 {
 #pricing-header {
     padding: 8rem 0 4rem;
     background-color: var(--color-bg);
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .text-center {
