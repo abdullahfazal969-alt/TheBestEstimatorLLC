@@ -127,6 +127,14 @@
                 <h3>Intake Completed!</h3>
                 <p>We have successfully received your project plans. A notification has been sent directly to our Chief Estimator. You will receive a custom proposal and takeoff agreement shortly.</p>
             </div>
+
+            <!-- Failure/Result Banner -->
+            <div id="form-error-banner" class="form-result-error" style="display: none;">
+                <div class="error-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                <h3>We Couldn't Send Your Request</h3>
+                <p id="form-error-message">Something went wrong on our end. Please try again, or reach us directly at <a href="mailto:Sales@thebestestimatorllc.com">Sales@thebestestimatorllc.com</a>.</p>
+                <button type="button" id="form-error-retry" class="btn btn-secondary">Try Again</button>
+            </div>
         </div>
 
         <!-- RIGHT SIDE: Corporate Sidebar -->
@@ -151,7 +159,7 @@
                 <h4>Direct Channels</h4>
                 <a class="channel-link" href="mailto:Sales@thebestestimatorllc.com">Sales@thebestestimatorllc.com</a>
                 <a class="channel-link" href="tel:+19173101235">+1 (917) 310-1235</a>
-                
+
                 <div class="location-box">
                     <strong>Albuquerque Office</strong>
                     <p>1209 Mountain Rd NE, Suite N<br>Albuquerque, NM 87110</p>
@@ -204,6 +212,37 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Ajax Submission to avoid page reload and show smooth Apple-style success transition
+    const errorBanner = document.getElementById("form-error-banner");
+    const errorMessage = document.getElementById("form-error-message");
+    const errorRetryBtn = document.getElementById("form-error-retry");
+    const defaultSubmitLabel = submitBtn ? submitBtn.textContent : "Submit Intake Form & Upload plans";
+
+    function showError(message) {
+        if (errorMessage) errorMessage.textContent = message;
+
+        if (form) form.style.display = "none";
+        if (errorBanner) {
+            errorBanner.style.display = "block";
+            gsap.fromTo(errorBanner, {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.5});
+        }
+    }
+
+    function resetToForm() {
+        if (errorBanner) errorBanner.style.display = "none";
+        if (form) {
+            form.style.display = "block";
+            gsap.fromTo(form, {opacity: 0}, {opacity: 1, duration: 0.4});
+        }
+        if (submitBtn) {
+            submitBtn.textContent = defaultSubmitLabel;
+            submitBtn.disabled = false;
+        }
+    }
+
+    if (errorRetryBtn) {
+        errorRetryBtn.addEventListener("click", resetToForm);
+    }
+
     if (form) {
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -220,7 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const result = await response.json();
 
-                if (result.status === "success") {
+                if (response.ok && result.status === "success") {
                     // Smoothly animate the form hiding and success showing
                     gsap.to(form, {
                         opacity: 0,
@@ -233,15 +272,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     });
                 } else {
-                    alert("Error submitting. Please try again.");
-                    submitBtn.textContent = "Submit Intake Form";
-                    submitBtn.disabled = false;
+                    showError(result.message || "We couldn't send your request right now. Please try again.");
                 }
             } catch (err) {
                 console.error(err);
-                alert("Network error. Please try again.");
-                submitBtn.textContent = "Submit Intake Form";
-                submitBtn.disabled = false;
+                showError("Network error — please check your connection and try again.");
             }
         });
     }

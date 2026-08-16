@@ -247,7 +247,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     : "Detailed scope, deliverables, applications, and relevant sample.";
             }
 
-            if (shouldScroll) scrollToCard(card);
+            if (shouldScroll) {
+                scrollToCard(card);
+                // Brief pulse to draw the eye to the card that was just linked to
+                card.classList.add("is-target");
+                window.setTimeout(() => card.classList.remove("is-target"), 1500);
+            }
         };
 
         serviceCards.forEach(card => {
