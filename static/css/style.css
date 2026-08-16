@@ -961,7 +961,6 @@ h6 {
 #testimonials-section {
     padding: 8rem 0;
     background-color: var(--color-surface);
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
     text-align: center;
 }
 
@@ -1051,10 +1050,7 @@ h6 {
     margin-bottom: 2.5rem;
 }
 
-.placeholder-quote {
-    font-style: italic;
-    color: var(--color-text-muted);
-}
+
 
 .quote-author {
     display: flex;
