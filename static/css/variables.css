@@ -1,0 +1,24 @@
+:root {
+    /* Fonts */
+    --font-sans: "Inter", sans-serif;
+    --font-heading: "Barlow Condensed", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+
+    /* Colors */
+    --color-primary: #1c2541; /* Oxford Blue - Trust/Brand */
+    --color-accent: #e5a93b; /* Construction Gold - Highlights/Action */
+    --color-accent-hover: #c58f2b; /* Darker Gold for Hover */
+    --color-bg: #f7f9fc; /* Soft Ice Gray background */
+    --color-surface: #ffffff; /* Pure White for cards/containers */
+    --color-text-dark: #1c2541; /* Slate Navy for headlines */
+    --color-text-muted: #4a4e69; /* Cool Grey for body copy */
+
+    /* Footer Palette (Hugo Inspired) */
+    --color-footer-bg: #050505; /* Eerie Black */
+    --color-footer-text: #b0b0b0; /* Muted Silver */
+
+    /* Global Spacing & Layout */
+    --max-width: 1200px;
+    --border-radius: 12px;
+    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
