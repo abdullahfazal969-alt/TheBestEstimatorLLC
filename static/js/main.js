@@ -176,78 +176,52 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 5. Capability Matrix — Spotlight-Expand Rows (pricing page only)
-    const capabilityRows = document.querySelectorAll(".capability-row");
-    const capabilityBackdrop = document.getElementById("capability-modal-backdrop");
+    // 5. Service scope flashcards — expand/collapse + deep-linking (pricing page only)
+    const serviceCards = document.querySelectorAll(".svcflash-card");
 
-    if (capabilityRows.length > 0 && capabilityBackdrop) {
-        const capabilityModal = document.getElementById("capability-modal");
-        const capabilityCloseBtn = document.getElementById("capability-modal-close");
-        const modalNum = document.getElementById("capability-modal-num");
-        const modalTitle = document.getElementById("capability-modal-title");
-        const modalDesc = document.getElementById("capability-modal-desc");
-        const modalItems = document.getElementById("capability-modal-items");
+    if (serviceCards.length > 0) {
+        const expandCard = (card, shouldScroll = false) => {
+            const toggle = card.querySelector(".svcflash-toggle");
+            card.classList.add("is-expanded");
+            toggle?.setAttribute("aria-expanded", "true");
 
-        function openCapability(row) {
-            const division = row.dataset.division;
-            const title = row.dataset.title;
-            const desc = row.dataset.desc;
-            const items = (row.dataset.items || "").split("|").filter(Boolean);
+            if (shouldScroll) {
+                requestAnimationFrame(() => {
+                    card.scrollIntoView({ behavior: "smooth", block: "start" });
+                });
+            }
+        };
 
-            modalNum.textContent = "DIVISION " + division;
-            modalTitle.textContent = title;
-            modalDesc.textContent = desc;
-            modalItems.innerHTML = "";
+        const collapseCard = (card) => {
+            const toggle = card.querySelector(".svcflash-toggle");
+            card.classList.remove("is-expanded");
+            toggle?.setAttribute("aria-expanded", "false");
+        };
 
-            items.forEach(item => {
-                const li = document.createElement("li");
-                li.textContent = item;
-                modalItems.appendChild(li);
-            });
+        serviceCards.forEach(card => {
+            const toggle = card.querySelector(".svcflash-toggle");
+            if (!toggle) return;
 
-            capabilityBackdrop.classList.add("is-open");
-            document.body.classList.add("capability-modal-open");
-
-            gsap.fromTo(capabilityModal,
-                { opacity: 0, scale: 0.85, y: 30 },
-                { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "power3.out" }
-            );
-
-            gsap.fromTo(modalItems.querySelectorAll("li"),
-                { opacity: 0, y: 14 },
-                { opacity: 1, y: 0, duration: 0.4, stagger: 0.06, delay: 0.2, ease: "power2.out" }
-            );
-        }
-
-        function closeCapability() {
-            gsap.to(capabilityModal, {
-                opacity: 0,
-                scale: 0.85,
-                y: 30,
-                duration: 0.3,
-                ease: "power2.in",
-                onComplete: () => {
-                    capabilityBackdrop.classList.remove("is-open");
-                    document.body.classList.remove("capability-modal-open");
+            toggle.addEventListener("click", (event) => {
+                event.preventDefault();
+                const isExpanded = card.classList.contains("is-expanded");
+                if (isExpanded) {
+                    collapseCard(card);
+                } else {
+                    expandCard(card);
                 }
             });
-        }
-
-        capabilityRows.forEach(row => {
-            row.addEventListener("click", () => openCapability(row));
         });
 
-        capabilityCloseBtn.addEventListener("click", closeCapability);
-
-        capabilityBackdrop.addEventListener("click", (e) => {
-            if (e.target === capabilityBackdrop) closeCapability();
-        });
-
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && capabilityBackdrop.classList.contains("is-open")) {
-                closeCapability();
+        const targetId = window.location.hash.replace(/^#/, "");
+        if (targetId) {
+            const targetCard = document.getElementById(targetId);
+            if (targetCard?.classList.contains("svcflash-card")) {
+                expandCard(targetCard, true);
+                targetCard.classList.add("is-target");
+                window.setTimeout(() => targetCard.classList.remove("is-target"), 1600);
             }
-        });
+        }
     }
 
     // 6. FAQ Accordion — smooth expand/collapse

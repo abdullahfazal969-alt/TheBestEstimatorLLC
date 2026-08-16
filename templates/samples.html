@@ -66,27 +66,56 @@
 <!-- Embedded Page-Specific JS for Dynamic Filtering -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const tabs = document.querySelectorAll(".filter-tab");
-    const cards = document.querySelectorAll(".sample-card");
+    const tabs = Array.from(document.querySelectorAll(".filter-tab"));
+    const cards = Array.from(document.querySelectorAll(".sample-card"));
+
+    function applyFilter(filter, animate = true) {
+        const matchingTab = tabs.find(tab => tab.getAttribute("data-filter") === filter);
+        const activeFilter = matchingTab ? filter : "all";
+
+        tabs.forEach(tab => {
+            tab.classList.toggle("active", tab.getAttribute("data-filter") === activeFilter);
+        });
+
+        cards.forEach(card => {
+            const cardTrade = card.getAttribute("data-trade");
+            const shouldShow = activeFilter === "all" || cardTrade === activeFilter;
+            card.style.display = shouldShow ? "flex" : "none";
+
+            if (shouldShow && animate && typeof gsap !== "undefined") {
+                gsap.fromTo(card, {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.35});
+            }
+        });
+
+        return activeFilter;
+    }
 
     tabs.forEach(tab => {
         tab.addEventListener("click", () => {
-            tabs.forEach(t => t.classList.remove("active"));
-            tab.classList.add("active");
-
             const filter = tab.getAttribute("data-filter");
-
-            cards.forEach(card => {
-                const cardTrade = card.getAttribute("data-trade");
-                if (filter === "all" || cardTrade === filter) {
-                    card.style.display = "flex";
-                    gsap.fromTo(card, {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.4});
-                } else {
-                    card.style.display = "none";
-                }
-            });
+            applyFilter(filter);
+            const url = new URL(window.location.href);
+            if (filter === "all") {
+                url.searchParams.delete("trade");
+            } else {
+                url.searchParams.set("trade", filter);
+            }
+            window.history.replaceState({}, "", url);
         });
     });
+
+    const requestedTrade = new URLSearchParams(window.location.search).get("trade");
+    if (requestedTrade) {
+        const activeFilter = applyFilter(requestedTrade, false);
+        const matchingCard = cards.find(card => card.getAttribute("data-trade") === activeFilter);
+        if (matchingCard) {
+            requestAnimationFrame(() => {
+                matchingCard.scrollIntoView({ behavior: "smooth", block: "center" });
+                matchingCard.classList.add("sample-card-linked");
+                window.setTimeout(() => matchingCard.classList.remove("sample-card-linked"), 1600);
+            });
+        }
+    }
 });
 </script>
 {% endblock %}

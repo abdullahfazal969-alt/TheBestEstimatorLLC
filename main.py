@@ -1,11 +1,13 @@
 import os
 import json
+from pathlib import Path
 from flask import Flask, render_template, request, jsonify
 from flask_mail import Mail, Message
 from dotenv import load_dotenv
 
 load_dotenv()
 
+BASE_DIR = Path(__file__).resolve().parent
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-key-123')
 
@@ -28,14 +30,24 @@ app.config['MAX_CONTENT_LENGTH'] = 15 * 1024 * 1024
 
 def load_samples():
     try:
-        with open('samples.json', 'r') as f:
+        with open(BASE_DIR / 'samples.json', 'r', encoding='utf-8') as f:
             return json.load(f)
-    except FileNotFoundError:
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        app.logger.error("Unable to load samples.json: %s", e)
+        return []
+
+def load_services():
+    try:
+        with open(BASE_DIR / 'services.json', 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        app.logger.error("Unable to load services.json: %s", e)
         return []
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    all_services = load_services()
+    return render_template('index.html', services=all_services)
 
 @app.route('/samples')
 def samples():
@@ -44,7 +56,8 @@ def samples():
 
 @app.route('/pricing')
 def pricing():
-    return render_template('pricing.html')
+    all_services = load_services()
+    return render_template('pricing.html', services=all_services)
 
 @app.route('/contact')
 def contact():
@@ -52,17 +65,26 @@ def contact():
 
 @app.route('/submit-quote', methods=['POST'])
 def submit_quote():
-    name = request.form.get('name')
-    email = request.form.get('email')
+    name = request.form.get('name', '').strip()
+    email = request.form.get('email', '').strip()
+    organization = request.form.get('org', '').strip()
     project_type = request.form.get('project_type')
     services = request.form.get('services')
     message = request.form.get('message')
+
+    # Basic server-side validation — never trust the client alone
+    if not name or not email:
+        return jsonify({
+            "status": "error",
+            "message": "Name and email are required."
+        }), 400
 
     file = request.files.get('blueprint')
 
     body_lines = [
         "New Lead Submitted!",
         f"Contractor: {name} ({email})",
+        f"Company: {organization or 'Not provided'}",
         f"Project Trade: {project_type}",
         f"Requested Services: {services}",
         f"Message: {message}",
@@ -89,18 +111,22 @@ def submit_quote():
             )
 
         mail.send(msg)
-        email_status = "sent"
-    except Exception as e:
-        # Don't fail the whole request if email delivery has an issue —
-        # the lead is still logged server-side either way.
-        print(f"Email send failed: {e}")
-        email_status = "failed"
 
-    return jsonify({
-        "status": "success",
-        "message": "Quote request submitted successfully!",
-        "email_status": email_status
-    })
+        # Only report success when the email genuinely sent — the frontend
+        # relies on this to decide which banner to show.
+        return jsonify({
+            "status": "success",
+            "message": "Your quote request was sent successfully."
+        })
+
+    except Exception as e:
+        # Don't pretend this succeeded. Log the real error server-side,
+        # send back a distinct failure status so the UI can show it honestly.
+        print(f"Email send failed: {e}")
+        return jsonify({
+            "status": "error",
+            "message": "We couldn't send your request right now. Please try again, or email us directly."
+        }), 502
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,196 @@
+[
+  {
+    "id": "sitework-civil",
+    "featured": true,
+    "number": "01",
+    "csi_division": "Div. 31–33",
+    "name": "SiteWork & Civil",
+    "discipline": "CIVIL",
+    "icon": "fa-cubes",
+    "elevation": "EL. +24.00 m",
+    "coord": "SPEC. 31-33",
+    "short_desc": "Earthwork, excavation, utilities, paving, grading, and site development takeoffs.",
+    "overview": "Site and civil takeoffs covering everything that happens before vertical construction begins — from initial earthwork through finished paving and utility tie-ins.",
+    "what_we_cover": [
+      "Cut & fill volumetric calculations",
+      "Excavation and trenching quantities",
+      "Site utilities — water, sewer, storm drainage",
+      "Grading and 3D surface modeling",
+      "Paving, curb, and sidewalk takeoffs",
+      "Erosion control and site restoration"
+    ],
+    "what_you_receive": [
+      "Itemized quantity takeoff spreadsheet",
+      "Marked-up site plans showing measured areas",
+      "Material and labor unit breakdowns"
+    ],
+    "typical_applications": "Land development, subdivisions, commercial pad sites, road and utility infrastructure projects.",
+    "sample_trade_match": "Sitework & Earthwork"
+  },
+  {
+    "id": "concrete-masonry",
+    "featured": false,
+    "number": "02",
+    "csi_division": "Div. 03–04",
+    "name": "Concrete & Masonry",
+    "discipline": "MASONRY",
+    "icon": "fa-trowel",
+    "elevation": "EL. +20.00 m",
+    "coord": "SPEC. 03-04",
+    "short_desc": "Accurate takeoffs for foundations, concrete structures, reinforcing, and masonry work.",
+    "overview": "Foundation-through-structure concrete and masonry quantities, verified against rebar schedules and formwork requirements for accurate bid pricing.",
+    "what_we_cover": [
+      "Foundations, footings, slabs on grade",
+      "Reinforcing steel (rebar) tonnage",
+      "Formwork square footage",
+      "CMU block and brick veneer counts",
+      "Precast concrete elements",
+      "Mortar and grout quantities"
+    ],
+    "what_you_receive": [
+      "Itemized quantity takeoff spreadsheet",
+      "Rebar schedule cross-referenced to structural drawings",
+      "Material and labor unit breakdowns"
+    ],
+    "typical_applications": "Foundations for residential and commercial buildings, parking structures, retaining walls, masonry building envelopes.",
+    "sample_trade_match": "Concrete & Masonry"
+  },
+  {
+    "id": "structural-envelope",
+    "featured": false,
+    "number": "03",
+    "csi_division": "Div. 05–08",
+    "name": "Structural & Building Envelope",
+    "discipline": "STRUCTURAL",
+    "icon": "fa-layer-group",
+    "elevation": "EL. +16.00 m",
+    "coord": "SPEC. 05-08",
+    "short_desc": "Estimating structural metals, framing, roofing, waterproofing, doors, windows, and glazing.",
+    "overview": "Structural steel, framing, and the full building envelope — the systems that carry loads and separate interior from exterior.",
+    "what_we_cover": [
+      "Structural steel — beams, columns, connections",
+      "Wood and steel framing takeoffs",
+      "Roofing systems and underlayment",
+      "Waterproofing and thermal insulation",
+      "Doors, windows, and curtain wall glazing",
+      "Building envelope air/vapor barrier quantities"
+    ],
+    "what_you_receive": [
+      "Itemized quantity takeoff spreadsheet",
+      "Structural steel tonnage and connection schedule",
+      "Material and labor unit breakdowns"
+    ],
+    "typical_applications": "Commercial and industrial steel structures, multi-family framing packages, envelope retrofits, roofing replacement projects.",
+    "sample_trade_match": "Structural Steel"
+  },
+  {
+    "id": "architectural-finishes",
+    "featured": false,
+    "number": "04",
+    "csi_division": "Div. 09–12",
+    "name": "Architectural & Interior Finishes",
+    "discipline": "FINISHES",
+    "icon": "fa-paint-roller",
+    "elevation": "EL. +12.00 m",
+    "coord": "SPEC. 09-12",
+    "short_desc": "Detailed quantities for drywall, ceilings, flooring, painting, finishes, and interior specialties.",
+    "overview": "Complete interior finish-out quantities — the trades that turn a structural shell into a finished, occupiable space.",
+    "what_we_cover": [
+      "Drywall board counts and metal stud framing",
+      "Acoustic ceiling tile and grid systems",
+      "Flooring — tile, carpet, LVP, and underlayment",
+      "Interior and exterior paint surface area",
+      "Interior specialties and casework",
+      "Trim, millwork, and finish carpentry"
+    ],
+    "what_you_receive": [
+      "Itemized quantity takeoff spreadsheet",
+      "Room-by-room finish schedule",
+      "Material and labor unit breakdowns"
+    ],
+    "typical_applications": "Commercial tenant improvements, multi-family interiors, hospitality and retail buildouts, residential remodels.",
+    "sample_trade_match": "Finishes"
+  },
+  {
+    "id": "mep-systems",
+    "featured": false,
+    "number": "05",
+    "csi_division": "Div. 21–28",
+    "name": "MEP & Building Systems",
+    "discipline": "MEP",
+    "icon": "fa-fan",
+    "elevation": "EL. +8.00 m",
+    "coord": "SPEC. 21-28",
+    "short_desc": "Comprehensive estimating for HVAC, plumbing, fire protection, electrical, and low-voltage systems.",
+    "overview": "Full mechanical, electrical, and plumbing takeoffs covering ductwork, piping, wiring, and fire/life-safety systems across a project.",
+    "what_we_cover": [
+      "HVAC ductwork and equipment schedules",
+      "Plumbing pipe lengths, fittings, and fixtures",
+      "Fire suppression and sprinkler systems",
+      "Electrical conduit runs and panelboards",
+      "Lighting fixture counts and schedules",
+      "Low-voltage and communications rough-in"
+    ],
+    "what_you_receive": [
+      "Itemized quantity takeoff spreadsheet",
+      "Equipment and fixture schedules",
+      "Material and labor unit breakdowns"
+    ],
+    "typical_applications": "Commercial and institutional HVAC replacements, multi-family plumbing risers, ground-up MEP rough-in packages.",
+    "sample_trade_match": "MEP Estimation"
+  },
+  {
+    "id": "equipment-specialty",
+    "featured": false,
+    "number": "06",
+    "csi_division": "Div. 13–14, 40–48",
+    "name": "Equipment & Specialty Construction",
+    "discipline": "EQUIPMENT",
+    "icon": "fa-warehouse",
+    "elevation": "EL. +4.00 m",
+    "coord": "SPEC. 13-48",
+    "short_desc": "Takeoffs for equipment, specialties, furnishings, conveying systems, and specialty construction.",
+    "overview": "Purpose-built structures and process equipment that fall outside standard building trades — from conveying systems to special-use facilities.",
+    "what_we_cover": [
+      "Conveying systems — elevators, escalators, lifts",
+      "Special construction — pre-engineered buildings, fabric structures",
+      "Process and material handling equipment",
+      "Building specialties and furnishings quantities",
+      "Loading dock and industrial equipment takeoffs"
+    ],
+    "what_you_receive": [
+      "Itemized quantity takeoff spreadsheet",
+      "Equipment schedule with specification references",
+      "Material and labor unit breakdowns"
+    ],
+    "typical_applications": "Industrial and warehouse facilities, pre-engineered metal buildings, specialty process/manufacturing projects.",
+    "sample_trade_match": "Lumber & Framing"
+  },
+  {
+    "id": "design-drafting",
+    "featured": false,
+    "number": "07",
+    "csi_division": "Div. 01 · BIM/CAD Services",
+    "name": "Design & Drafting",
+    "discipline": "DRAFTING",
+    "icon": "fa-drafting-compass",
+    "elevation": "±0.00 m",
+    "coord": "REF. DWG-01",
+    "short_desc": "BIM modeling, CAD drafting, plan drafting, shop drawings, as-builts, and 3D documentation.",
+    "overview": "Technical drafting and modeling services that support estimation and construction documentation — from concept drawings to fully coordinated BIM models.",
+    "what_we_cover": [
+      "3D BIM modeling and clash detection",
+      "CAD plan drafting and redlines",
+      "Shop drawing preparation",
+      "As-built documentation",
+      "Construction detail drawings"
+    ],
+    "what_you_receive": [
+      "Drafted plan sets in your required format",
+      "Coordinated BIM model files where applicable",
+      "Revision-tracked documentation"
+    ],
+    "typical_applications": "Design-build projects, shop drawing submittals, as-built record sets, BIM coordination for multi-trade projects.",
+    "sample_trade_match": "Construction Management"
+  }
+]

@@ -169,16 +169,17 @@
             <div class="svc-schema-cell">
                 <span>Supporting Trades</span>
                 <span class="svc-schema-line"></span>
-                <span>04 · 06 · 09 · 21–23 · 31</span>
+                <span>01 · 03 · 05 · 09 · 21 · 31 · 40</span>
             </div>
         </div>
 
         <!-- Main: featured panel + accordion ledger -->
         <div class="svc-main">
 
-            <!-- Featured: Concrete (Div. 03) -->
-            <a href="{{ url_for('pricing') }}#trades-breakdown" class="svc-item svc-featured">
-                <div class="svc-featured-ghost" aria-hidden="true">03</div>
+            {% for service in services %}{% if service.featured %}
+            <!-- Featured: {{ service.name }} ({{ service.csi_division }}) -->
+            <a href="{{ url_for('pricing') }}#svc-{{ service.id }}" class="svc-item svc-featured">
+                <div class="svc-featured-ghost" aria-hidden="true">{{ service.number }}</div>
                 <div class="svc-featured-edge"></div>
 
                 <svg class="svc-blueprint" viewBox="0 0 540 450" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
@@ -205,180 +206,60 @@
                 <div class="svc-item-content">
                     <div>
                         <div class="svc-row-top">
-                            <span class="svc-num">31-33</span>
-                            <span class="svc-annot">REF. A-101</span>
+                            <span class="svc-num">{{ service.csi_division }}</span>
+                            <span class="svc-annot">{{ service.elevation }}</span>
                         </div>
-                        <div class="svc-icon"><i class="fas fa-cubes"></i></div>
-                        <h3 class="svc-name">SiteWork & Civil</h3>
-                                         <p class="svc-desc">Earthwork, excavation, utilities, paving, grading, and site development takeoffs.</p>
-
+                        <div class="svc-icon"><i class="fas {{ service.icon }}"></i></div>
+                        <h3 class="svc-name">{{ service.name }}</h3>
+                        <p class="svc-desc">{{ service.short_desc }}</p>
                     </div>
                     <div class="svc-row-bottom">
-                        <span class="svc-explore">View full matrix <i class="fas fa-arrow-right"></i></span>
-                        <span class="svc-coord">SPEC. 31-33</span>
+                        <span class="svc-explore">View full scope <i class="fas fa-arrow-right"></i></span>
+                        <span class="svc-coord">{{ service.coord }}</span>
                     </div>
                 </div>
             </a>
+            {% endif %}{% endfor %}
 
             <!-- Accordion ledger -->
             <div class="svc-ledger">
                 <div class="svc-spine" aria-hidden="true"></div>
 
-                <a href="{{ url_for('pricing') }}#trades-breakdown" class="svc-item svc-row">
+                {% for service in services %}{% if not service.featured %}
+                <a href="{{ url_for('pricing') }}#svc-{{ service.id }}" class="svc-item svc-row">
                     <div class="svc-row-node" aria-hidden="true"></div>
                     <div class="svc-row-inner">
                         <div class="svc-row-main">
                             <div class="svc-row-head">
-                                <span class="svc-num">03-04</span>
-                                <h3 class="svc-name-sm">Concrete & Masonry</h3>
+                                <span class="svc-num">{{ service.csi_division }}</span>
+                                <h3 class="svc-name-sm">{{ service.name }}</h3>
                             </div>
                             <div class="svc-row-detail">
-                                <p>Accurate takeoffs for foundations, concrete structures, reinforcing, and masonry work.</p>
+                                <p>{{ service.short_desc }}</p>
                                 <div class="svc-row-detail-bottom">
-                                    <span class="svc-explore">View full matrix <i class="fas fa-arrow-right"></i></span>
-                                    <span class="svc-annot">EL. +16.00 m</span>
+                                    <span class="svc-explore">View full scope <i class="fas fa-arrow-right"></i></span>
+                                    <span class="svc-annot">{{ service.elevation }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="svc-row-side">
-                            <span class="svc-discipline">MASONRY</span>
-                            <i class="fas fa-trowel svc-row-icon"></i>
+                            <span class="svc-discipline">{{ service.discipline }}</span>
+                            <i class="fas {{ service.icon }} svc-row-icon"></i>
                         </div>
                     </div>
-                    <div class="svc-row-sep"></div>
+                    <div class="svc-row-sep{% if loop.last %} svc-row-sep-last{% endif %}"></div>
                 </a>
-
-                <a href="{{ url_for('pricing') }}#trades-breakdown" class="svc-item svc-row">
-                    <div class="svc-row-node" aria-hidden="true"></div>
-                    <div class="svc-row-inner">
-                        <div class="svc-row-main">
-                            <div class="svc-row-head">
-                                <span class="svc-num">05-08</span>
-                                <h3 class="svc-name-sm">Structural & Building Envelope</h3>
-                            </div>
-                            <div class="svc-row-detail">
-                                <p>Estimating structural metals, framing, roofing, waterproofing, doors, windows, and glazing.</p>
-                                <div class="svc-row-detail-bottom">
-                                    <span class="svc-explore">View full matrix <i class="fas fa-arrow-right"></i></span>
-                                    <span class="svc-annot">EL. +12.00 m</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="svc-row-side">
-                            <span class="svc-discipline">WOOD</span>
-                            <i class="fas fa-tree svc-row-icon"></i>
-                        </div>
-                    </div>
-                    <div class="svc-row-sep"></div>
-                </a>
-
-                <a href="{{ url_for('pricing') }}#trades-breakdown" class="svc-item svc-row">
-                    <div class="svc-row-node" aria-hidden="true"></div>
-                    <div class="svc-row-inner">
-                        <div class="svc-row-main">
-                            <div class="svc-row-head">
-                                <span class="svc-num">09-12</span>
-                                <h3 class="svc-name-sm">Architectural & Interior Finishes</h3>
-                            </div>
-                            <div class="svc-row-detail">
-                                <p>Detailed quantities for drywall, ceilings, flooring, painting, finishes, and interior specialties.</p>
-                                <div class="svc-row-detail-bottom">
-                                    <span class="svc-explore">View full matrix <i class="fas fa-arrow-right"></i></span>
-                                    <span class="svc-annot">EL. +8.00 m</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="svc-row-side">
-                            <span class="svc-discipline">REMODEL+FINISHES</span>
-                            <i class="fas fa-paint-roller svc-row-icon"></i>
-                        </div>
-                    </div>
-                    <div class="svc-row-sep"></div>
-                </a>
-
-                <a href="{{ url_for('pricing') }}#trades-breakdown" class="svc-item svc-row">
-                    <div class="svc-row-node" aria-hidden="true"></div>
-                    <div class="svc-row-inner">
-                        <div class="svc-row-main">
-                            <div class="svc-row-head">
-                                <span class="svc-num">21–28</span>
-                                <h3 class="svc-name-sm">MEP & Building Systems</h3>
-                            </div>
-                            <div class="svc-row-detail">
-                                <p>Comprehensive estimating for HVAC, plumbing, fire protection, electrical, and low-voltage systems.</p>
-                                <div class="svc-row-detail-bottom">
-                                    <span class="svc-explore">View full matrix <i class="fas fa-arrow-right"></i></span>
-                                    <span class="svc-annot">EL. +4.00 m</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="svc-row-side">
-                            <span class="svc-discipline">MEP</span>
-                            <i class="fas fa-fan svc-row-icon"></i>
-                        </div>
-                    </div>
-                    <div class="svc-row-sep"></div>
-                </a>
-
-                <a href="{{ url_for('pricing') }}#trades-breakdown" class="svc-item svc-row">
-                    <div class="svc-row-node" aria-hidden="true"></div>
-                    <div class="svc-row-inner">
-                        <div class="svc-row-main">
-                            <div class="svc-row-head">
-                                <span class="svc-num">10-14 40-49</span>
-                                <h3 class="svc-name-sm">Equipment & Specialty Construction</h3>
-                            </div>
-                            <div class="svc-row-detail">
-                                <p>Takeoffs for equipment, specialties, furnishings, conveying systems, and specialty construction.</p>
-                                <div class="svc-row-detail-bottom">
-                                    <span class="svc-explore">View full matrix <i class="fas fa-arrow-right"></i></span>
-                                    <span class="svc-annot">±0.00 m</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="svc-row-side">
-                            <span class="svc-discipline">EARTHWORK</span>
-                            <i class="fas fa-mountain svc-row-icon"></i>
-                        </div>
-                    </div>
-                    <div class="svc-row-sep svc-row-sep-last"></div>
-                </a>
-                <a href="{{ url_for('pricing') }}#trades-breakdown" class="svc-item svc-row">
-                    <div class="svc-row-node" aria-hidden="true"></div>
-                    <div class="svc-row-inner">
-                        <div class="svc-row-main">
-                            <div class="svc-row-head">
-                                <span class="svc-num">01</span>
-                                <h3 class="svc-name-sm">Design & Drafting</h3>
-                            </div>
-                            <div class="svc-row-detail">
-                                <p> BIM modeling, CAD drafting, plan drafting, shop drawings, as-builts, and 3D documentation. </p>
-                                <div class="svc-row-detail-bottom">
-                                    <span class="svc-explore">View full matrix <i class="fas fa-arrow-right"></i></span>
-                                    <span class="svc-annot">±0.00 m</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="svc-row-side">
-                            <span class="svc-discipline">Visuals</span>
-                            <i class="fas fa-mountain svc-row-icon"></i>
-                        </div>
-                    </div>
-                    <div class="svc-row-sep svc-row-sep-last"></div>
-                </a>
-
+                {% endif %}{% endfor %}
 
             </div>
         </div>
 
-        <!-- Footer annotation strip + primary CTA -->
+        <!-- Footer annotation strip -->
         <div class="svc-footer-strip">
             <div class="svc-footer-cell">N 45°32′41″ W 122°40′55″</div>
             <div class="svc-footer-cell svc-footer-cell-center">Scale 1:500 — All divisions in scope</div>
             <div class="svc-footer-cell svc-footer-cell-right">Drawing No. TBE-SVC-01</div>
         </div>
-
-
 
     </div>
 </section>
