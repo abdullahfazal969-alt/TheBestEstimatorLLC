@@ -176,52 +176,125 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 5. Service scope flashcards — expand/collapse + deep-linking (pricing page only)
+    // 5. Service scope flashcards — selection-aware deep linking
     const serviceCards = document.querySelectorAll(".svcflash-card");
 
     if (serviceCards.length > 0) {
-        const expandCard = (card, shouldScroll = false) => {
+        const serviceGrid = document.querySelector(".svcflash-grid");
+        const scopeTitle = document.getElementById("service-scope-title");
+        const scopeSubtitle = document.getElementById("service-scope-subtitle");
+        const defaultTitle = scopeTitle?.textContent || "Service Scope & Capabilities";
+        const defaultSubtitle = scopeSubtitle?.textContent || "Every discipline we estimate, broken down by what's covered, what you receive, and where it applies.";
+
+        const getHeaderOffset = () => {
+            const header = document.getElementById("site-header");
+            return (header?.getBoundingClientRect().height || 0) + 24;
+        };
+
+        const scrollToCard = card => {
+            window.setTimeout(() => {
+                const top = card.getBoundingClientRect().top + window.scrollY - getHeaderOffset();
+                window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+            }, 80);
+        };
+
+        const expandCard = card => {
             const toggle = card.querySelector(".svcflash-toggle");
             card.classList.add("is-expanded");
             toggle?.setAttribute("aria-expanded", "true");
-
-            if (shouldScroll) {
-                requestAnimationFrame(() => {
-                    card.scrollIntoView({ behavior: "smooth", block: "start" });
-                });
-            }
         };
 
-        const collapseCard = (card) => {
+        const collapseCard = card => {
             const toggle = card.querySelector(".svcflash-toggle");
             card.classList.remove("is-expanded");
             toggle?.setAttribute("aria-expanded", "false");
+        };
+
+        const clearSelection = () => {
+            serviceGrid?.classList.remove("has-selection");
+            serviceCards.forEach(card => {
+                card.classList.remove("is-selected", "is-not-selected", "is-target");
+                collapseCard(card);
+            });
+
+            if (scopeTitle) scopeTitle.textContent = defaultTitle;
+            if (scopeSubtitle) scopeSubtitle.textContent = defaultSubtitle;
+        };
+
+        const selectService = (card, shouldScroll = true) => {
+            serviceGrid?.classList.add("has-selection");
+
+            serviceCards.forEach(otherCard => {
+                const isTarget = otherCard === card;
+                otherCard.classList.toggle("is-selected", isTarget);
+                otherCard.classList.toggle("is-not-selected", !isTarget);
+
+                if (isTarget) {
+                    expandCard(otherCard);
+                } else {
+                    collapseCard(otherCard);
+                }
+            });
+
+            if (scopeTitle) {
+                scopeTitle.textContent = card.dataset.serviceName || "Selected Service";
+            }
+
+            if (scopeSubtitle) {
+                const csi = card.dataset.serviceCsi || "";
+                scopeSubtitle.textContent = csi
+                    ? `${csi} · Detailed scope, deliverables, applications, and relevant sample.`
+                    : "Detailed scope, deliverables, applications, and relevant sample.";
+            }
+
+            if (shouldScroll) scrollToCard(card);
         };
 
         serviceCards.forEach(card => {
             const toggle = card.querySelector(".svcflash-toggle");
             if (!toggle) return;
 
-            toggle.addEventListener("click", (event) => {
+            toggle.addEventListener("click", event => {
                 event.preventDefault();
-                const isExpanded = card.classList.contains("is-expanded");
-                if (isExpanded) {
-                    collapseCard(card);
-                } else {
-                    expandCard(card);
+
+                if (card.classList.contains("is-selected")) {
+                    const isExpanded = card.classList.contains("is-expanded");
+                    if (isExpanded) collapseCard(card);
+                    else expandCard(card);
+                    return;
                 }
+
+                selectService(card, false);
             });
         });
 
-        const targetId = window.location.hash.replace(/^#/, "");
-        if (targetId) {
-            const targetCard = document.getElementById(targetId);
-            if (targetCard?.classList.contains("svcflash-card")) {
-                expandCard(targetCard, true);
-                targetCard.classList.add("is-target");
-                window.setTimeout(() => targetCard.classList.remove("is-target"), 1600);
+        const openLinkedService = () => {
+            const rawHash = window.location.hash;
+
+            if (!rawHash || !rawHash.startsWith("#svc-")) {
+                clearSelection();
+                return;
             }
-        }
+
+            let targetId;
+            try {
+                targetId = decodeURIComponent(rawHash.substring(1));
+            } catch {
+                targetId = rawHash.substring(1);
+            }
+
+            const targetCard = document.getElementById(targetId);
+
+            if (!targetCard || !targetCard.classList.contains("svcflash-card")) {
+                clearSelection();
+                return;
+            }
+
+            selectService(targetCard, true);
+        };
+
+        window.setTimeout(openLinkedService, 180);
+        window.addEventListener("hashchange", openLinkedService);
     }
 
     // 6. FAQ Accordion — smooth expand/collapse

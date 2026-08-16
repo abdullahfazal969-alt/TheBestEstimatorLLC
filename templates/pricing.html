@@ -67,7 +67,7 @@
 
         <div class="svcflash-grid">
             {% for service in services %}
-            <div class="svcflash-card{% if service.id == 'design-drafting' %} svcflash-card-wide{% endif %}" id="svc-{{ service.id }}" data-service="{{ service.id }}">
+            <div class="svcflash-card{% if service.id == 'design-drafting' %} svcflash-card-wide{% endif %}" id="svc-{{ service.id }}" data-service="{{ service.id }}" data-service-name="{{ service.name }}" data-service-csi="{{ service.csi_division }}">
                 <div class="svcflash-top">
                     <span class="svcflash-num">{{ service.number }}</span>
                     <span class="svcflash-csi">{{ service.csi_division }}</span>

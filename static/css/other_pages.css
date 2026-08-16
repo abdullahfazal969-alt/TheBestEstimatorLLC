@@ -432,6 +432,42 @@
     box-shadow: 0 20px 45px rgba(10, 17, 40, 0.06);
 }
 
+/* Selected-service state: make a homepage-to-pricing visit feel intentional. */
+.svcflash-grid.has-selection .svcflash-card {
+    opacity: 0.48;
+    transform: scale(0.985);
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.svcflash-grid.has-selection .svcflash-card.is-selected {
+    opacity: 1;
+    transform: translateY(-2px);
+    border-color: var(--color-accent);
+    border-top-width: 4px;
+    box-shadow: 0 24px 55px rgba(10, 17, 40, 0.13), 0 0 0 2px rgba(229, 169, 59, 0.18);
+    z-index: 2;
+}
+
+.svcflash-grid.has-selection .svcflash-card.is-selected::before {
+    content: "SELECTED SERVICE";
+    position: absolute;
+    top: 1.05rem;
+    left: 2.5rem;
+    padding: 0.3rem 0.55rem;
+    border: 1px solid rgba(229, 169, 59, 0.35);
+    background: rgba(229, 169, 59, 0.08);
+    color: var(--color-accent-hover);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    font-weight: 700;
+}
+
+.svcflash-grid.has-selection .svcflash-card.is-not-selected:hover {
+    opacity: 0.72;
+    transform: translateY(-1px);
+}
+
 .svcflash-card-wide {
     grid-column: span 2;
 }
