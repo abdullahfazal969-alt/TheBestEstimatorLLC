@@ -5,7 +5,8 @@
 :root {
     /* Fonts */
     --font-sans: "Inter", sans-serif;
-    --font-heading: "Montserrat", sans-serif;
+    --font-heading: "Barlow Condensed", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
 
     /* Colors */
     --color-primary: #1c2541; /* Oxford Blue - Trust/Brand */
@@ -346,7 +347,7 @@ h6 {
 .footer-cta-text {
     font-size: clamp(1.5rem, 3vw, 2.25rem);
     font-weight: 500;
-    font-family: pp-mori, sans-serif;
+    font-family: var(--font-heading);
     color: #ffffff;
     margin: 0;
 }
@@ -362,7 +363,7 @@ h6 {
 .footer-info h3,
 .footer-links-col h4 {
     color: #ffffff;
-    font-family: pp-mori, sans-serif;
+    font-family: var(--font-heading);
     font-weight: 500;
 }
 
@@ -551,7 +552,7 @@ h6 {
     font-family: var(--font-heading);
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 800;
-    letter-spacing: -2px;
+    letter-spacing: -0.5px;
     margin-bottom: 2rem;
     color: var(--color-primary);
 }
@@ -668,7 +669,8 @@ h6 {
 
 .value-left h2 {
     font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 700;
+    font-weight: 600;
+    font-family: var(--font-heading);
     margin-bottom: 2rem;
 }
 
@@ -771,11 +773,13 @@ h6 {
 
 .section-header {
     margin-bottom: 5rem;
+    font-family: var(--font-heading);
 }
 
 .section-header h2 {
     font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 700;
+    font-weight: 600;
+    font-family: var(--font-heading);
 }
 
 .timeline-grid {
@@ -824,7 +828,8 @@ h6 {
 
 .section-header-center h2 {
     font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 700;
+    font-weight: 600;
+    font-family: var(--font-heading);
     margin-bottom: 1.5rem;
 }
 
@@ -844,18 +849,35 @@ h6 {
     padding: 3rem;
     border-radius: var(--border-radius);
     border: 1px solid rgba(226, 232, 240, 0.8);
+    border-top: 3px solid var(--trade-color, var(--color-accent));
     transition: var(--transition-smooth);
 }
 
 .service-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 45px rgba(10, 17, 40, 0.05);
-    border-color: var(--color-accent);
+    box-shadow: 0 20px 45px rgba(10, 17, 40, 0.08);
+    border-color: var(--trade-color, var(--color-accent));
+    border-top-color: var(--trade-color, var(--color-accent));
 }
 
 .service-icon {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: color-mix(in srgb, var(--trade-color, var(--color-accent)) 12%, white);
+    color: var(--trade-color, var(--color-accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    margin-bottom: 1.75rem;
+    transition: var(--transition-smooth);
+}
+
+.service-card:hover .service-icon {
+    background-color: var(--trade-color, var(--color-accent));
+    color: #ffffff;
+    transform: scale(1.06);
 }
 
 .service-card h3 {
@@ -1112,9 +1134,10 @@ h6 {
     align-items: center;
     justify-content: center;
     gap: 1.25rem;
+    font-family: var(--font-heading);
     font-size: clamp(2rem, 4.5vw, 2.9rem);
-    font-weight: 500;
-    letter-spacing: -1px;
+    font-weight: 700;
+    letter-spacing: -0.25px;
     color: var(--color-surface);
     margin: 0;
 }
@@ -1267,7 +1290,7 @@ h6 {
     font-family: var(--font-heading);
     font-size: clamp(2.2rem, 5vw, 3.5rem);
     font-weight: 800;
-    letter-spacing: -1.5px;
+    letter-spacing: -0.5px;
     color: var(--color-primary);
     margin-bottom: 1.5rem;
 }
@@ -1298,7 +1321,9 @@ h6 {
 .samples-gallery-heading .section-desc {
     font-size: 1.05rem;
 }
-
+.samples-gallery-heading{
+    font-size: 40.32px;
+}
 /* Filter Tabs */
 .filter-tabs {
     display: flex;
@@ -1619,8 +1644,9 @@ h6 {
 }
 
 .section-title {
-    font-size: 2.2rem;
-    font-weight: 800;
+    font-size: 40.32px;
+    font-family: var(--font-heading);
+    font-weight: 600;
     margin-bottom: 5rem;
 }
 
@@ -1828,7 +1854,6 @@ body.capability-modal-open {
 /* FAQ Accordion Section */
 #faq-section {
     padding: 8rem 0 12rem; /* Increased bottom padding */
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .faq-container {
