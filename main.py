@@ -80,6 +80,7 @@ def submit_quote():
         }), 400
 
     file = request.files.get('blueprint')
+    has_attachment = bool(file and file.filename)
 
     body_lines = [
         "New Lead Submitted!",
@@ -93,16 +94,42 @@ def submit_quote():
     print(body)  # keep server-log visibility for debugging
 
     try:
+        html_body = render_template(
+            'email/quote_notification.html',
+            name=name,
+            email=email,
+            organization=organization,
+            project_type=project_type,
+            services=services,
+            message=message,
+            has_attachment=has_attachment,
+        )
+
         msg = Message(
             subject=f"New Quote Request — {name or 'Unknown'}",
             recipients=[CEO_EMAIL],
             reply_to=email if email else None,
-            body=body,
+            body=body,       # plain-text fallback for clients that don't render HTML
+            html=html_body,  # branded version most clients will actually display
         )
+
+        # Embed the logo directly in the email (Content-ID) rather than linking
+        # to a URL — this way it displays correctly even before the site is live,
+        # and doesn't depend on the recipient's client fetching a remote image.
+        logo_path = BASE_DIR / 'static' / 'images' / 'logo.png'
+        if logo_path.exists():
+            with open(logo_path, 'rb') as logo_file:
+                msg.attach(
+                    filename="logo.png",
+                    content_type="image/png",
+                    data=logo_file.read(),
+                    disposition='inline',
+                    headers={'Content-ID': '<tbe_logo>'},
+                )
 
         # Attach the blueprint directly to the email — read into memory,
         # never written to disk, so nothing depends on the server's filesystem.
-        if file and file.filename:
+        if has_attachment:
             file_bytes = file.read()
             msg.attach(
                 filename=file.filename,
