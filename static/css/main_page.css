@@ -1,4 +1,3 @@
-
 /* ==========================================
    MAIN PAGE ELEMENTS & LAYOUTS
    ========================================== */
@@ -23,7 +22,7 @@
 
 .hero-headline {
     font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2.5rem, 6vw, 60px);
     font-weight: 800;
     letter-spacing: -0.5px;
     margin-bottom: 2rem;
@@ -68,16 +67,9 @@
    ========================================== */
 #software-marquee-section {
     padding: 3rem 0;
-    background-color: var(--color-footer-text));
+    background-color: var(--color-bg);
     overflow: hidden;
     margin: 0;
-
-}
-.software-logo{
-    font-weight: 500;
-    font-family: sans-serif;
-    color: var(--color-footer-text);
-    font-size: 2.8rem;
 }
 
 .marquee-track {
@@ -101,7 +93,7 @@
 
 .software-logo {
     font-family: var(--font-heading);
-    font-size: 1.1rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: #94a3b8;
     filter: grayscale(100%);
@@ -131,8 +123,8 @@
 }
 
 .eyebrow {
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
     font-weight: 700;
     letter-spacing: 2px;
     color: var(--color-accent);
@@ -143,6 +135,7 @@
 .value-left h2 {
     font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 600;
+    color: var(--color-primary);
     font-family: var(--font-heading);
     margin-bottom: 2rem;
 }
@@ -150,7 +143,7 @@
 .value-left p {
     font-size: 1.1rem;
     line-height: 1.8;
-    color: var(--color-text-muted);
+    color: black;
     margin-bottom: 3rem;
 }
 
@@ -239,9 +232,8 @@
    HOW IT WORKS TIMELINE
    ========================================== */
 #timeline-section {
-    padding: 8rem 0;
+    padding: 6rem 0;
     background-color: var(--color-surface);
-    border-top: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .section-header {
@@ -250,6 +242,7 @@
 }
 
 .section-header h2 {
+    color: var(--color-primary);
     font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 600;
     font-family: var(--font-heading);
@@ -269,7 +262,7 @@
     font-family: var(--font-heading);
     font-size: 3.5rem;
     font-weight: 800;
-    color: rgba(229, 169, 59, 0.15);
+    color: #94a3b8;
     margin-bottom: 1rem;
 }
 
@@ -277,11 +270,13 @@
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 1rem;
+    color:var(--color-primary)
 }
 
 .timeline-step p {
-    font-size: 1rem;
-    color: var(--color-text-muted);
+font-size: 1.1rem;
+    font-family: var(--font-heading);
+    color: black;
     line-height: 1.7;
 }
 
@@ -293,9 +288,9 @@
    ========================================================== */
 
 #services-section {
-    --svc-outer: var(--color-primary);   /* section background */
-    --svc-panel: #14204a;                /* base panel/row background — dark navy, not accent gold */
-    --svc-panel-active: #1c2d5e;         /* hovered panel state — lighter navy, still dark */
+    --svc-outer: #94a3b8;   /* section background */
+    --svc-panel: #1e4d7b;;                /* base panel/row background — dark navy, not accent gold */
+    --svc-panel-active: #f6f4f0;       /* hovered panel state — lighter navy, still dark */
     --svc-heading-dim: #787e90;
     --svc-heading-active: #f6f4f0;
     --svc-body-dim: #4a5170;
@@ -366,7 +361,7 @@
 .svc-rule-short {
     width: 28px;
     height: 1px;
-    background-color: var(--color-primary);
+    background-color: var(--color-accent);
     flex-shrink: 0;
 }
 
@@ -379,7 +374,7 @@
 .svc-eyebrow-mono,
 .svc-rev-mono {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 1rem;
     letter-spacing: 0.28em;
     text-transform: uppercase;
     white-space: nowrap;
@@ -401,8 +396,8 @@
     text-transform: uppercase;
     line-height: 0.92;
     letter-spacing: -0.5px;
-    color: var(--color-footer-text);
-    font-size: clamp(2.4rem, 4.6vw, 4rem);
+    color: var(--color-primary);
+    font-size: clamp(2.4rem, 6vw, 60px);
 }
 
 .svc-headline span {
@@ -413,16 +408,16 @@
     display: block;
     width: 100%;
     height: 1px;
-    background-color: var(--svc-hairline);
+    background-color: var(--color-accent);
     margin-bottom: 1.15rem;
 }
 
 .svc-intro p {
-    font-family: var(--font-sans);
-    font-size: 0.92rem;
-    font-weight: 300;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 400;
     line-height: 1.7;
-    color: var(--color-footer-text);
+    color: var(--color-accent);
 }
 
 /* Schema label strip */
@@ -439,11 +434,11 @@
     display: flex;
     align-items: center;
     gap: 1.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-family: var(--font-heading);
+    font-size: 1rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--svc-annot-dim);
+    color: var(--color-accent);
 }
 
 .svc-schema-line {
@@ -550,7 +545,7 @@
 }
 
 .svc-num {
-    font-family: var(--font-mono);
+    font-family: var(--font-heading);
     font-size: 0.75rem;
     color: var(--color-primary);
     letter-spacing: 0.26em;
@@ -558,8 +553,8 @@
 }
 
 .svc-annot {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--svc-annot-dim);
@@ -570,7 +565,7 @@
 .svc-icon {
     margin-bottom: 1.5rem;
     font-size: 1.35rem;
-    color: #253a50;
+    color: var(--svc-heading-active);
     transition: color 0.32s ease;
 }
 .svc-featured:hover .svc-icon { color: #8ab0c8; }
@@ -579,25 +574,25 @@
     font-family: var(--font-heading);
     font-weight: 700;
     text-transform: uppercase;
-    line-height: 0.92;
+    line-height: 1.92;
     letter-spacing: -0.5px;
     color: #ffffff;
     font-size: clamp(2.1rem, 3vw, 2.9rem);
     margin-bottom: 1rem;
     transition: color 0.3s ease;
 }
-.svc-featured:hover .svc-name { color: var(--svc-heading-active); }
+.svc-featured:hover .svc-name { color: var(--color-primary); }
 
 .svc-desc {
-    font-family: var(--font-sans);
-    font-size: 0.88rem;
-    font-weight: 400;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 300;
     line-height: 1.7;
     max-width: 340px;
-    color: #d8e1ec;;
+    color: var(--color-bg);
     transition: color 0.3s ease;
 }
-.svc-featured:hover .svc-desc { color: var(--svc-body-active); }
+.svc-featured:hover .svc-desc { color: var(--color-accent); }
 
 .svc-row-bottom {
     display: flex;
@@ -610,8 +605,8 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
+    font-family: var(--font-heading);
+    font-size: 1rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--color-primary);
@@ -622,14 +617,14 @@
 .svc-item:hover .svc-explore { opacity: 1; }
 
 .svc-coord {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--svc-annot-dim);
     transition: color 0.3s ease;
 }
-.svc-featured:hover .svc-coord { color: var(--svc-annot-active); }
+.svc-featured:hover .svc-coord { color: var(--color-accent); }
 
 /* Ledger (right) */
 .svc-ledger {
@@ -706,10 +701,10 @@
     letter-spacing: -0.3px;
     line-height: 1;
     font-size: 1.15rem;
-    color: #908880;
+    color: var(--svc-heading-active);
     transition: color 0.2s ease;
 }
-.svc-row:hover .svc-name-sm { color: var(--svc-heading-active); }
+.svc-row:hover .svc-name-sm { color: var(--color-primary); }
 
 .svc-row-detail {
     max-height: 0;
@@ -723,11 +718,11 @@
 }
 
 .svc-row-detail p {
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
+    font-family: var(--font-heading);
+    font-size: 0.92rem;
     font-weight: 300;
     line-height: 1.65;
-    color: #4a6070;
+    color: var(--color-accent);
     margin: 0.75rem 0 1rem;
 }
 
@@ -748,18 +743,18 @@
 }
 
 .svc-discipline {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #1e3040;
+    color: #ffffff;
     transition: color 0.2s ease;
 }
-.svc-row:hover .svc-discipline { color: #4a6a7a; }
+.svc-row:hover .svc-discipline { color: #1c2541; }
 
 .svc-row-icon {
     font-size: 0.85rem;
-    color: #1e3040;
+    color: var(--color-bg);
     transition: color 0.2s ease;
 }
 .svc-row:hover .svc-row-icon { color: #8ab0c8; }
@@ -786,11 +781,11 @@
 .svc-footer-cell {
     background-color: var(--svc-panel);
     padding: 0.9rem 1.75rem;
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
+    font-family: var(--font-heading);
+    font-size: 0.82rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--svc-annot-dim);
+    color: #ffffff;
 }
 .svc-footer-cell-center { text-align: center; }
 .svc-footer-cell-right { text-align: right; }
@@ -878,7 +873,7 @@
    TESTIMONIAL ROTATOR
    ========================================== */
 #testimonials-section {
-    padding: 8rem 0;
+    padding: 6rem 0;
     background-color: var(--color-surface);
     text-align: center;
 }
@@ -1025,7 +1020,7 @@
    FINAL CLOSE CALL TO ACTION
    ========================================== */
 #final-cta {
-    padding: 8rem 0 12rem; /* Pushing content further up from footer curve */
+    padding: 1rem 0 7rem; /* Pushing content further up from footer curve */
     background-color: var(--color-surface);
     text-align: center;
 }

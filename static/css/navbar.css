@@ -38,13 +38,13 @@
 }
 
 .brand-logo {
-    max-height: 38px;
+    max-height: 50px;
     width: auto;
     display: block;
 }
 
 .footer-logo-img {
-    max-height: 60px;
+    max-height: 100px;
     width: auto;
     margin-bottom: 1.5rem;
     display: block;

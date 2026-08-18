@@ -1,11 +1,12 @@
 /* ==========================================
-   FOOTER (OXFORD BLUE)
+   FOOTER (DARK CHARCOAL GREY)
    ========================================== */
 #site-footer {
     position: relative;
-    background-color: var(--color-primary);
+    overflow: hidden;
+    background-color: var(--color-footer-bg);
     color: #e2e8f0;
-    padding: 9rem 0 4rem;
+    padding: 6rem 0 2.5rem;
     margin-top: 0;
 }
 
@@ -21,8 +22,22 @@
     height: 12vw;
     min-height: 90px;
     max-height: 220px;
-    background-color: var(--color-primary);
+    background-color: var(--color-footer-bg);
     border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    z-index: 0;
+}
+
+/* Building line-illustration — rises from the bottom-right corner,
+   same technical/blueprint visual language used elsewhere on the site
+   (grid backgrounds, registration marks) rather than a photo. */
+.footer-blueprint {
+    position: absolute;
+    right: -2%;
+    bottom: -4%;
+    width: min(46%, 560px);
+    height: auto;
+    opacity: 0.16;
+    pointer-events: none;
     z-index: 0;
 }
 
@@ -39,7 +54,7 @@
 }
 
 .footer-top-cta {
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .footer-cta-text {
@@ -53,8 +68,8 @@
 .footer-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem;
-    margin-bottom: 4rem;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
     text-align: left; /* Keep text left-aligned inside grid columns */
 }
 
@@ -95,7 +110,8 @@
     transform: translateX(0);
 }
 
-/* Social icon chips — solid gold circles, Hugo-style */
+/* Social icon chips — navy circles with white icons, pop clearly
+   against the dark grey footer background */
 .social-links {
     display: flex;
     gap: 0.75rem;
@@ -106,18 +122,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: var(--color-accent);
-    color: var(--color-primary);
-    font-size: 0.95rem;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-size: 1rem;
     text-decoration: none;
     transition: var(--transition-smooth);
 }
 
 .social-links a:hover {
-    background-color: #ffffff;
+    background-color: var(--color-accent);
     transform: translateY(-3px);
 }
 
@@ -129,7 +145,7 @@
 
 .contact-col a {
     display: inline;
-    color: var(--color-footer-text);
+    color: #e2e8f0; /* Same brightness as the "Email:"/"Phone:" labels — was dimmer before */
 }
 
 .contact-col a:hover {

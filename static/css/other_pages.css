@@ -3,7 +3,7 @@
    ========================================== */
 #samples-header,
 #pricing-header {
-    padding: 6rem 0 4rem;
+    padding: 4rem 0 4rem;
     background-color: var(--color-bg);
 }
 
@@ -52,8 +52,9 @@
 
 .page-subtitle {
     font-size: 1.15rem;
-    color: var(--color-text-muted);
+    color: black;
     max-width: 700px;
+    font-family: var(--font-heading);
     margin: 0 auto;
     line-height: 1.7;
 }
@@ -70,11 +71,18 @@
 
 .samples-gallery-heading .section-title {
     font-size: 2rem;
+    font-family: var(--font-heading);
+    color: var(--color-primary);
     margin-bottom: 1rem;
 }
 
 .samples-gallery-heading .section-desc {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
+    color: black;
+    max-width: 700px;
+    font-family: var(--font-heading);
+    margin: 0 auto;
+    line-height: 1.7;
 }
 .samples-gallery-heading{
     font-size: 40.32px;
@@ -204,24 +212,27 @@
 }
 
 .sample-trade-label {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.6px;
     text-transform: uppercase;
     color: var(--color-accent-hover);
     margin-bottom: 0.6rem;
+    font-family: var(--font-heading);
 }
 
 .sample-content h3 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--color-primary);
     margin-bottom: 0.6rem;
+    font-family: var(--font-heading);
 }
 
 .sample-content p {
-    font-size: 0.92rem;
-    color: var(--color-text-muted);
+    font-size: 1rem;
+    font-family: var(--font-heading);
+    color: black;
     line-height: 1.6;
     margin-bottom: 1.5rem;
     flex-grow: 1;
@@ -256,7 +267,7 @@
    PRICING & SERVICES PAGE LAYOUTS
    ========================================== */
 #pricing-models {
-    padding: 6rem 0 8rem;
+    padding: 4rem 0 8rem;
     background-color: var(--color-bg);
 }
 
@@ -285,8 +296,8 @@
 
 /* Featured Card Highlights */
 .featured-card {
-    background-color: var(--color-primary);
-    color: #ffffff;
+    background-color: var(--color-accent);
+    color: var(--color-primary);
     border-color: var(--color-primary);
     box-shadow: 0 20px 45px rgba(10, 17, 40, 0.15);
 }
@@ -300,31 +311,34 @@
     position: absolute;
     top: 2rem;
     right: 2rem;
-    background-color: var(--color-accent);
-    color: var(--color-primary);
+    background-color: var(--color-primary);
+    color:  #ffffff;
     padding: 0.4rem 1.2rem;
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 800;
+    font-family: var(--font-heading);
 }
 
 .card-eyebrow {
     font-size: 0.8rem;
+    font-family: var(--font-heading);
     font-weight: 700;
     letter-spacing: 2px;
-    color: var(--color-accent-hover);
+    color: #ffffff;
     margin-bottom: 1rem;
     display: block;
 }
 
 .text-gold {
-    color: var(--color-accent) !important;
+    color: #ffffff !important;
 }
 
 .pricing-card h2 {
     font-size: 2rem;
     font-weight: 800;
     margin-bottom: 1rem;
+    font-family: var(--font-heading);
 }
 
 .card-desc {
@@ -332,6 +346,7 @@
     color: var(--color-text-muted);
     margin-bottom: 3rem;
     line-height: 1.6;
+     font-family: var(--font-heading);
 }
 
 .card-price {
@@ -344,6 +359,7 @@
 .price-symbol {
     font-size: 1.8rem;
     font-weight: 700;
+     font-family: var(--font-heading);
 }
 
 .price-num {
@@ -351,6 +367,7 @@
     font-size: 3.5rem;
     font-weight: 800;
     line-height: 1;
+     font-family: var(--font-heading);
 }
 
 .price-period {
@@ -358,6 +375,7 @@
     font-weight: 500;
     color: var(--color-text-muted);
     margin-left: 0.5rem;
+     font-family: var(--font-heading);
 }
 
 .text-white {
@@ -379,6 +397,7 @@
 .card-features li {
     font-size: 1rem;
     font-weight: 500;
+    font-family: var(--font-heading);
 }
 
 .text-silver li {

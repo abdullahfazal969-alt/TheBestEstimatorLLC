@@ -23,7 +23,7 @@
 
 .btn-primary:hover {
     background-color: var(--color-accent);
-    color: var(--color-primary);
+    color: #ffffff;
     box-shadow: 0 8px 30px rgba(229, 169, 59, 0.25);
     transform: translateY(-3px);
 }
