@@ -464,7 +464,7 @@
     transform: translateY(-2px);
     border-color: var(--color-accent);
     border-top-width: 4px;
-    box-shadow: 0 24px 55px rgba(10, 17, 40, 0.13), 0 0 0 2px rgba(229, 169, 59, 0.18);
+    box-shadow: 0 24px 55px rgba(10, 17, 40, 0.13), 0 0 0 2px rgba(var(--color-accent-rgb), 0.18);
     z-index: 2;
 }
 
@@ -474,8 +474,8 @@
     top: 1.05rem;
     left: 2.5rem;
     padding: 0.3rem 0.55rem;
-    border: 1px solid rgba(229, 169, 59, 0.35);
-    background: rgba(229, 169, 59, 0.08);
+    border: 1px solid rgba(var(--color-accent-rgb), 0.35);
+    background: rgba(var(--color-accent-rgb), 0.08);
     color: var(--color-accent-hover);
     font-family: var(--font-mono);
     font-size: 0.58rem;
@@ -503,9 +503,9 @@
 
 /* Highlight pulse when a card is the anchor-linked target */
 @keyframes svcflash-target-pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(229, 169, 59, 0.45); }
-    70%  { box-shadow: 0 0 0 14px rgba(229, 169, 59, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(229, 169, 59, 0); }
+    0%   { box-shadow: 0 0 0 0 rgba(var(--color-accent-rgb), 0.45); }
+    70%  { box-shadow: 0 0 0 14px rgba(var(--color-accent-rgb), 0); }
+    100% { box-shadow: 0 0 0 0 rgba(var(--color-accent-rgb), 0); }
 }
 
 .svcflash-card.is-target {
@@ -539,7 +539,7 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background-color: rgba(229, 169, 59, 0.1);
+    background-color: rgba(var(--color-accent-rgb), 0.1);
     color: var(--color-accent-hover);
     display: flex;
     align-items: center;
@@ -669,7 +669,7 @@
     text-decoration: none;
     padding: 0.7rem 1.35rem;
     border-radius: 30px;
-    background-color: rgba(229, 169, 59, 0.12);
+    background-color: rgba(var(--color-accent-rgb), 0.12);
     transition: var(--transition-smooth);
 }
 
@@ -863,7 +863,7 @@
     outline: none;
     border-color: var(--color-accent);
     background-color: #ffffff;
-    box-shadow: 0 0 0 4px rgba(229, 169, 59, 0.08);
+    box-shadow: 0 0 0 4px rgba(var(--color-accent-rgb), 0.08);
 }
 
 /* Drag & Drop Zone Styling */
@@ -881,7 +881,7 @@
 .upload-dropzone:hover,
 .upload-dropzone.dragover {
     border-color: var(--color-accent);
-    background-color: rgba(229, 169, 59, 0.03);
+    background-color: rgba(var(--color-accent-rgb), 0.03);
 }
 
 .hidden-file-input {
@@ -1118,7 +1118,7 @@
 
 /* Service/sample deep-link feedback */
 .sample-card-linked {
-    outline: 2px solid rgba(229, 169, 59, 0.75);
+    outline: 2px solid rgba(var(--color-accent-rgb), 0.75);
     outline-offset: 5px;
 }
 
@@ -1129,8 +1129,8 @@
     gap: 0.75rem;
     margin-top: 1.25rem;
     padding: 1rem 1.1rem;
-    border: 1px solid rgba(229, 169, 59, 0.35);
-    background: rgba(229, 169, 59, 0.08);
+    border: 1px solid rgba(var(--color-accent-rgb), 0.35);
+    background: rgba(var(--color-accent-rgb), 0.08);
     color: var(--color-primary);
     border-radius: var(--border-radius);
     font-size: 0.9rem;
@@ -1165,4 +1165,97 @@
     color: #fff;
     font-size: 0.75rem;
     font-weight: 800;
+}
+
+/* ==========================================
+   PRIVACY POLICY PAGE
+   ========================================== */
+#privacy-content {
+    padding: 6rem 0 8rem;
+    background-color: var(--color-surface);
+}
+
+.privacy-container {
+    max-width: 780px;
+}
+
+.privacy-block {
+    margin-bottom: 2.75rem;
+    padding-bottom: 2.75rem;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.privacy-block:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.privacy-block h2 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.privacy-block p {
+    font-size: 0.98rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.privacy-block ul {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.privacy-block ul li {
+    position: relative;
+    padding-left: 1.4rem;
+    font-size: 0.98rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+}
+
+.privacy-block ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+}
+
+.privacy-contact {
+    background-color: var(--color-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem 1.75rem;
+    line-height: 1.9 !important;
+}
+
+.privacy-contact a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.privacy-contact a:hover {
+    color: var(--color-accent);
+}
+
+@media (max-width: 576px) {
+    #privacy-content {
+        padding: 4rem 0 5rem;
+    }
+    .privacy-block h2 {
+        font-size: 1.2rem;
+    }
 }

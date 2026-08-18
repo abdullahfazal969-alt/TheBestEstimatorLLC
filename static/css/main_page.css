@@ -325,7 +325,7 @@ font-size: 1.1rem;
 .svc-reg-mark::after {
     content: "";
     position: absolute;
-    background-color: rgba(229, 169, 59, 0.4);
+    background-color: rgba(var(--color-accent-rgb), 0.4);
 }
 .svc-reg-tl { top: 1.75rem; left: 1.75rem; }
 .svc-reg-tr { top: 1.75rem; right: 1.75rem; }
@@ -485,7 +485,7 @@ font-size: 1.1rem;
 
 .svc-featured:hover {
     background-color: var(--svc-panel-active);
-    box-shadow: inset 0 0 0 1px rgba(229, 169, 59, 0.4);
+    box-shadow: inset 0 0 0 1px rgba(var(--color-accent-rgb), 0.4);
 }
 
 .svc-featured-ghost {
@@ -509,7 +509,7 @@ font-size: 1.1rem;
     bottom: 0;
     width: 1px;
     opacity: 0.5;
-    background: linear-gradient(to bottom, transparent 5%, rgba(229,169,59,0.28) 30%, rgba(229,169,59,0.22) 70%, transparent 95%);
+    background: linear-gradient(to bottom, transparent 5%, rgba(var(--color-accent-rgb), 0.28) 30%, rgba(var(--color-accent-rgb), 0.22) 70%, transparent 95%);
     transition: opacity 0.3s ease;
 }
 .svc-featured:hover .svc-featured-edge { opacity: 1; }
@@ -659,7 +659,7 @@ font-size: 1.1rem;
 }
 .svc-row:hover {
     background-color: var(--svc-panel-active);
-    box-shadow: inset 4px 0 0 rgba(229, 169, 59, 0.6);
+    box-shadow: inset 4px 0 0 rgba(var(--color-accent-rgb), 0.6);
 }
 
 .svc-row-node {
@@ -673,7 +673,7 @@ font-size: 1.1rem;
     background-color: rgba(255, 255, 255, 0.1);
     transition: background-color 0.22s ease;
 }
-.svc-row:hover .svc-row-node { background-color: rgba(229, 169, 59, 0.9); }
+.svc-row:hover .svc-row-node { background-color: rgba(var(--color-accent-rgb), 0.9); }
 
 .svc-row-inner {
     padding: 1.25rem 1.75rem;
@@ -1063,7 +1063,7 @@ font-size: 1.1rem;
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
-    box-shadow: 0 8px 20px rgba(229, 169, 59, 0.3);
+    box-shadow: 0 8px 20px rgba(var(--color-accent-rgb), 0.3);
 }
 
 .final-cta-bottom {
@@ -1132,6 +1132,14 @@ font-size: 1.1rem;
     .timeline-grid {
         grid-template-columns: 1fr;
         gap: 2.5rem;
+    }
+    .grid-hero {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    .hero-image {
+        max-width: 480px;
+        margin: 0 auto;
     }
 }
 

@@ -32,13 +32,15 @@
    (grid backgrounds, registration marks) rather than a photo. */
 .footer-blueprint {
     position: absolute;
-    right: -2%;
-    bottom: -4%;
-    width: min(46%, 560px);
+    right: 0;
+    bottom: 0;
+    width: min(32%, 380px);
+    max-height: 70%;
     height: auto;
-    opacity: 0.16;
+    opacity: 0.1;
     pointer-events: none;
     z-index: 0;
+    overflow: hidden;
 }
 
 .footer-container {
@@ -157,23 +159,45 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 2.5rem;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1.75rem;
     font-size: 0.85rem;
 }
 
-.footer-bottom p {
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.footer-legal-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    color: var(--color-footer-text);
+}
+
+.footer-legal-row p {
     color: var(--color-footer-text);
     margin: 0;
 }
 
-/* Trust badges — circular seal treatment, Hugo-inspired */
-.trust-badges {
-    display: flex;
-    gap: 1.25rem;
-    flex-wrap: wrap;
+.footer-legal-row a {
+    color: var(--color-footer-text);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.footer-legal-row a:hover {
+    color: var(--color-accent-hover);
+}
+
+.footer-legal-sep {
+    color: rgba(255, 255, 255, 0.25);
 }
 
 .badge-seal {
@@ -184,7 +208,7 @@
     width: 84px;
     height: 84px;
     border-radius: 50%;
-    border: 1.5px solid rgba(229, 169, 59, 0.4);
+    border: 1.5px solid rgba(var(--color-accent-rgb), 0.4);
     text-align: center;
     padding: 0.5rem;
     transition: var(--transition-smooth);

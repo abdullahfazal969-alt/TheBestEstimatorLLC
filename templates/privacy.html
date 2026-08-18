@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy{% endblock %}
+
+{% block content %}
+<section id="pricing-header">
+    <div class="container">
+        <div class="page-hero-frame">
+            <span class="eyebrow">YOUR DATA, HANDLED PLAINLY</span>
+            <h1 class="page-title">Privacy Policy</h1>
+            <p class="page-subtitle">Last updated: {{ policy_updated or "August 2026" }}. This page explains, in plain terms, what information we collect through this website and how it's used.</p>
+        </div>
+    </div>
+</section>
+
+<section id="privacy-content">
+    <div class="container privacy-container">
+
+        <div class="privacy-block">
+            <h2>1. Who We Are</h2>
+            <p>The Best Estimator LLC ("we," "us," or "our") provides construction quantity takeoff and cost estimation services to contractors and construction companies. This policy applies to visitors of thebestestimatorllc.com and covers the information collected when you use our contact and quote-request form.</p>
+        </div>
+
+        <div class="privacy-block">
+            <h2>2. Information We Collect</h2>
+            <p>When you submit a quote request through our Contact page, we collect only what you choose to provide:</p>
+            <ul>
+                <li>Your name</li>
+                <li>Your email address</li>
+                <li>Your company name (optional)</li>
+                <li>The trade/division your project falls under</li>
+                <li>Any project description or scope details you enter (optional)</li>
+                <li>Blueprint, bid set, or plan files you upload</li>
+            </ul>
+            <p>We do not currently collect phone numbers through this form. If you provide a phone number separately — for example, during a follow-up call or email exchange — we treat it with the same care described in this policy.</p>
+        </div>
+
+        <div class="privacy-block">
+            <h2>3. How We Use Your Information</h2>
+            <p>Information submitted through our quote request form is used solely to:</p>
+            <ul>
+                <li>Review your project and prepare a cost estimate or proposal</li>
+                <li>Respond to your inquiry by email or, where a number is available, by phone</li>
+                <li>Keep a record of the request in our own email inbox for follow-up</li>
+            </ul>
+            <p>We do not sell, rent, or share your information with third parties for marketing purposes.</p>
+        </div>
+
+        <div class="privacy-block">
+            <h2>4. Phone & SMS Communications</h2>
+            <p>If you provide us with a phone number — whether through this website in the future or during direct correspondence — you may receive calls or text messages from us regarding your project inquiry, estimate status, or related follow-up. Message frequency varies based on your project. Message and data rates may apply depending on your carrier and plan.</p>
+            <p>You can opt out of text communications at any time by replying <strong>STOP</strong> to any message we send, or by contacting us directly using the information in Section 9. Reply <strong>HELP</strong> for assistance. We do not share your phone number with third parties for their own marketing purposes.</p>
+        </div>
+
+        <div class="privacy-block">
+            <h2>5. Uploaded Files</h2>
+            <p>Blueprint and plan files you upload are read directly into memory and sent as an email attachment to our estimating team. They are not written to, or stored on, our web server's disk, and we do not maintain a searchable database or archive of submitted files. If you'd like a file you previously submitted to be deleted from our email records, contact us using the details in Section 9 and we'll remove it.</p>
+        </div>
+
+        <div class="privacy-block">
+            <h2>6. Data Storage & Retention</h2>
+            <p>We do not use a database to store quote request submissions. Each submission is delivered as an email to our team's inbox, where it's retained for as long as needed to respond to your inquiry and maintain a business record, consistent with normal email retention practices.</p>
+        </div>
+
+        <div class="privacy-block">
+            <h2>7. Cookies & Tracking</h2>
+            <p>This website does not currently use cookies, analytics scripts, or advertising trackers to monitor your browsing activity. If that changes in the future, this policy will be updated to reflect it before any such tool is enabled.</p>
+        </div>
+
+        <div class="privacy-block">
+            <h2>8. Third-Party Services</h2>
+            <p>To display the site correctly, your browser loads a small number of resources from third-party content delivery networks: Google Fonts (for typography), and Cloudflare's CDN (for icons and animation libraries). These services may log basic technical information such as your IP address as part of delivering those files, governed by their own privacy policies. We do not use them to track or profile visitors, and no personal information you submit through our form is shared with them.</p>
+        </div>
+
+        <div class="privacy-block">
+            <h2>9. Data Security</h2>
+            <p>Information submitted through our contact form is transmitted using an encrypted (TLS) connection to our email provider. While no method of transmission over the internet is completely infallible, we take reasonable steps to protect the information you share with us.</p>
+        </div>
+
+        <div class="privacy-block">
+            <h2>10. Children's Privacy</h2>
+            <p>Our services are directed at businesses and construction professionals. This site is not intended for, and we do not knowingly collect information from, anyone under the age of 18.</p>
+        </div>
+
+        <div class="privacy-block">
+            <h2>11. Changes to This Policy</h2>
+            <p>We may update this policy from time to time as our practices or services change. The "last updated" date at the top of this page will reflect the most recent revision. Continued use of this site after changes are posted constitutes acceptance of the updated policy.</p>
+        </div>
+
+        <div class="privacy-block">
+            <h2>12. Contact Us</h2>
+            <p>If you have questions about this policy, want to opt out of communications, or want a previous submission removed from our records, reach us at:</p>
+            <p class="privacy-contact">
+                <strong>The Best Estimator LLC</strong><br>
+                Email: <a href="mailto:support@thebestestimatorllc.com">support@thebestestimatorllc.com</a><br>
+                Phone: <a href="tel:+19173101235">+1 (917) 310-1235</a>
+            </p>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
