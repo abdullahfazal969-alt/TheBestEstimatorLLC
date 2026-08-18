@@ -57,17 +57,21 @@
 
 <!-- Service Scope & Capabilities — data-driven flashcards, one per service.json entry -->
 <section id="trades-breakdown">
-    <svg class="section-wave section-wave-top" viewBox="0 0 1440 100" preserveAspectRatio="none">
-        <path d="M0,30 C240,70 480,0 720,30 C960,60 1200,0 1440,30 L1440,0 L0,0 Z" fill="var(--color-ans)"></path>
-    </svg>
 
     <div class="container">
         <h2 class="section-title text-center" id="service-scope-title">Service Scope & Capabilities</h2>
         <p class="section-desc text-center capability-subtitle" id="service-scope-subtitle">Every discipline we estimate, broken down by what's covered, what you receive, and where it applies.</p>
 
+        <!-- Backdrop for the "letter" reading experience -->
+        <div class="svcflash-letter-backdrop" id="svcflash-letter-backdrop"></div>
+
         <div class="svcflash-grid">
             {% for service in services %}
             <div class="svcflash-card{% if service.id == 'design-drafting' %} svcflash-card-wide{% endif %}" id="svc-{{ service.id }}" data-service="{{ service.id }}" data-service-name="{{ service.name }}" data-service-csi="{{ service.csi_division }}">
+                <button class="svcflash-letter-close" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+
                 <div class="svcflash-top">
                     <span class="svcflash-num">{{ service.number }}</span>
                     <span class="svcflash-csi">{{ service.csi_division }}</span>
@@ -118,9 +122,7 @@
         </div>
     </div>
 
-    <svg class="section-wave section-wave-bottom" viewBox="0 0 1440 100" preserveAspectRatio="none">
-        <path d="M0,70 C240,30 480,100 720,70 C960,40 1200,100 1440,70 L1440,100 L0,100 Z" fill="var(--color-ans)"></path>
-    </svg>
+
 </section>
 
 <!-- Hugo-Style FAQ Section -->

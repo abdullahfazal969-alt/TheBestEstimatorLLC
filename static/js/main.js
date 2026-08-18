@@ -176,70 +176,45 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 5. Service scope flashcards — selection-aware deep linking
+    // 5. Service scope flashcards — "letter opening" reading experience
     const serviceCards = document.querySelectorAll(".svcflash-card");
 
     if (serviceCards.length > 0) {
         const serviceGrid = document.querySelector(".svcflash-grid");
+        const backdrop = document.getElementById("svcflash-letter-backdrop");
         const scopeTitle = document.getElementById("service-scope-title");
         const scopeSubtitle = document.getElementById("service-scope-subtitle");
         const defaultTitle = scopeTitle?.textContent || "Service Scope & Capabilities";
         const defaultSubtitle = scopeSubtitle?.textContent || "Every discipline we estimate, broken down by what's covered, what you receive, and where it applies.";
 
-        const getHeaderOffset = () => {
-            const header = document.getElementById("site-header");
-            return (header?.getBoundingClientRect().height || 0) + 24;
-        };
+        let currentlyOpenCard = null;
 
-        const scrollToCard = card => {
-            window.setTimeout(() => {
-                const top = card.getBoundingClientRect().top + window.scrollY - getHeaderOffset();
-                window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
-            }, 80);
-        };
+        const openLetter = (card, updateUrl = true) => {
+            if (currentlyOpenCard === card) return;
 
-        const expandCard = card => {
-            const toggle = card.querySelector(".svcflash-toggle");
-            card.classList.add("is-expanded");
-            toggle?.setAttribute("aria-expanded", "true");
-        };
+            serviceGrid?.classList.add("has-letter-open");
+            document.body.classList.add("has-letter-open");
+            backdrop?.classList.add("is-visible");
 
-        const collapseCard = card => {
-            const toggle = card.querySelector(".svcflash-toggle");
-            card.classList.remove("is-expanded");
-            toggle?.setAttribute("aria-expanded", "false");
-        };
+            card.classList.add("is-letter-open", "is-expanded");
+            currentlyOpenCard = card;
 
-        const clearSelection = () => {
-            serviceGrid?.classList.remove("has-selection");
-            serviceCards.forEach(card => {
-                card.classList.remove("is-selected", "is-not-selected", "is-target");
-                collapseCard(card);
-            });
+            // "Unroll" open: starts as a thin, small sealed rectangle at
+            // center screen, unfurls to full size with a settling ease —
+            // reads like a letter/scroll being opened, not a generic popup.
+            gsap.fromTo(card,
+                { xPercent: -50, yPercent: -50, scaleX: 0.55, scaleY: 0.045, opacity: 0 },
+                { xPercent: -50, yPercent: -50, scaleX: 1, scaleY: 1, opacity: 1, duration: 0.75, ease: "back.out(1.4)" }
+            );
 
-            if (scopeTitle) scopeTitle.textContent = defaultTitle;
-            if (scopeSubtitle) scopeSubtitle.textContent = defaultSubtitle;
-        };
+            // Inner content fades in slightly after the unroll starts
+            const innerContent = card.querySelectorAll(".svcflash-title, .svcflash-overview, .svcflash-expand, .svcflash-footer");
+            gsap.fromTo(innerContent,
+                { opacity: 0, y: 10 },
+                { opacity: 1, y: 0, duration: 0.5, delay: 0.25, stagger: 0.05, ease: "power2.out" }
+            );
 
-        const selectService = (card, shouldScroll = true) => {
-            serviceGrid?.classList.add("has-selection");
-
-            serviceCards.forEach(otherCard => {
-                const isTarget = otherCard === card;
-                otherCard.classList.toggle("is-selected", isTarget);
-                otherCard.classList.toggle("is-not-selected", !isTarget);
-
-                if (isTarget) {
-                    expandCard(otherCard);
-                } else {
-                    collapseCard(otherCard);
-                }
-            });
-
-            if (scopeTitle) {
-                scopeTitle.textContent = card.dataset.serviceName || "Selected Service";
-            }
-
+            if (scopeTitle) scopeTitle.textContent = card.dataset.serviceName || "Selected Service";
             if (scopeSubtitle) {
                 const csi = card.dataset.serviceCsi || "";
                 scopeSubtitle.textContent = csi
@@ -247,37 +222,63 @@ document.addEventListener("DOMContentLoaded", () => {
                     : "Detailed scope, deliverables, applications, and relevant sample.";
             }
 
-            if (shouldScroll) {
-                scrollToCard(card);
-                // Brief pulse to draw the eye to the card that was just linked to
-                card.classList.add("is-target");
-                window.setTimeout(() => card.classList.remove("is-target"), 1500);
+            if (updateUrl) {
+                const newHash = `#${card.id}`;
+                if (window.location.hash !== newHash) {
+                    history.pushState(null, "", newHash);
+                }
+            }
+        };
+
+        const closeLetter = (updateUrl = true) => {
+            if (!currentlyOpenCard) return;
+            const card = currentlyOpenCard;
+
+            gsap.to(card, {
+                scaleX: 0.55,
+                scaleY: 0.045,
+                opacity: 0,
+                duration: 0.4,
+                ease: "power2.in",
+                onComplete: () => {
+                    card.classList.remove("is-letter-open", "is-expanded");
+                    gsap.set(card, { clearProps: "transform,opacity" });
+                    serviceGrid?.classList.remove("has-letter-open");
+                    document.body.classList.remove("has-letter-open");
+                    backdrop?.classList.remove("is-visible");
+                    currentlyOpenCard = null;
+
+                    if (scopeTitle) scopeTitle.textContent = defaultTitle;
+                    if (scopeSubtitle) scopeSubtitle.textContent = defaultSubtitle;
+                }
+            });
+
+            if (updateUrl && window.location.hash) {
+                history.pushState(null, "", window.location.pathname + window.location.search);
             }
         };
 
         serviceCards.forEach(card => {
             const toggle = card.querySelector(".svcflash-toggle");
-            if (!toggle) return;
-
-            toggle.addEventListener("click", event => {
+            toggle?.addEventListener("click", event => {
                 event.preventDefault();
-
-                if (card.classList.contains("is-selected")) {
-                    const isExpanded = card.classList.contains("is-expanded");
-                    if (isExpanded) collapseCard(card);
-                    else expandCard(card);
-                    return;
-                }
-
-                selectService(card, false);
+                openLetter(card);
             });
+
+            card.querySelector(".svcflash-letter-close")?.addEventListener("click", () => closeLetter());
+        });
+
+        backdrop?.addEventListener("click", () => closeLetter());
+
+        document.addEventListener("keydown", e => {
+            if (e.key === "Escape" && currentlyOpenCard) closeLetter();
         });
 
         const openLinkedService = () => {
             const rawHash = window.location.hash;
 
             if (!rawHash || !rawHash.startsWith("#svc-")) {
-                clearSelection();
+                if (currentlyOpenCard) closeLetter(false);
                 return;
             }
 
@@ -291,15 +292,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const targetCard = document.getElementById(targetId);
 
             if (!targetCard || !targetCard.classList.contains("svcflash-card")) {
-                clearSelection();
+                if (currentlyOpenCard) closeLetter(false);
                 return;
             }
 
-            selectService(targetCard, true);
+            openLetter(targetCard, false);
         };
 
         window.setTimeout(openLinkedService, 180);
         window.addEventListener("hashchange", openLinkedService);
+        window.addEventListener("popstate", openLinkedService);
     }
 
     // 6. FAQ Accordion — smooth expand/collapse
