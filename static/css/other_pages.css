@@ -1185,7 +1185,7 @@ body.has-letter-open {
 }
 
 .commitment-item h5 {
-    color: var(--color-accent);
+    color: goldenrod;
     font-size: 1.05rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
