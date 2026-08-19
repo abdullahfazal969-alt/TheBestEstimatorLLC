@@ -4,8 +4,8 @@
 #site-footer {
     position: relative;
     overflow: hidden;
-    background-color: var(--color-footer-bg);
-    color: #e2e8f0;
+    background-color: var(--color-bg);
+    color: black;
     padding: 6rem 0 2.5rem;
     margin-top: 0;
 }
@@ -22,7 +22,7 @@
     height: 12vw;
     min-height: 90px;
     max-height: 220px;
-    background-color: var(--color-footer-bg);
+    background-color: var(--color-bg);
     border-radius: 50% 50% 0 0 / 100% 100% 0 0;
     z-index: 0;
 }
@@ -63,7 +63,7 @@
     font-size: clamp(1.5rem, 3vw, 2.25rem);
     font-weight: 500;
     font-family: var(--font-heading);
-    color: #ffffff;
+    color: black;
     margin: 0;
 }
 
@@ -77,7 +77,7 @@
 
 .footer-info h3,
 .footer-links-col h4 {
-    color: #ffffff;
+    color: black;
     font-family: var(--font-heading);
     font-weight: 500;
 }
@@ -85,7 +85,7 @@
 .footer-links-col a,
 .footer-links-col span {
     display: block;
-    color: var(--color-footer-text);
+    color: black;
     text-decoration: none;
     font-size: 0.95rem;
     margin-bottom: 0.85rem;
@@ -143,11 +143,12 @@
     font-size: 0.95rem;
     margin-bottom: 1rem;
     line-height: 1.6;
+    color: black;
 }
 
 .contact-col a {
     display: inline;
-    color: #e2e8f0; /* Same brightness as the "Email:"/"Phone:" labels — was dimmer before */
+    color: black; /* Same brightness as the "Email:"/"Phone:" labels — was dimmer before */
 }
 
 .contact-col a:hover {
@@ -156,13 +157,13 @@
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.75rem;
     font-size: 0.85rem;
+    color: black;
 }
 
 .trust-badges {
@@ -182,12 +183,12 @@
 }
 
 .footer-legal-row p {
-    color: var(--color-footer-text);
+    color: black;
     margin: 0;
 }
 
 .footer-legal-row a {
-    color: var(--color-footer-text);
+    color: black;
     text-decoration: none;
     transition: var(--transition-smooth);
 }
@@ -197,7 +198,7 @@
 }
 
 .footer-legal-sep {
-    color: rgba(255, 255, 255, 0.25);
+    color:black;
 }
 
 .badge-seal {
@@ -217,7 +218,7 @@
 .badge-seal span {
     display: block;
     margin: 0;
-    color: #ffffff;
+    color: var(--color-primary);
     font-size: 0.7rem;
     font-weight: 700;
     line-height: 1.2;
@@ -226,14 +227,14 @@
 }
 
 .badge-seal .badge-seal-sub {
-    color: var(--color-footer-text);
+    color: black;
     font-weight: 400;
-    font-size: 0.62rem;
+    font-size: 0.72rem;
     text-transform: none;
 }
 
 .badge-seal:hover {
-    border-color: var(--color-accent);
+    border-color: black;
     transform: translateY(-3px);
 }
 
