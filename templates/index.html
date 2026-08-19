@@ -173,7 +173,7 @@
 
             {% for service in services %}{% if service.featured %}
             <!-- Featured: {{ service.name }} ({{ service.csi_division }}) -->
-            <a href="{{ url_for('pricing') }}#svc-{{ service.id }}" class="svc-item svc-featured">
+            <a href="{{ url_for('services_page') }}#svc-{{ service.id }}" class="svc-item svc-featured">
                 <div class="svc-featured-ghost" aria-hidden="true">{{ service.number }}</div>
                 <div class="svc-featured-edge"></div>
 
@@ -221,7 +221,7 @@
                 <div class="svc-spine" aria-hidden="true"></div>
 
                 {% for service in services %}{% if not service.featured %}
-                <a href="{{ url_for('pricing') }}#svc-{{ service.id }}" class="svc-item svc-row">
+                <a href="{{ url_for('services_page') }}#svc-{{ service.id }}" class="svc-item svc-row">
                     <div class="svc-row-node" aria-hidden="true"></div>
                     <div class="svc-row-inner">
                         <div class="svc-row-main">

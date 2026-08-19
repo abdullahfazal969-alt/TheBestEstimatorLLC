@@ -1,20 +1,22 @@
 /* ==========================================
-   NAVIGATION (BACKDROP-FILTER GLASS)
+   NAVIGATION
    ========================================== */
+
 #site-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    background-color: rgba(247, 249, 252, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(247, 249, 252, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(226, 232, 240, 0.8);
     transform: translateY(0);
     transition:
         transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-        background-color 0.4s ease;
+        background-color 0.4s ease,
+        box-shadow 0.35s ease;
 }
 
 #site-header.nav-hidden {
@@ -50,31 +52,42 @@
     display: block;
 }
 
+/* ==========================================
+   DESKTOP NAVIGATION
+   ========================================== */
+
 .nav-links {
     display: flex;
     align-items: center;
     gap: 2rem;
 }
 
-.nav-links a {
+.nav-links > a,
+.nav-item-dropdown > a {
     text-decoration: none;
     color: var(--color-text-dark);
     font-weight: 500;
     font-size: 0.95rem;
-    transition: var(--transition-smooth);
+    transition:
+        color 0.22s ease,
+        transform 0.22s ease;
     position: relative;
 }
 
-.nav-links a:not(.nav-cta):hover {
+.nav-links > a:not(.nav-cta):hover,
+.nav-item-dropdown > a:hover,
+.nav-item-dropdown.is-open > a {
     color: var(--color-accent);
 }
 
-.nav-links a.active:not(.nav-cta) {
+.nav-links > a.active:not(.nav-cta),
+.nav-item-dropdown > a.active:not(.nav-cta) {
     color: var(--color-primary);
     font-weight: 600;
 }
 
-.nav-links a.active:not(.nav-cta)::after {
+.nav-links > a.active:not(.nav-cta)::after,
+.nav-item-dropdown > a.active:not(.nav-cta)::after {
     content: "";
     position: absolute;
     bottom: -6px;
@@ -82,9 +95,13 @@
     width: 100%;
     height: 2px;
     background-color: var(--color-accent);
+    transform-origin: left center;
 }
 
-/* CTA Button */
+/* ==========================================
+   CTA BUTTON
+   ========================================== */
+
 .nav-cta {
     background-color: var(--color-primary);
     color: #ffffff !important;
@@ -103,114 +120,360 @@
 }
 
 /* ==========================================
-   SERVICES DROPDOWN (desktop/laptop only)
+   SERVICES DROPDOWN
+   Premium engineering / CSI navigation panel
    ========================================== */
+
 .nav-item-dropdown {
     position: relative;
     display: flex;
     align-items: center;
 }
 
+/*
+ * The old dropdown had:
+ *
+ * top: calc(100% + 18px)
+ *
+ * which created a physical hover gap between the
+ * Services link and the dropdown.
+ *
+ * The smaller gap + invisible bridge below prevents
+ * accidental closing while moving the pointer down.
+ */
 .nav-dropdown-panel {
     position: absolute;
-    top: calc(100% + 18px);
+    top: calc(100% + 10px);
     left: 50%;
-    transform: translateX(-50%) translateY(8px);
-    width: 340px;
-    max-height: 420px;
+
+    width: 370px;
+    max-height: min(520px, calc(100vh - 110px));
     overflow-y: auto;
-    background-color: var(--color-surface);
-    border: 1px solid rgba(226, 232, 240, 0.9);
-    border-radius: var(--border-radius);
-    box-shadow: 0 25px 60px rgba(10, 17, 40, 0.14);
-    padding: 0.6rem;
+
+    transform: translateX(-50%) translateY(8px) scale(0.985);
+    transform-origin: top center;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.98) 0%,
+            rgba(247, 249, 252, 0.98) 100%
+        );
+
+    border: 1px solid rgba(210, 218, 230, 0.95);
+    border-radius: 14px;
+
+    box-shadow:
+        0 30px 70px rgba(10, 17, 40, 0.14),
+        0 8px 24px rgba(10, 17, 40, 0.06);
+
+    padding: 0.7rem;
+
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.2s ease;
+
     z-index: 1200;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(var(--color-accent-rgb), 0.45) transparent;
 }
 
-.nav-item-dropdown:hover .nav-dropdown-panel {
+/*
+ * Invisible hover bridge.
+ * This occupies the small space between the navbar
+ * and the dropdown so the menu doesn't disappear.
+ */
+.nav-dropdown-panel::before {
+    content: "";
+    position: absolute;
+    top: -12px;
+    left: 0;
+    width: 100%;
+    height: 12px;
+}
+
+/*
+ * Small engineering-style header inside dropdown.
+ */
+.nav-dropdown-panel::after {
+    content: "SERVICES  /  CSI COVERAGE";
+    display: block;
+
+    margin: 0 0 0.45rem;
+    padding: 0.45rem 0.7rem 0.6rem;
+
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/*
+ * Open through hover or JS keyboard/focus state.
+ */
+.nav-item-dropdown:hover .nav-dropdown-panel,
+.nav-item-dropdown.is-open .nav-dropdown-panel,
+.nav-item-dropdown:focus-within .nav-dropdown-panel {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
+
+    transform:
+        translateX(-50%)
+        translateY(0)
+        scale(1);
 }
+
+/* ==========================================
+   DROPDOWN ITEMS
+   ========================================== */
 
 .nav-dropdown-item {
+    position: relative;
+
     display: flex;
     align-items: center;
+
     gap: 0.85rem;
-    padding: 0.65rem 0.75rem;
-    border-radius: 8px;
+
+    padding: 0.7rem 2.2rem 0.7rem 0.7rem;
+
+    margin: 0.15rem 0;
+
+    border-radius: 10px;
+
     text-decoration: none;
+
     color: var(--color-text-dark);
     font-weight: 500;
-    transition: var(--transition-smooth);
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.nav-dropdown-item:hover {
-    background-color: var(--color-bg);
+.nav-dropdown-item:hover,
+.nav-dropdown-item:focus-visible {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(var(--color-accent-rgb), 0.09),
+            rgba(var(--color-accent-rgb), 0.035)
+        );
+
+    transform: translateX(3px);
+
+    box-shadow:
+        inset 3px 0 0 var(--color-accent);
+
+    outline: none;
 }
+
+/* ==========================================
+   DROPDOWN ICON
+   ========================================== */
 
 .nav-dropdown-icon {
     flex-shrink: 0;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background-color: rgba(var(--color-accent-rgb), 0.1);
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 10px;
+
+    background-color: rgba(var(--color-accent-rgb), 0.09);
+
     color: var(--color-accent-hover);
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     font-size: 0.85rem;
+
+    border: 1px solid rgba(var(--color-accent-rgb), 0.08);
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
+.nav-dropdown-item:hover .nav-dropdown-icon,
+.nav-dropdown-item:focus-visible .nav-dropdown-icon {
+    background-color: var(--color-accent);
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+/* ==========================================
+   DROPDOWN TEXT
+   ========================================== */
+
 .nav-dropdown-text {
+    min-width: 0;
+
     display: flex;
     flex-direction: column;
-    gap: 0.1rem;
+    gap: 0.12rem;
 }
 
 .nav-dropdown-name {
     font-size: 0.9rem;
-    font-weight: 600;
+    line-height: 1.2;
+    font-weight: 650;
     color: var(--color-text-dark);
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    transition: color 0.2s ease;
+}
+
+.nav-dropdown-item:hover .nav-dropdown-name,
+.nav-dropdown-item:focus-visible .nav-dropdown-name {
+    color: var(--color-primary);
 }
 
 .nav-dropdown-csi {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.65rem;
+    line-height: 1.2;
+
     color: var(--color-text-muted);
-    letter-spacing: 0.04em;
+
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+}
+
+/* ==========================================
+   DROPDOWN ARROW
+   ========================================== */
+
+.nav-dropdown-item::after {
+    content: "\f061";
+
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+
+    transform:
+        translateY(-50%)
+        translateX(-4px);
+
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+
+    font-size: 0.65rem;
+
+    color: var(--color-text-muted);
+
+    opacity: 0;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+.nav-dropdown-item:hover::after,
+.nav-dropdown-item:focus-visible::after {
+    opacity: 1;
+
+    color: var(--color-accent);
+
+    transform:
+        translateY(-50%)
+        translateX(0);
+}
+
+/* ==========================================
+   DROPDOWN SCROLLBAR
+   ========================================== */
+
+.nav-dropdown-panel::-webkit-scrollbar {
+    width: 5px;
+}
+
+.nav-dropdown-panel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.nav-dropdown-panel::-webkit-scrollbar-thumb {
+    background: rgba(var(--color-accent-rgb), 0.3);
+    border-radius: 20px;
+}
+
+.nav-dropdown-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(var(--color-accent-rgb), 0.55);
 }
 
 /* ==========================================
    MOBILE NAV TOGGLE + PANEL
    ========================================== */
+
 .mobile-nav-toggle {
     display: none;
     align-items: center;
     justify-content: center;
+
     width: 42px;
     height: 42px;
+
     border-radius: 8px;
+
     border: 1px solid rgba(226, 232, 240, 0.9);
+
     background-color: var(--color-surface);
     color: var(--color-primary);
+
     font-size: 1.1rem;
+
     cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.mobile-nav-toggle:hover {
+    background-color: rgba(var(--color-accent-rgb), 0.08);
+    color: var(--color-accent);
+}
+
+.mobile-nav-toggle:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
 }
 
 .mobile-nav-panel {
     display: none;
+
     flex-direction: column;
+
     max-height: 0;
+
     overflow: hidden;
+
     background-color: var(--color-surface);
+
     border-top: 1px solid rgba(226, 232, 240, 0.9);
-    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+    transition:
+        max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.25s ease;
 }
 
 .mobile-nav-panel.is-open {
@@ -220,12 +483,30 @@
 
 .mobile-nav-panel a {
     display: block;
+
     padding: 1rem 1.5rem;
+
     text-decoration: none;
+
     color: var(--color-text-dark);
+
     font-weight: 500;
     font-size: 1rem;
+
     border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        padding-left 0.2s ease;
+}
+
+.mobile-nav-panel a:hover,
+.mobile-nav-panel a:focus-visible {
+    background-color: rgba(var(--color-accent-rgb), 0.06);
+    color: var(--color-primary);
+    padding-left: 1.7rem;
+    outline: none;
 }
 
 .mobile-nav-panel a.active {
@@ -238,14 +519,59 @@
     font-weight: 700;
 }
 
+.mobile-nav-panel .mobile-nav-cta:hover {
+    color: var(--color-accent);
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 1020px) {
+    .nav-links {
+        gap: 1.4rem;
+    }
+
+    .header-container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
 @media (max-width: 860px) {
     .nav-links {
         display: none;
     }
+
     .mobile-nav-toggle {
         display: flex;
     }
+
     .mobile-nav-panel {
         display: flex;
+    }
+
+    /*
+     * Desktop dropdown is completely disabled on mobile.
+     * Mobile users use the dedicated mobile Services link.
+     */
+    .nav-dropdown-panel {
+        display: none !important;
+    }
+}
+
+/* ==========================================
+   REDUCED MOTION
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    #site-header,
+    .nav-dropdown-panel,
+    .nav-dropdown-item,
+    .nav-dropdown-icon,
+    .nav-dropdown-item::after,
+    .mobile-nav-panel,
+    .mobile-nav-panel a {
+        transition: none !important;
     }
 }
