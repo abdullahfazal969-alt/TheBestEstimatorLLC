@@ -48,6 +48,7 @@
                         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="The Best Estimator Logo" class="brand-logo">
                     </a>
                 </div>
+
                 <nav class="nav-links">
                     <a
                         href="{{ url_for('index') }}"
@@ -59,15 +60,50 @@
                         class="{% if request.path == '/samples' %}active{% endif %}"
                         >Samples</a
                     >
+
+                    <!-- Services — hover dropdown listing every trade (desktop/laptop only) -->
+                    <div class="nav-item-dropdown">
+                        <a
+                            href="{{ url_for('services_page') }}"
+                            class="{% if request.path == '/services' %}active{% endif %}"
+                            >Services</a
+                        >
+                        <div class="nav-dropdown-panel">
+                            {% for service in nav_services %}
+                            <a href="{{ url_for('services_page') }}#svc-{{ service.id }}" class="nav-dropdown-item">
+                                <span class="nav-dropdown-icon"><i class="fas {{ service.icon }}"></i></span>
+                                <span class="nav-dropdown-text">
+                                    <span class="nav-dropdown-name">{{ service.name }}</span>
+                                    <span class="nav-dropdown-csi">{{ service.csi_division }}</span>
+                                </span>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
                     <a
                         href="{{ url_for('pricing') }}"
                         class="{% if request.path == '/pricing' %}active{% endif %}"
-                        >Services & Pricing</a
+                        >Pricing</a
                     >
                     <a href="{{ url_for('contact') }}" class="nav-cta"
                         >Request Quote</a
                     >
                 </nav>
+
+                <!-- Mobile menu toggle -->
+                <button id="mobile-nav-toggle" class="mobile-nav-toggle" aria-label="Open menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Mobile slide-down menu -->
+            <div id="mobile-nav-panel" class="mobile-nav-panel">
+                <a href="{{ url_for('index') }}" class="{% if request.path == '/' %}active{% endif %}">Home</a>
+                <a href="{{ url_for('samples') }}" class="{% if request.path == '/samples' %}active{% endif %}">Samples</a>
+                <a href="{{ url_for('services_page') }}" class="{% if request.path == '/services' %}active{% endif %}">Services</a>
+                <a href="{{ url_for('pricing') }}" class="{% if request.path == '/pricing' %}active{% endif %}">Pricing</a>
+                <a href="{{ url_for('contact') }}" class="mobile-nav-cta">Request Quote</a>
             </div>
         </header>
 
@@ -80,43 +116,43 @@
                  same blueprint/technical-drawing language used elsewhere on the site -->
             <svg class="footer-blueprint" viewBox="0 0 560 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <!-- Tall rear tower -->
-                <rect x="360" y="60" width="140" height="360" stroke="#ffffff" stroke-width="1.5"/>
-                <line x1="360" y1="100" x2="500" y2="100" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="360" y1="140" x2="500" y2="140" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="360" y1="180" x2="500" y2="180" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="360" y1="220" x2="500" y2="220" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="360" y1="260" x2="500" y2="260" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="360" y1="300" x2="500" y2="300" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="360" y1="340" x2="500" y2="340" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="400" y1="60" x2="400" y2="420" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="440" y1="60" x2="440" y2="420" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="470" y1="60" x2="470" y2="420" stroke="#ffffff" stroke-width="0.75"/>
+                <rect x="360" y="60" width="140" height="360" stroke="#4a4e69" stroke-width="1.5"/>
+                <line x1="360" y1="100" x2="500" y2="100" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="360" y1="140" x2="500" y2="140" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="360" y1="180" x2="500" y2="180" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="360" y1="220" x2="500" y2="220" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="360" y1="260" x2="500" y2="260" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="360" y1="300" x2="500" y2="300" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="360" y1="340" x2="500" y2="340" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="400" y1="60" x2="400" y2="420" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="440" y1="60" x2="440" y2="420" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="470" y1="60" x2="470" y2="420" stroke="#4a4e69" stroke-width="0.75"/>
 
                 <!-- Mid-front building -->
-                <rect x="180" y="180" width="160" height="240" stroke="#ffffff" stroke-width="1.5"/>
-                <line x1="180" y1="220" x2="340" y2="220" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="180" y1="260" x2="340" y2="260" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="180" y1="300" x2="340" y2="300" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="180" y1="340" x2="340" y2="340" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="180" y1="380" x2="340" y2="380" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="220" y1="180" x2="220" y2="420" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="260" y1="180" x2="260" y2="420" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="300" y1="180" x2="300" y2="420" stroke="#ffffff" stroke-width="0.75"/>
+                <rect x="180" y="180" width="160" height="240" stroke="#4a4e69" stroke-width="1.5"/>
+                <line x1="180" y1="220" x2="340" y2="220" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="180" y1="260" x2="340" y2="260" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="180" y1="300" x2="340" y2="300" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="180" y1="340" x2="340" y2="340" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="180" y1="380" x2="340" y2="380" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="220" y1="180" x2="220" y2="420" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="260" y1="180" x2="260" y2="420" stroke="#4a4e69" stroke-width="0.75"/>
+                <line x1="300" y1="180" x2="300" y2="420" stroke="#4a4e69" stroke-width="0.75"/>
 
                 <!-- Small foreground structure -->
-                <rect x="40" y="300" width="110" height="120" stroke="#ffffff" stroke-width="1.5"/>
-                <line x1="40" y1="335" x2="150" y2="335" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="40" y1="370" x2="150" y2="370" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="75" y1="300" x2="75" y2="420" stroke="#ffffff" stroke-width="0.75"/>
-                <line x1="115" y1="300" x2="115" y2="420" stroke="#ffffff" stroke-width="0.75"/>
+                <rect x="40" y="300" width="110" height="120" stroke=" #4a4e69" stroke-width="1.5"/>
+                <line x1="40" y1="335" x2="150" y2="335" stroke=" #4a4e69" stroke-width="0.75"/>
+                <line x1="40" y1="370" x2="150" y2="370" stroke=" #4a4e69" stroke-width="0.75"/>
+                <line x1="75" y1="300" x2="75" y2="420" stroke=" #4a4e69" stroke-width="0.75"/>
+                <line x1="115" y1="300" x2="115" y2="420" stroke=" #4a4e69" stroke-width="0.75"/>
 
                 <!-- Dimension / measurement lines -->
-                <line x1="40" y1="30" x2="500" y2="30" stroke="#ffffff" stroke-width="0.5" stroke-dasharray="2 4"/>
-                <circle cx="40" cy="30" r="2.5" fill="#ffffff"/>
-                <circle cx="500" cy="30" r="2.5" fill="#ffffff"/>
+                <line x1="40" y1="30" x2="500" y2="30" stroke="#4a4e69" stroke-width="0.5" stroke-dasharray="2 4"/>
+                <circle cx="40" cy="30" r="2.5" fill="#4a4e69"/>
+                <circle cx="500" cy="30" r="2.5" fill="#4a4e69"/>
 
                 <!-- Small corner registration mark -->
-                <path d="M520,40 L540,40 L540,60" stroke="#ffffff" stroke-width="1"/>
+                <path d="M520,40 L540,40 L540,60" stroke="#4a4e69" stroke-width="1"/>
             </svg>
 
             <div class="footer-container">
@@ -151,8 +187,12 @@
                             >Samples
                             <i class="fas fa-chevron-right link-arrow"></i
                         ></a>
+                        <a href="{{ url_for('services_page') }}"
+                            >Services
+                            <i class="fas fa-chevron-right link-arrow"></i
+                        ></a>
                         <a href="{{ url_for('pricing') }}"
-                            >Services & Pricing
+                            >Pricing
                             <i class="fas fa-chevron-right link-arrow"></i
                         ></a>
                         <a href="{{ url_for('contact') }}"

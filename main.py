@@ -44,6 +44,12 @@ def load_services():
         app.logger.error("Unable to load services.json: %s", e)
         return []
 
+@app.context_processor
+def inject_nav_services():
+    # Makes the services list available in base.html's navbar dropdown
+    # on every page, without needing to pass it from every single route.
+    return {'nav_services': load_services()}
+
 @app.route('/')
 def index():
     all_services = load_services()
@@ -54,10 +60,14 @@ def samples():
     all_samples = load_samples()
     return render_template('samples.html', samples=all_samples)
 
+@app.route('/services')
+def services_page():
+    all_services = load_services()
+    return render_template('services.html', services=all_services)
+
 @app.route('/pricing')
 def pricing():
-    all_services = load_services()
-    return render_template('pricing.html', services=all_services)
+    return render_template('pricing.html')
 
 @app.route('/contact')
 def contact():

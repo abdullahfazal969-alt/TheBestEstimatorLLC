@@ -4,7 +4,7 @@
 #samples-header,
 #pricing-header {
     padding: 4rem 0 4rem;
-    background-color: var(--color-bg);
+    background-color: var(--color-primary);
 }
 
 /* Bordered "frame" treatment — separates the hero as its own visible
@@ -453,7 +453,16 @@
 }
 
 .svcflash-card:hover {
-    box-shadow: 0 20px 45px rgba(10, 17, 40, 0.06);
+    box-shadow: 0 20px 45px rgba(10, 17, 40, 0.1);
+    border-color: var(--color-primary);
+    transform: translateY(-4px);
+    background-color: var(--color-surface);
+}
+
+.svcflash-card:hover .svcflash-icon {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    transform: scale(1.06);
 }
 
 /* Selected-service state: make a homepage-to-pricing visit feel intentional. */
@@ -550,6 +559,7 @@
     justify-content: center;
     font-size: 1.15rem;
     margin-bottom: 1.25rem;
+    transition: var(--transition-smooth);
 }
 
 .svcflash-title {

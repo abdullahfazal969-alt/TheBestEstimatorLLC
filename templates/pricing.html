@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Pricing & Services{% endblock %}
+{% block title %}Pricing{% endblock %}
 
 {% block content %}
 <section id="pricing-header">
@@ -53,76 +53,6 @@
             <a href="{{ url_for('contact') }}" class="btn btn-primary">Subscribe to Monthly Package</a>
         </div>
     </div>
-</section>
-
-<!-- Service Scope & Capabilities — data-driven flashcards, one per service.json entry -->
-<section id="trades-breakdown">
-
-    <div class="container">
-        <h2 class="section-title text-center" id="service-scope-title">Service Scope & Capabilities</h2>
-        <p class="section-desc text-center capability-subtitle" id="service-scope-subtitle">Every discipline we estimate, broken down by what's covered, what you receive, and where it applies.</p>
-
-        <!-- Backdrop for the "letter" reading experience -->
-        <div class="svcflash-letter-backdrop" id="svcflash-letter-backdrop"></div>
-
-        <div class="svcflash-grid">
-            {% for service in services %}
-            <div class="svcflash-card{% if service.id == 'design-drafting' %} svcflash-card-wide{% endif %}" id="svc-{{ service.id }}" data-service="{{ service.id }}" data-service-name="{{ service.name }}" data-service-csi="{{ service.csi_division }}">
-                <button class="svcflash-letter-close" aria-label="Close">
-                    <i class="fas fa-times"></i>
-                </button>
-
-                <div class="svcflash-top">
-                    <span class="svcflash-num">{{ service.number }}</span>
-                    <span class="svcflash-csi">{{ service.csi_division }}</span>
-                </div>
-
-                <div class="svcflash-icon"><i class="fas {{ service.icon }}"></i></div>
-                <h3 class="svcflash-title">{{ service.name }}</h3>
-                <p class="svcflash-overview">{{ service.overview }}</p>
-
-                <div class="svcflash-expand">
-                    <div class="svcflash-block">
-                        <h4>What We Cover</h4>
-                        <ul>
-                            {% for item in service.what_we_cover %}<li>{{ item }}</li>{% endfor %}
-                        </ul>
-                    </div>
-                    <div class="svcflash-block">
-                        <h4>What You Receive</h4>
-                        <ul>
-                            {% for item in service.what_you_receive %}<li>{{ item }}</li>{% endfor %}
-                        </ul>
-                    </div>
-                    <div class="svcflash-block">
-                        <h4>Typical Applications</h4>
-                        <p>{{ service.typical_applications }}</p>
-                    </div>
-                </div>
-
-                <button class="svcflash-toggle" aria-expanded="false">
-                    <span class="svcflash-toggle-label-more">Show full scope</span>
-                    <span class="svcflash-toggle-label-less">Show less</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-
-                <div class="svcflash-footer">
-                    {% if service.sample_trade_match %}
-                    <a href="{{ url_for('samples') }}?trade={{ service.sample_trade_match | urlencode }}" class="svcflash-sample-btn">
-                        <i class="fas fa-file-arrow-down"></i> View Sample for This Scope
-                    </a>
-                    {% else %}
-                    <a href="{{ url_for('samples') }}" class="svcflash-sample-btn svcflash-sample-btn-muted">
-                        <i class="fas fa-folder-open"></i> Browse All Samples
-                    </a>
-                    {% endif %}
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-
-
 </section>
 
 <!-- Hugo-Style FAQ Section -->

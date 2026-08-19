@@ -457,6 +457,8 @@ font-size: 1.1rem;
 
 .svc-item {
     opacity: 1;
+    text-decoration: none;
+    color: inherit;
     transition:
         background-color 0.28s ease,
         box-shadow 0.28s ease,

@@ -107,12 +107,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 3c. Navbar Auto-Hide on Scroll Direction
     const siteHeader = document.getElementById("site-header");
+    const mobileNavPanel = document.getElementById("mobile-nav-panel");
+
     if (siteHeader) {
         let lastScrollY = window.scrollY;
         let ticking = false;
         const hideThreshold = 100; // don't hide until scrolled past this point
 
         function updateHeader() {
+            // Don't auto-hide the header while the mobile menu is open —
+            // it would slide the open menu off-screen mid-browse.
+            if (mobileNavPanel?.classList.contains("is-open")) {
+                ticking = false;
+                return;
+            }
+
             const currentScrollY = window.scrollY;
 
             if (currentScrollY <= hideThreshold) {
@@ -134,6 +143,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 window.requestAnimationFrame(updateHeader);
                 ticking = true;
             }
+        });
+    }
+
+    // 3d. Mobile nav menu toggle
+    const mobileNavToggle = document.getElementById("mobile-nav-toggle");
+
+    if (mobileNavToggle && mobileNavPanel) {
+        mobileNavToggle.addEventListener("click", () => {
+            const isOpen = mobileNavPanel.classList.toggle("is-open");
+            mobileNavToggle.setAttribute("aria-expanded", String(isOpen));
+            mobileNavToggle.innerHTML = isOpen
+                ? '<i class="fas fa-times"></i>'
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close the mobile menu after tapping any link inside it
+        mobileNavPanel.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                mobileNavPanel.classList.remove("is-open");
+                mobileNavToggle.setAttribute("aria-expanded", "false");
+                mobileNavToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
         });
     }
 
