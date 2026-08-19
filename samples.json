@@ -3,7 +3,7 @@
     "id": "lumber-takeoff",
     "trade": "Lumber & Framing",
     "division": "06",
-    "title": "Residential Framing Takeoff",
+    "title": "Framing Takeoff",
     "description": "Full material lists, hardware schedules, and stud counts.",
     "file_url": "/static/samples/sample_lumber.pdf",
     "file_type": "pdf",
@@ -16,7 +16,7 @@
     "title": "Commercial Slab Estimation",
     "description": "Volume calculation, rebar, and formwork.",
     "file_url": "/static/samples/sample_concrete.xlsx",
-    "file_type": "excel",
+    "file_type": "pdf",
     "image": "/static/images/samples/commercial-slab.png"
   },
   {
@@ -46,7 +46,7 @@
     "title": "Steel Detailing",
     "description": "Beams, columns, and fastener schedules.",
     "file_url": "/static/samples/sample_steel.xlsx",
-    "file_type": "excel",
+    "file_type": "pdf",
     "image": "/static/images/samples/steel-detailing.png"
   },
   {
@@ -76,7 +76,7 @@
     "title": "Roofing Estimation",
     "description": "Shingles, underlayment, and insulation quantities.",
     "file_url": "/static/samples/sample_roofing.xlsx",
-    "file_type": "excel",
+    "file_type": "pdf",
     "image": "/static/images/samples/roofing-estimation.png"
   },
   {
@@ -98,5 +98,15 @@
     "file_url": "/static/samples/sample_plumbing.pdf",
     "file_type": "pdf",
     "image": "/static/images/samples/plumbing-takeoff.png"
-  }
+  },
+  {
+  "id": "electrical-takeoff",
+  "trade": "MEP Estimation",
+  "division": "26",
+  "title": "Electrical Takeoff",
+  "description": "detail estimate of electrical components and wiring.",
+  "file_url": "/static/samples/sample_mep.pdf",
+  "file_type": "pdf",
+  "image": "/static/images/samples/electrical.png"
+}
 ]

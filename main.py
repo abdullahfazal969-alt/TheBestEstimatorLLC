@@ -1,5 +1,6 @@
 import os
 import json
+import socket
 from pathlib import Path
 from flask import Flask, render_template, request, jsonify
 from flask_mail import Mail, Message
@@ -151,7 +152,18 @@ def submit_quote():
                 data=file_bytes,
             )
 
-        mail.send(msg)
+        # Flask-Mail/smtplib has no built-in connect timeout, so a blocked or
+        # unreachable port (e.g. a host that silently drops the connection
+        # rather than refusing it) can hang forever — which then trips
+        # gunicorn's own WORKER TIMEOUT and kills the whole process before
+        # our except block below ever runs. Force a hard 10s ceiling so a
+        # network problem fails fast and cleanly instead.
+        previous_timeout = socket.getdefaulttimeout()
+        socket.setdefaulttimeout(10)
+        try:
+            mail.send(msg)
+        finally:
+            socket.setdefaulttimeout(previous_timeout)
 
         # Only report success when the email genuinely sent — the frontend
         # relies on this to decide which banner to show.
