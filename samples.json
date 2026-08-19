@@ -105,7 +105,7 @@
   "division": "26",
   "title": "Electrical Takeoff",
   "description": "detail estimate of electrical components and wiring.",
-  "file_url": "/static/samples/sample_mep.pdf",
+  "file_url": "/static/samples/electric-sample.pdf",
   "file_type": "pdf",
   "image": "/static/images/samples/electrical.png"
 }
