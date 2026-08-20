@@ -1,8 +1,7 @@
 import os
 import json
 import base64
-import urllib.request
-import urllib.error
+import requests
 from pathlib import Path
 from flask import Flask, render_template, request, jsonify
 from dotenv import load_dotenv
@@ -24,19 +23,25 @@ CEO_EMAIL = os.getenv('CEO_EMAIL', 'support@thebestestimatorllc.com')
 app.config['MAX_CONTENT_LENGTH'] = 15 * 1024 * 1024
 
 def send_via_resend(payload):
-    """POST an email to Resend's HTTPS API. Raises on any failure so the
-    caller's existing try/except handles it exactly like mail.send() did."""
-    req = urllib.request.Request(
+    """POST an email to Resend's HTTPS API.
+
+    Uses the `requests` library rather than urllib — on at least one real
+    dev machine, raw urllib's SSL stack failed to complete a TLS handshake
+    with Resend's Cloudflare-fronted endpoint (curl to the same URL from
+    the same machine worked perfectly, isolating it to Python's own SSL
+    module rather than any network/firewall issue). requests/urllib3
+    handles this TLS 1.3 + session-resumption combination more robustly
+    in practice. Raises on any failure so the caller's existing
+    try/except handles it exactly as before.
+    """
+    response = requests.post(
         'https://api.resend.com/emails',
-        data=json.dumps(payload).encode('utf-8'),
-        headers={
-            'Authorization': f'Bearer {RESEND_API_KEY}',
-            'Content-Type': 'application/json',
-        },
-        method='POST',
+        json=payload,
+        headers={'Authorization': f'Bearer {RESEND_API_KEY}'},
+        timeout=10,
     )
-    with urllib.request.urlopen(req, timeout=10) as resp:
-        return json.loads(resp.read().decode('utf-8'))
+    response.raise_for_status()
+    return response.json()
 
 def load_samples():
     try:
@@ -91,26 +96,26 @@ def about():
     # title, and bio copy. Keeping it here (rather than hardcoded in the
     # template) means future edits only need to happen in one place.
     ceo = {
-        'name': 'Mohsin Altaf',
-        'title': 'Founder & CEO',
-        'photo': 'images/team/ceo.png',
-        'bio_paragraphs': [
-            'The Best Estimator LLC was built from a simple idea: construction '
-            'professionals should be able to rely on their estimates before they '
-            'commit to a project. What started as a focused estimating service '
-            'has grown through hands-on project experience into a team supporting '
-            'projects across multiple trades and scopes of work.',
+           'name': 'Mohsin Altaf',
+           'title': 'Founder & CEO',
+           'photo': 'images/team/ceo.png',
+           'bio_paragraphs': [
+               'The Best Estimator LLC was built from a simple idea: construction '
+               'professionals should be able to rely on their estimates before they '
+               'commit to a project. What started as a focused estimating service '
+               'has grown through hands-on project experience into a team supporting '
+               'projects across multiple trades and scopes of work.',
 
-            'Over the years, our work has been shaped by the projects themselves — '
-            'each set of plans, every revision, and every scope requiring a '
-            'different level of attention. We have now completed more than 3,000 '
-            'projects, giving us practical experience across a wide range of '
-            'construction work. Our approach remains straightforward: understand '
-            'the plans, identify what the project actually requires, and deliver '
-            'organized takeoffs and estimates that give our clients a clearer '
-            'picture of their costs before the work begins.'
-        ]
-    }
+               'Over the years, our work has been shaped by the projects themselves — '
+               'each set of plans, every revision, and every scope requiring a '
+               'different level of attention. We have now completed more than 3,000 '
+               'projects, giving us practical experience across a wide range of '
+               'construction work. Our approach remains straightforward: understand '
+               'the plans, identify what the project actually requires, and deliver '
+               'organized takeoffs and estimates that give our clients a clearer '
+               'picture of their costs before the work begins.'
+           ]
+       }
     return render_template('about.html', ceo=ceo)
 
 @app.route('/pricing')
