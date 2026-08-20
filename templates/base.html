@@ -61,7 +61,7 @@
                         >Samples</a
                     >
 
-                    <!-- Services — hover dropdown listing every trade (desktop/laptop only) -->
+                    <!-- Services — two-level hover dropdown (desktop/laptop only) -->
                     <div class="nav-item-dropdown">
                         <a
                             href="{{ url_for('services_page') }}"
@@ -69,15 +69,39 @@
                             >Services</a
                         >
                         <div class="nav-dropdown-panel">
-                            {% for service in nav_services %}
-                            <a href="{{ url_for('services_page') }}#svc-{{ service.id }}" class="nav-dropdown-item">
+                            <!-- Estimating Services — hover reveals the 6-trade flyout -->
+                            <div class="nav-subitem-dropdown">
+                                <a href="{{ url_for('services_page') }}" class="nav-dropdown-item nav-dropdown-item-parent">
+                                    <span class="nav-dropdown-icon"><i class="fas fa-ruler-combined"></i></span>
+                                    <span class="nav-dropdown-text">
+                                        <span class="nav-dropdown-name">Estimating Services</span>
+                                        <span class="nav-dropdown-csi">6 CSI Trade Divisions</span>
+                                    </span>
+                                    <span class="nav-subitem-arrow"><i class="fas fa-chevron-right"></i></span>
+                                </a>
+                                <div class="nav-subdropdown-panel">
+                                    {% for service in nav_services %}{% if not service.is_hub %}
+                                    <a href="{{ url_for('services_page') }}#svc-{{ service.id }}" class="nav-dropdown-item">
+                                        <span class="nav-dropdown-icon"><i class="fas {{ service.icon }}"></i></span>
+                                        <span class="nav-dropdown-text">
+                                            <span class="nav-dropdown-name">{{ service.name }}</span>
+                                            <span class="nav-dropdown-csi">{{ service.csi_division }}</span>
+                                        </span>
+                                    </a>
+                                    {% endif %}{% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- BIM Modelling — direct link, own dedicated page, no flyout -->
+                            {% for service in nav_services %}{% if service.is_hub %}
+                            <a href="{{ url_for('bim_modelling') }}" class="nav-dropdown-item">
                                 <span class="nav-dropdown-icon"><i class="fas {{ service.icon }}"></i></span>
                                 <span class="nav-dropdown-text">
                                     <span class="nav-dropdown-name">{{ service.name }}</span>
                                     <span class="nav-dropdown-csi">{{ service.csi_division }}</span>
                                 </span>
                             </a>
-                            {% endfor %}
+                            {% endif %}{% endfor %}
                         </div>
                     </div>
 
@@ -85,6 +109,11 @@
                         href="{{ url_for('pricing') }}"
                         class="{% if request.path == '/pricing' %}active{% endif %}"
                         >Pricing</a
+                    >
+                    <a
+                        href="{{ url_for('about') }}"
+                        class="{% if request.path == '/about' %}active{% endif %}"
+                        >About</a
                     >
                     <a href="{{ url_for('contact') }}" class="nav-cta"
                         >Request Quote</a
@@ -103,6 +132,7 @@
                 <a href="{{ url_for('samples') }}" class="{% if request.path == '/samples' %}active{% endif %}">Samples</a>
                 <a href="{{ url_for('services_page') }}" class="{% if request.path == '/services' %}active{% endif %}">Services</a>
                 <a href="{{ url_for('pricing') }}" class="{% if request.path == '/pricing' %}active{% endif %}">Pricing</a>
+                <a href="{{ url_for('about') }}" class="{% if request.path == '/about' %}active{% endif %}">About</a>
                 <a href="{{ url_for('contact') }}" class="mobile-nav-cta">Request Quote</a>
             </div>
         </header>

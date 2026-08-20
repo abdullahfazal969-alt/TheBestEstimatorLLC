@@ -221,7 +221,7 @@
                 <div class="svc-spine" aria-hidden="true"></div>
 
                 {% for service in services %}{% if not service.featured %}
-                <a href="{{ url_for('services_page') }}#svc-{{ service.id }}" class="svc-item svc-row">
+                <a href="{% if service.is_hub %}{{ url_for('bim_modelling') }}{% else %}{{ url_for('services_page') }}#svc-{{ service.id }}{% endif %}" class="svc-item svc-row">
                     <div class="svc-row-node" aria-hidden="true"></div>
                     <div class="svc-row-inner">
                         <div class="svc-row-main">

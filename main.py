@@ -1,9 +1,10 @@
 import os
 import json
-import socket
+import base64
+import urllib.request
+import urllib.error
 from pathlib import Path
 from flask import Flask, render_template, request, jsonify
-from flask_mail import Mail, Message
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -12,22 +13,30 @@ BASE_DIR = Path(__file__).resolve().parent
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-key-123')
 
-# --- SMTP / Email Configuration ---
-# All values come from environment variables (.env locally, host dashboard in production).
-# Never hardcode credentials here.
-app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
-app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
-app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'True') == 'True'
-app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
-app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_USERNAME')
-
+# --- Resend (HTTPS email API) Configuration ---
+# Switched from SMTP because Railway blocks all outbound SMTP ports on every
+# plan below Pro. Resend sends over HTTPS instead, so no blocked-port issue.
+RESEND_API_KEY = os.getenv('RESEND_API_KEY')
+RESEND_FROM = os.getenv('RESEND_FROM', 'The Best Estimator <onboarding@resend.dev>')
 CEO_EMAIL = os.getenv('CEO_EMAIL', 'support@thebestestimatorllc.com')
 
-mail = Mail(app)
-
-# Max upload size: 15MB, to keep blueprint attachments within typical SMTP/mailbox limits
+# Max upload size: 15MB, to keep blueprint attachments within typical email/API limits
 app.config['MAX_CONTENT_LENGTH'] = 15 * 1024 * 1024
+
+def send_via_resend(payload):
+    """POST an email to Resend's HTTPS API. Raises on any failure so the
+    caller's existing try/except handles it exactly like mail.send() did."""
+    req = urllib.request.Request(
+        'https://api.resend.com/emails',
+        data=json.dumps(payload).encode('utf-8'),
+        headers={
+            'Authorization': f'Bearer {RESEND_API_KEY}',
+            'Content-Type': 'application/json',
+        },
+        method='POST',
+    )
+    with urllib.request.urlopen(req, timeout=10) as resp:
+        return json.loads(resp.read().decode('utf-8'))
 
 def load_samples():
     try:
@@ -64,7 +73,37 @@ def samples():
 @app.route('/services')
 def services_page():
     all_services = load_services()
-    return render_template('services.html', services=all_services)
+    # The "BIM Modelling" entry is a hub — it has its own dedicated page
+    # (/bim-modelling) instead of a flashcard here, so it's excluded.
+    visible_services = [s for s in all_services if not s.get('is_hub')]
+    return render_template('services.html', services=visible_services)
+
+@app.route('/bim-modelling')
+def bim_modelling():
+    all_services = load_services()
+    hub = next((s for s in all_services if s.get('is_hub')), None)
+    sub_services = hub['sub_services'] if hub else []
+    return render_template('bim_modelling.html', services=sub_services, hub=hub)
+
+@app.route('/about')
+def about():
+    # Placeholder content — edit the strings below with the real name,
+    # title, and bio copy. Keeping it here (rather than hardcoded in the
+    # template) means future edits only need to happen in one place.
+    ceo = {
+        'name': 'Mohsin Altaf',
+        'title': 'Founder & CEO',
+        'photo': 'images/team/ceo.png',
+        'bio_paragraphs': [
+            '[Insert first bio paragraph here — company origin story: '
+            'when and why The Best Estimator LLC was founded, and what '
+            'it focused on early on.]',
+            '[Insert second bio paragraph here — the CEO\u2019s background: '
+            'relevant experience, credentials, or career history before '
+            'and during the company.]',
+        ],
+    }
+    return render_template('about.html', ceo=ceo)
 
 @app.route('/pricing')
 def pricing():
@@ -120,50 +159,42 @@ def submit_quote():
             has_attachment=has_attachment,
         )
 
-        msg = Message(
-            subject=f"New Quote Request — {name or 'Unknown'}",
-            recipients=[CEO_EMAIL],
-            reply_to=email if email else None,
-            body=body,       # plain-text fallback for clients that don't render HTML
-            html=html_body,  # branded version most clients will actually display
-        )
+        attachments = []
 
         # Embed the logo directly in the email (Content-ID) rather than linking
-        # to a URL — this way it displays correctly even before the site is live,
-        # and doesn't depend on the recipient's client fetching a remote image.
+        # to a URL — displays correctly regardless of hosting status, and the
+        # HTML template already references it as cid:tbe_logo, unchanged.
         logo_path = BASE_DIR / 'static' / 'images' / 'logo.png'
         if logo_path.exists():
             with open(logo_path, 'rb') as logo_file:
-                msg.attach(
-                    filename="logo.png",
-                    content_type="image/png",
-                    data=logo_file.read(),
-                    disposition='inline',
-                    headers={'Content-ID': '<tbe_logo>'},
-                )
+                attachments.append({
+                    "filename": "logo.png",
+                    "content": base64.b64encode(logo_file.read()).decode('ascii'),
+                    "content_id": "tbe_logo",
+                })
 
         # Attach the blueprint directly to the email — read into memory,
         # never written to disk, so nothing depends on the server's filesystem.
         if has_attachment:
             file_bytes = file.read()
-            msg.attach(
-                filename=file.filename,
-                content_type=file.content_type or "application/octet-stream",
-                data=file_bytes,
-            )
+            attachments.append({
+                "filename": file.filename,
+                "content": base64.b64encode(file_bytes).decode('ascii'),
+            })
 
-        # Flask-Mail/smtplib has no built-in connect timeout, so a blocked or
-        # unreachable port (e.g. a host that silently drops the connection
-        # rather than refusing it) can hang forever — which then trips
-        # gunicorn's own WORKER TIMEOUT and kills the whole process before
-        # our except block below ever runs. Force a hard 10s ceiling so a
-        # network problem fails fast and cleanly instead.
-        previous_timeout = socket.getdefaulttimeout()
-        socket.setdefaulttimeout(10)
-        try:
-            mail.send(msg)
-        finally:
-            socket.setdefaulttimeout(previous_timeout)
+        payload = {
+            "from": RESEND_FROM,
+            "to": [CEO_EMAIL],
+            "subject": f"New Quote Request — {name or 'Unknown'}",
+            "text": body,       # plain-text fallback for clients that don't render HTML
+            "html": html_body,  # branded version most clients will actually display
+        }
+        if email:
+            payload["reply_to"] = email
+        if attachments:
+            payload["attachments"] = attachments
+
+        send_via_resend(payload)
 
         # Only report success when the email genuinely sent — the frontend
         # relies on this to decide which banner to show.

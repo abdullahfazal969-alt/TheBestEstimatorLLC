@@ -1,0 +1,205 @@
+/* ==========================================================
+   ABOUT PAGE — Leadership hero
+   New, purely additive file. Nothing here touches any other
+   page's styles — every selector below is scoped to classes
+   that only exist on templates/about.html.
+   ========================================================== */
+
+.about-hero-wrap {
+    position: relative;
+}
+
+.about-hero {
+    position: relative;
+    overflow: hidden;
+
+    height: calc(100vh - 5rem); /* clears the fixed nav's reserved space */
+    display: flex;
+    align-items: stretch;
+}
+
+/* Diagonal blend of both brand colors — Navy near the text panel
+   (for contrast under white type, now on the left), fading toward
+   a touch of the page background color near the photo edge on the
+   right, mirroring the light-to-dark sweep in the reference. */
+.about-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    background: linear-gradient(
+        245deg,
+        var(--color-bg) 0%,
+        rgba(var(--color-accent-rgb), 0.55) 28%,
+        var(--color-accent) 52%,
+        var(--color-primary) 100%
+    );
+}
+
+.about-hero-inner {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+    grid-template-columns: 1fr minmax(320px, 38%);
+    align-items: stretch;
+
+    width: 100%;
+    max-width: var(--max-width);
+    height: 100%;
+}
+
+.about-hero-photo {
+    /* Anchored against .about-hero (already position:relative, and spans
+       the FULL viewport width — unlike .about-hero-inner, which is capped
+       at --max-width and centered). Positioning here rather than using a
+       margin/padding viewport-width calc means "hug the real right edge"
+       works correctly at any screen width, with no math to get wrong.
+
+       Previous approach used margin-right: calc(50% - 50vw), but that
+       "50%" was relative to this element's own narrow grid-column width
+       (~38% of --max-width), not the actual viewport — so as the window
+       grew past --max-width, the negative margin grew far too large and
+       pushed the photo increasingly off-screen to the right. */
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    overflow: hidden; /* safety net — object-fit:contain shouldn't need this, but guarantees no overflow either way */
+}
+
+.about-hero-photo-img {
+    display: block;
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: bottom;
+}
+
+.about-hero-copy {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 2rem 5rem;
+    color: #ffffff;
+}
+
+/* Override the shared .eyebrow component's color just here —
+   the default (--color-accent) doesn't have enough contrast
+   against this dark gradient. Everything else about it
+   (font, size, spacing) stays inherited from the shared rule. */
+.about-hero-copy .eyebrow {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.about-hero-name {
+    font-family: var(--font-heading);
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    line-height: 1.05;
+}
+
+.about-hero-title-role {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.78);
+    margin-bottom: 2rem;
+}
+
+.about-hero-bio {
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.about-hero-bio p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+/* Placeholder section below the hero — exists only so the
+   fade-on-scroll effect has something to scroll toward.
+   Replace its content when the next section is designed. */
+.about-next-placeholder {
+    background-color: var(--color-surface);
+    padding: 8rem 0;
+}
+
+.about-next-placeholder-text {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-style: italic;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 992px) {
+    .about-hero {
+        height: auto;
+        min-height: 0;
+    }
+
+    .about-hero-inner {
+        grid-template-columns: 1fr;
+        align-items: center;
+        text-align: center;
+        height: auto;
+    }
+
+    .about-hero-photo {
+        /* Reset out of the desktop absolute-positioning (see base rule
+           above) back into normal grid flow — order:-1 below only works
+           on elements participating in normal flow, not absolutely
+           positioned ones. */
+        position: static;
+        order: -1; /* shows photo above text on mobile, DOM order unchanged for a11y */
+        height: auto;
+        overflow: visible;
+        justify-content: center;
+        padding-top: 3rem;
+    }
+
+    .about-hero-photo-img {
+        height: auto;
+        width: min(70vw, 420px);
+    }
+
+    .about-hero-bio {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .about-hero-photo-img {
+        width: min(78vw, 320px);
+    }
+
+    .about-hero-copy {
+        padding: 2.5rem 1.25rem 3rem;
+    }
+
+    .about-hero-name {
+        font-size: clamp(2rem, 9vw, 2.6rem);
+    }
+
+    .about-hero-bio p {
+        font-size: 0.95rem;
+    }
+}

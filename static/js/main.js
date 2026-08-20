@@ -280,6 +280,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 "aria-expanded",
                 "false"
             );
+
+            // Also close the nested "Estimating Services" flyout,
+            // if it happens to be open, so nothing is left stuck
+            // open when the whole Services menu closes.
+            const openSubmenu = serviceDropdown.querySelector(
+                ".nav-subitem-dropdown.is-open"
+            );
+
+            openSubmenu?.classList.remove(
+                "is-open",
+                "nav-subitem-flip"
+            );
         }
 
 
@@ -400,6 +412,143 @@ document.addEventListener("DOMContentLoaded", () => {
                 }, 0);
             }
         );
+    }
+
+
+    // ==========================================
+    // 3d-ii. ESTIMATING SERVICES SUBMENU
+    // Nested flyout inside the Services dropdown.
+    // Same interaction pattern as the outer dropdown,
+    // scoped to its own element so it never touches
+    // the outer dropdown's logic above.
+    // ==========================================
+
+    const submenu = document.querySelector(
+        ".nav-subitem-dropdown"
+    );
+
+    if (submenu) {
+        const submenuTrigger =
+            submenu.querySelector(":scope > a");
+
+        const submenuPanel = submenu.querySelector(
+            ".nav-subdropdown-panel"
+        );
+
+        const submenuItems = submenu.querySelectorAll(
+            ".nav-subdropdown-panel .nav-dropdown-item"
+        );
+
+        if (submenuTrigger) {
+            submenuTrigger.setAttribute("aria-haspopup", "true");
+            submenuTrigger.setAttribute("aria-expanded", "false");
+
+            if (submenuPanel) {
+                submenuPanel.setAttribute("role", "menu");
+            }
+        }
+
+        submenuItems.forEach((item) => {
+            item.setAttribute("role", "menuitem");
+        });
+
+
+        // ------------------------------------------
+        // Flip to the left if the flyout would
+        // overflow past the right edge of the viewport.
+        // ------------------------------------------
+
+        function positionSubmenu() {
+            if (!submenuPanel) {
+                return;
+            }
+
+            submenu.classList.remove("nav-subitem-flip");
+
+            const rect = submenuPanel.getBoundingClientRect();
+
+            if (rect.right > window.innerWidth - 12) {
+                submenu.classList.add("nav-subitem-flip");
+            }
+        }
+
+
+        function openSubmenu() {
+            positionSubmenu();
+
+            submenu.classList.add("is-open");
+
+            submenuTrigger?.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+        }
+
+
+        function closeSubmenu() {
+            submenu.classList.remove(
+                "is-open",
+                "nav-subitem-flip"
+            );
+
+            submenuTrigger?.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+        }
+
+
+        submenu.addEventListener(
+            "pointerenter",
+            (event) => {
+                if (
+                    event.pointerType === "mouse" ||
+                    event.pointerType === "pen"
+                ) {
+                    openSubmenu();
+                }
+            }
+        );
+
+        submenu.addEventListener(
+            "pointerleave",
+            (event) => {
+                if (
+                    event.pointerType === "mouse" ||
+                    event.pointerType === "pen"
+                ) {
+                    window.setTimeout(() => {
+                        if (!submenu.matches(":hover")) {
+                            closeSubmenu();
+                        }
+                    }, 60);
+                }
+            }
+        );
+
+        submenuTrigger?.addEventListener("focus", () => {
+            openSubmenu();
+        });
+
+        submenuItems.forEach((item) => {
+            item.addEventListener("focus", () => {
+                openSubmenu();
+            });
+        });
+
+        // Escape closes just the submenu first, leaving the
+        // outer Services panel open — a second Escape (handled
+        // by the outer dropdown's own listener) closes that too.
+        submenu.addEventListener("keydown", (event) => {
+            if (
+                event.key === "Escape" &&
+                submenu.classList.contains("is-open")
+            ) {
+                event.stopPropagation();
+                closeSubmenu();
+                submenuTrigger?.focus();
+            }
+        });
     }
 
 
@@ -989,6 +1138,58 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
                 }
             );
+        });
+    }
+
+
+    // ==========================================
+    // 7. ABOUT PAGE — HERO PIN & FADE
+    // Pins the leadership hero in place while the user
+    // scrolls, then fades it out as the next section
+    // approaches. Desktop/laptop only — on smaller
+    // screens this is skipped entirely and the hero
+    // just sits as a normal static section, since
+    // scroll-pin effects are the most likely thing to
+    // misbehave on mobile browsers.
+    // ==========================================
+
+    const aboutHeroWrap = document.querySelector(
+        ".about-hero-wrap"
+    );
+
+    const aboutHero = document.getElementById(
+        "about-hero"
+    );
+
+    if (
+        aboutHeroWrap &&
+        aboutHero &&
+        typeof gsap !== "undefined" &&
+        typeof ScrollTrigger !== "undefined" &&
+        window.matchMedia("(min-width: 993px)").matches
+    ) {
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        ScrollTrigger.create({
+            trigger: aboutHeroWrap,
+            start: "top top",
+            end: "+=90%",
+            pin: aboutHero,
+            scrub: true,
+
+            onUpdate: (self) => {
+                gsap.set(aboutHero, {
+                    opacity: 1 - self.progress,
+                });
+            },
+
+            // If the hero is fully faded and the user scrolls
+            // back up, restore full opacity rather than leaving
+            // it invisible.
+            onLeaveBack: () => {
+                gsap.set(aboutHero, { opacity: 1 });
+            },
         });
     }
 

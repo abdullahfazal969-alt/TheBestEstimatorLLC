@@ -1,30 +1,30 @@
 {% extends "base.html" %}
 
-{% block title %}Services{% endblock %}
+{% block title %}BIM Modelling{% endblock %}
 
 {% block content %}
 <section id="pricing-header">
     <div class="container">
         <div class="page-hero-frame">
-            <span class="eyebrow">FULL-SCOPE CSI COVERAGE</span>
-            <h1 class="page-title">Every Discipline. One Team.</h1>
-            <p class="page-subtitle">From structural concrete and steel to MEP, finishes, and sitework — click any service below for the full scope of what we cover.</p>
+            <span class="eyebrow">MODELING &amp; DOCUMENTATION</span>
+            <h1 class="page-title">BIM Modelling</h1>
+            <p class="page-subtitle">From first redlines to fabrication-ready shop drawings and project scheduling — click any service below for the full scope of what we cover.</p>
         </div>
     </div>
 </section>
 
-<!-- Service Scope & Capabilities — data-driven flashcards, one per service.json entry -->
+<!-- BIM Modelling Scope & Capabilities — data-driven flashcards, one per sub_services entry -->
 <section id="trades-breakdown">
     <div class="container">
-        <h2 class="section-title text-center" id="service-scope-title">Service Scope & Capabilities</h2>
-        <p class="section-desc text-center capability-subtitle" id="service-scope-subtitle">Every discipline we estimate, broken down by what's covered, what you receive, and where it applies.</p>
+        <h2 class="section-title text-center" id="service-scope-title">BIM Modelling Scope &amp; Capabilities</h2>
+        <p class="section-desc text-center capability-subtitle" id="service-scope-subtitle">Every BIM and drafting service we offer, broken down by what's covered, what you receive, and where it applies.</p>
 
         <!-- Backdrop for the "letter" reading experience -->
         <div class="svcflash-letter-backdrop" id="svcflash-letter-backdrop"></div>
 
         <div class="svcflash-grid">
             {% for service in services %}
-            <div class="svcflash-card" id="svc-{{ service.id }}" data-service="{{ service.id }}" data-service-name="{{ service.name }}" data-service-csi="{{ service.csi_division }}">
+            <div class="svcflash-card{% if loop.last %} svcflash-card-wide{% endif %}" id="svc-{{ service.id }}" data-service="{{ service.id }}" data-service-name="{{ service.name }}" data-service-csi="{{ service.csi_division }}">
                 <button class="svcflash-letter-close" aria-label="Close">
                     <i class="fas fa-times"></i>
                 </button>

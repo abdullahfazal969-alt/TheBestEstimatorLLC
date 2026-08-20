@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<!-- ==========================================================
+     ABOUT — Leadership hero
+     Sticky-pinned while the user scrolls through the extra
+     scroll room in .about-hero-wrap, then fades via GSAP
+     ScrollTrigger (scrub-linked, desktop only) as the next
+     section approaches. On mobile the pin/fade is disabled —
+     see static/js/main.js — and this just sits as a normal
+     static section.
+     ========================================================== -->
+<section class="about-hero-wrap">
+    <div class="about-hero" id="about-hero">
+        <div class="about-hero-bg" aria-hidden="true"></div>
+
+        <div class="about-hero-inner container">
+            <div class="about-hero-copy">
+                <span class="eyebrow">LEADERSHIP</span>
+                <h1 class="about-hero-name">{{ ceo.name }}</h1>
+                <p class="about-hero-title-role">{{ ceo.title }}</p>
+
+                <div class="about-hero-bio">
+                    {% for paragraph in ceo.bio_paragraphs %}
+                    <p>{{ paragraph }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="about-hero-photo">
+                <img
+                    src="{{ url_for('static', filename=ceo.photo) }}"
+                    alt="{{ ceo.name }}, {{ ceo.title }} of The Best Estimator LLC"
+                    class="about-hero-photo-img"
+                >
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Placeholder — next section (General Manager, values, etc.)
+     to be built next. This exists now only so the fade-on-scroll
+     behavior above has something to scroll toward and can be
+     tested; replace its contents when ready. -->
+<section class="about-next-placeholder">
+    <div class="container">
+        <p class="about-next-placeholder-text">More coming here — General Manager, company values, and team.</p>
+    </div>
+</section>
+{% endblock %}
