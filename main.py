@@ -3,7 +3,7 @@ import json
 import base64
 import requests
 from pathlib import Path
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, Response, url_for
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -18,6 +18,11 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-key-123')
 RESEND_API_KEY = os.getenv('RESEND_API_KEY')
 RESEND_FROM = os.getenv('RESEND_FROM', 'The Best Estimator <onboarding@resend.dev>')
 CEO_EMAIL = os.getenv('CEO_EMAIL', 'support@thebestestimatorllc.com')
+
+# Single source of truth for the canonical domain — used in base.html's
+# canonical/OG tags and in the sitemap. If the preferred domain ever
+# changes (e.g. adding www), update it here only.
+SITE_DOMAIN = 'https://thebestestimatorllc.com'
 
 # Max upload size: 15MB, to keep blueprint attachments within typical email/API limits
 app.config['MAX_CONTENT_LENGTH'] = 15 * 1024 * 1024
@@ -61,9 +66,10 @@ def load_services():
 
 @app.context_processor
 def inject_nav_services():
-    # Makes the services list available in base.html's navbar dropdown
-    # on every page, without needing to pass it from every single route.
-    return {'nav_services': load_services()}
+    # Makes the services list (and the canonical site domain, used for
+    # SEO tags in base.html) available on every page, without needing
+    # to pass them from every single route.
+    return {'nav_services': load_services(), 'site_domain': SITE_DOMAIN}
 
 @app.route('/')
 def index():
@@ -97,7 +103,7 @@ def about():
     # template) means future edits only need to happen in one place.
     ceo = {
            'name': 'Mohsin Altaf',
-           'title': 'Founder & CEO',
+           'title': 'Managing Director',
            'photo': 'images/team/ceo.png',
            'bio_paragraphs': [
                'The Best Estimator LLC was built from a simple idea: construction '
@@ -129,6 +135,39 @@ def contact():
 @app.route('/privacy')
 def privacy():
     return render_template('privacy.html')
+
+@app.route('/robots.txt')
+def robots_txt():
+    lines = [
+        'User-agent: *',
+        'Allow: /',
+        'Disallow: /submit-quote',
+        '',
+        f'Sitemap: {SITE_DOMAIN}/sitemap.xml',
+    ]
+    return Response('\n'.join(lines), mimetype='text/plain')
+
+@app.route('/sitemap.xml')
+def sitemap_xml():
+    # Static pages only — samples/services detail pages are anchor-based
+    # (#svc-...) on their parent pages, not separate crawlable URLs, so
+    # they're intentionally not listed here individually.
+    pages = [
+        {'loc': url_for('index'), 'priority': '1.0', 'changefreq': 'weekly'},
+        {'loc': url_for('services_page'), 'priority': '0.8', 'changefreq': 'monthly'},
+        {'loc': url_for('bim_modelling'), 'priority': '0.8', 'changefreq': 'monthly'},
+        {'loc': url_for('samples'), 'priority': '0.7', 'changefreq': 'monthly'},
+        {'loc': url_for('pricing'), 'priority': '0.8', 'changefreq': 'monthly'},
+        {'loc': url_for('about'), 'priority': '0.6', 'changefreq': 'monthly'},
+        {'loc': url_for('contact'), 'priority': '0.7', 'changefreq': 'monthly'},
+        {'loc': url_for('privacy'), 'priority': '0.3', 'changefreq': 'yearly'},
+    ]
+    xml = render_template('sitemap.xml', pages=pages, site_domain=SITE_DOMAIN)
+    return Response(xml, mimetype='application/xml')
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 @app.route('/submit-quote', methods=['POST'])
 def submit_quote():

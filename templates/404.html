@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found{% endblock %}
+{% block meta_description %}This page doesn't exist. Find what you're looking for on The Best Estimator LLC's construction estimating services, pricing, or contact pages.{% endblock %}
+
+{% block content %}
+<section id="pricing-header">
+    <div class="container">
+        <div class="page-hero-frame" style="text-align: center;">
+            <span class="eyebrow">404 — PAGE NOT FOUND</span>
+            <h1 class="page-title">This page has moved or no longer exists.</h1>
+            <p class="page-subtitle">If you followed an old link or search result, it may be pointing to a page from our previous website. Here's where you actually want to go:</p>
+
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem;">
+                <a href="{{ url_for('index') }}" class="btn btn-primary">Go to Homepage</a>
+                <a href="{{ url_for('services_page') }}" class="btn btn-secondary">View Services</a>
+                <a href="{{ url_for('contact') }}" class="btn btn-secondary">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

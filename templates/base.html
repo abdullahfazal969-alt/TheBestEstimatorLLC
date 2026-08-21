@@ -7,6 +7,51 @@
             {% block title %}The Best Estimator LLC{% endblock %} | Precision
             Cost Estimating
         </title>
+
+        <!-- SEO: meta description — every page should override the
+             meta_description block below with a unique description -->
+        <meta name="description" content="{% block meta_description %}The Best Estimator LLC provides fast, accurate construction cost estimating, quantity takeoffs, and BIM modeling services for contractors nationwide.{% endblock %}" />
+
+        <!-- SEO: canonical URL — hardcoded to the primary domain (see
+             SITE_DOMAIN in main.py) so Google consolidates ranking
+             signals here regardless of which host (custom domain or
+             the Railway-provided URL) a page was reached through. -->
+        <link rel="canonical" href="{{ site_domain }}{{ request.path }}" />
+
+        <!-- Open Graph / social share preview tags -->
+        <meta property="og:site_name" content="The Best Estimator LLC" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="{{ site_domain }}{{ request.path }}" />
+        <meta property="og:title" content="{% block og_title %}{{ self.title() }}{% endblock %}" />
+        <meta property="og:description" content="{% block og_description %}{{ self.meta_description() }}{% endblock %}" />
+        <meta property="og:image" content="{{ site_domain }}{{ url_for('static', filename='images/logo.png') }}" />
+
+        <!-- Structured data: tells Google what this business actually is —
+             name, contact info, and address exactly as published in the
+             site footer and /contact page. Helps with knowledge panels,
+             rich results, and general entity recognition. -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "GeneralContractor",
+            "name": "The Best Estimator LLC",
+            "url": "{{ site_domain }}/",
+            "logo": "{{ site_domain }}{{ url_for('static', filename='images/logo.png') }}",
+            "image": "{{ site_domain }}{{ url_for('static', filename='images/logo.png') }}",
+            "telephone": "+1-917-310-1235",
+            "email": "support@thebestestimatorllc.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "1209 Mountain Rd NE, Suite N",
+                "addressLocality": "Albuquerque",
+                "addressRegion": "NM",
+                "postalCode": "87110",
+                "addressCountry": "US"
+            },
+            "priceRange": "$$"
+        }
+        </script>
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
