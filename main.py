@@ -104,7 +104,7 @@ def about():
     ceo = {
            'name': 'Mohsin Altaf',
            'title': 'Managing Director',
-           'photo': 'images/team/ceo.png',
+           'photo': 'images/team/ceo.webp',
            'bio_paragraphs': [
                'The Best Estimator LLC was built from a simple idea: construction '
                'professionals should be able to rely on their estimates before they '
